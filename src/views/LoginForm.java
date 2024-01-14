@@ -1,7 +1,8 @@
-
 package views;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.UIManager;
 
 public class LoginForm extends javax.swing.JFrame {
@@ -10,36 +11,44 @@ public class LoginForm extends javax.swing.JFrame {
         initComponents();
         myInit();
     }
-    
-    private void myInit(){
-        lbShow.setVisible(false);
-    }
-    
 
+    private void myInit() {
+        setBackground(new Color(0, 0, 0, 0));
+        svgShow.setVisible(false);
+    }
+
+    @Override
+    public void paintAll(Graphics g) {
+        svgUser.setSVGImage("./views/icon/svg/icons8_user.svg");
+        svgLogin.setSVGImage("./views/icon/svg/login-image.svg");
+        svgShow.setSVGImage("./views/icon/svg/icons8_eye.svg");
+        svgHide.setSVGImage("./views/icon/svg/icons8_hide.svg");
+        super.paintAll(g);
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lbLogin = new javax.swing.JLabel();
         iconUneti = new javax.swing.JLabel();
+        svgLogin = new views.label.SVGImage();
         jPanel2 = new javax.swing.JPanel();
         lbExit = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        lbShow = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         btLogin = new javax.swing.JButton();
         txtUsername = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
-        lbHide = new javax.swing.JLabel();
+        svgHide = new views.label.SVGImage();
+        svgUser = new views.label.SVGImage();
+        svgShow = new views.label.SVGImage();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -48,12 +57,10 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lbLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/bg-login.png"))); // NOI18N
-        jPanel1.add(lbLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 500, 290));
-
         iconUneti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         iconUneti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/uneti-icon.png"))); // NOI18N
         jPanel1.add(iconUneti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 130));
+        jPanel1.add(svgLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 500, 370));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 520));
 
@@ -92,16 +99,6 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel4.setText("________________________________________________________________________________");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, -1, -1));
 
-        lbShow.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbShow.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/icons8_eye_30px.png"))); // NOI18N
-        lbShow.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbShow.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbShowMouseClicked(evt);
-            }
-        });
-        jPanel2.add(lbShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 51, 50));
-
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("________________________________________________________________________________");
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, -1, -1));
@@ -110,10 +107,6 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Password");
         jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 259, 370, -1));
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/icons8_user_30px.png"))); // NOI18N
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 51, 47));
 
         jCheckBox1.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(199, 225, 255));
@@ -126,13 +119,18 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel9.setText("Quên mật khẩu?");
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 430, 185, -1));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 185, -1));
 
         btLogin.setBackground(new java.awt.Color(255, 255, 255));
         btLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btLogin.setForeground(new java.awt.Color(25, 118, 211));
         btLogin.setText("ĐĂNG NHẬP");
-        jPanel2.add(btLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 384, 413, 38));
+        btLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btLoginActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 384, 430, 38));
 
         txtUsername.setBackground(new java.awt.Color(25, 118, 211));
         txtUsername.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 18)); // NOI18N
@@ -149,15 +147,20 @@ public class LoginForm extends javax.swing.JFrame {
         txtPassword.setCaretColor(new java.awt.Color(255, 255, 255));
         jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 390, 40));
 
-        lbHide.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbHide.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/icons8_hide_30px.png"))); // NOI18N
-        lbHide.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbHide.addMouseListener(new java.awt.event.MouseAdapter() {
+        svgHide.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbHideMouseClicked(evt);
+                svgHideMouseClicked(evt);
             }
         });
-        jPanel2.add(lbHide, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 51, 50));
+        jPanel2.add(svgHide, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 40, 40));
+        jPanel2.add(svgUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 190, 40, 40));
+
+        svgShow.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                svgShowMouseClicked(evt);
+            }
+        });
+        jPanel2.add(svgShow, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 280, 40, 40));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 0, 540, 520));
 
@@ -169,22 +172,26 @@ public class LoginForm extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_lbExitMouseClicked
 
-    private void lbHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbHideMouseClicked
-        txtPassword.setEchoChar((char) 0);
-        lbHide.setVisible(false);
-        lbShow.setVisible(true);
-    }//GEN-LAST:event_lbHideMouseClicked
+    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
+        
+    }//GEN-LAST:event_btLoginActionPerformed
 
-    private void lbShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbShowMouseClicked
+    private void svgHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgHideMouseClicked
+        txtPassword.setEchoChar((char) 0);
+        svgHide.setVisible(false);
+        svgShow.setVisible(true);
+    }//GEN-LAST:event_svgHideMouseClicked
+
+    private void svgShowMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgShowMouseClicked
         txtPassword.setEchoChar('\u2022');
-        lbShow.setVisible(false);
-        lbHide.setVisible(true);
-    }//GEN-LAST:event_lbShowMouseClicked
+        svgShow.setVisible(false);
+        svgHide.setVisible(true);
+    }//GEN-LAST:event_svgShowMouseClicked
 
     public static void main(String args[]) {
-        try{
+        try {
             UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException(ex);
         }
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -204,14 +211,14 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lbExit;
-    private javax.swing.JLabel lbHide;
-    private javax.swing.JLabel lbLogin;
-    private javax.swing.JLabel lbShow;
+    private views.label.SVGImage svgHide;
+    private views.label.SVGImage svgLogin;
+    private views.label.SVGImage svgShow;
+    private views.label.SVGImage svgUser;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
