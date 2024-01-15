@@ -2,7 +2,6 @@ package views.panel;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -70,7 +69,7 @@ public class MenuItem extends javax.swing.JPanel {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2.setColor(new Color(255, 255, 255, 80));
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 5, 5);
+            g2.fillRoundRect(10, 0, getWidth() - 20, getHeight(), 10, 10);
         }
         super.paintComponent(g);
     }

@@ -3,7 +3,6 @@ package views.models;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
 public class Model_Menu {
     
