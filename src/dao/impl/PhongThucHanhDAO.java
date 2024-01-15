@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package dao.impl;
 
 import dao.DAOInterface;
@@ -137,18 +136,4 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return dsPhongThucHanh;
     }
-=======
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package dao.impl;
-
-/**
- *
- * @author ducanh
- */
-public class PhongThucHanhDAO {
-    
->>>>>>> 0aa074a242da4227ca0b9a2b59f3a7f57aeb88ef
 }
