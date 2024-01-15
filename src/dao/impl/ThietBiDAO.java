@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package dao.impl;
 
 import dao.DAOInterface;
@@ -141,18 +140,4 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return dsThietBi;
     }
-=======
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package dao.impl;
-
-/**
- *
- * @author ducanh
- */
-public class ThietBiDAO {
-    
->>>>>>> 0aa074a242da4227ca0b9a2b59f3a7f57aeb88ef
 }
