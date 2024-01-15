@@ -11,12 +11,12 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import views.models.Model_Menu;
 
-public class CanBoMenu extends javax.swing.JPanel {
+public class GiaoVienMenu extends javax.swing.JPanel {
 
     private int x;
     private int y;
 
-    public CanBoMenu() {
+    public GiaoVienMenu() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
@@ -25,22 +25,16 @@ public class CanBoMenu extends javax.swing.JPanel {
 
     private void myInit() {
         listMenu1.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("2", "Phòng", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("4", "Kho", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("5", "Thống Kê", Model_Menu.MenuType.MENU));
-        
+        listMenu1.addItem(new Model_Menu("gv2", "Lịch Trình", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("gv4", "Đánh Giá", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+
         listMenu1.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        
-        listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
+        listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
-        
-        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("", "Khác", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));
 
     }
 
@@ -138,10 +132,12 @@ public class CanBoMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
+    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
     }//GEN-LAST:event_formComponentShown

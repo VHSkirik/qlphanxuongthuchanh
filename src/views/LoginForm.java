@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
+import models.NguoiDung;
 
 public class LoginForm extends javax.swing.JFrame {
 
@@ -20,7 +21,7 @@ public class LoginForm extends javax.swing.JFrame {
     
     private void checkLogin(){
         this.dispose();
-        new CanBoKiemKeMain().setVisible(true);
+        new CanBoMain(new NguoiDung()).setVisible(true);
     }
 
     @Override
