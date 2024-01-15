@@ -19,7 +19,7 @@ public class CanBoKiemKeMain extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new views.panel.PanelBorder();
-        panelMenu1 = new views.panel.Menu();
+        panelMenu1 = new views.panel.CanBoMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -91,6 +91,6 @@ public class CanBoKiemKeMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.panel.PanelBorder panelBorder1;
-    private views.panel.Menu panelMenu1;
+    private views.panel.CanBoMenu panelMenu1;
     // End of variables declaration//GEN-END:variables
 }

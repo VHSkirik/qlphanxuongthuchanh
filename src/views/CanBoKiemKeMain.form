@@ -57,7 +57,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="views.panel.Menu" name="panelMenu1">
+        <Component class="views.panel.CanBoMenu" name="panelMenu1">
         </Component>
       </SubComponents>
     </Container>

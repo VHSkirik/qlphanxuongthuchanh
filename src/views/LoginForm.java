@@ -3,6 +3,7 @@ package views;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 
 public class LoginForm extends javax.swing.JFrame {
@@ -150,6 +151,11 @@ public class LoginForm extends javax.swing.JFrame {
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.setBorder(null);
         txtPassword.setCaretColor(new java.awt.Color(255, 255, 255));
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyPressed(evt);
+            }
+        });
         jPanel2.add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, 390, 40));
 
         svgHide.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,6 +198,11 @@ public class LoginForm extends javax.swing.JFrame {
         svgShow.setVisible(false);
         svgHide.setVisible(true);
     }//GEN-LAST:event_svgShowMouseClicked
+
+    private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            checkLogin();
+    }//GEN-LAST:event_txtPasswordKeyPressed
 
     public static void main(String args[]) {
         try {

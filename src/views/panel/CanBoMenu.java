@@ -11,12 +11,12 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
 import views.models.Model_Menu;
 
-public class Menu extends javax.swing.JPanel {
+public class CanBoMenu extends javax.swing.JPanel {
 
     private int x;
     private int y;
 
-    public Menu() {
+    public CanBoMenu() {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
