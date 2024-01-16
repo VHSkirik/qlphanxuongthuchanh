@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 import models.NguoiDung;
+import services.LoginService;
 
 public class LoginForm extends javax.swing.JFrame {
 
@@ -19,9 +20,10 @@ public class LoginForm extends javax.swing.JFrame {
         svgShow.setVisible(false);
     }
     
-    private void checkLogin(){
-        this.dispose();
-        new CanBoMain(new NguoiDung()).setVisible(true);
+    public void performLogin() {
+        String taikhoan = txtUsername.getText().trim();
+        String matkhau = txtPassword.getText().trim();
+        LoginService.checkLogin(taikhoan, matkhau);
     }
 
     @Override
@@ -185,7 +187,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        checkLogin();   
+        performLogin();
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void svgHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgHideMouseClicked
