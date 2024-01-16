@@ -50,7 +50,7 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
             Connection c = Jdbc.getConnection();
             String query = "SELECT * FROM nguoidung WHERE TenDangNhap = ?";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(2, TenDangNhap);
+            stm.setString(1, TenDangNhap);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 nguoiDung = new NguoiDung(
