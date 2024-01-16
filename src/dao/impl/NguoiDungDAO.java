@@ -43,6 +43,30 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
         }
         return nguoiDung;
     }
+    
+    public NguoiDung findUserName(String TenDangNhap) {
+        NguoiDung nguoiDung = null;
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM nguoidung WHERE TenDangNhap = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(2, TenDangNhap);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                nguoiDung = new NguoiDung(
+                        rs.getInt("MaNguoiDung"),
+                        rs.getString("TenDangNhap"),
+                        rs.getString("MatKhau"),
+                        rs.getString("Email"),
+                        rs.getString("LoaiNguoiDung")
+                );
+            }
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return nguoiDung;
+    }
 
     @Override
     public int create(NguoiDung nguoiDung) {

@@ -43,23 +43,20 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="iconUneti">
+        <Component class="views.label.SVGImage" name="svgLogin">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/views/icon/uneti-icon.png"/>
-            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="0" width="130" height="130"/>
+              <AbsoluteConstraints x="0" y="80" width="500" height="370"/>
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="views.label.SVGImage" name="svgLogin">
+        <Component class="views.label.SVGImage" name="svgUneti">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="0" y="80" width="500" height="370"/>
+              <AbsoluteConstraints x="0" y="0" width="350" height="340"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -236,9 +233,6 @@
         </Component>
         <Component class="javax.swing.JButton" name="btLogin">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="1"/>
             </Property>
