@@ -1,6 +1,7 @@
 package views.panel;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,24 +21,25 @@ public class CanBoMenu extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         listMenu1.setOpaque(false);
+        listMenu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
         myInit();
     }
 
     private void myInit() {
+        listMenu1.addItem(new Model_Menu("", "Cán Bộ Kiểm Kê", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("2", "Phòng", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("4", "Kho", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("5", "Thống Kê", Model_Menu.MenuType.MENU));
-        
+
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        
+
         listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
-        
+
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("", "Khác", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));

@@ -24,6 +24,7 @@ public class GiaoVienMenu extends javax.swing.JPanel {
     }
 
     private void myInit() {
+        listMenu1.addItem(new Model_Menu("", "Giáo Viên", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("gv2", "Lịch Trình", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
@@ -31,10 +32,13 @@ public class GiaoVienMenu extends javax.swing.JPanel {
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
 
         listMenu1.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
+
+        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+        listMenu1.addItem(new Model_Menu("", "Khác", Model_Menu.MenuType.TITLE));
+        listMenu1.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));
 
     }
 
@@ -132,12 +136,11 @@ public class GiaoVienMenu extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
-    
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
 
     }//GEN-LAST:event_formComponentShown

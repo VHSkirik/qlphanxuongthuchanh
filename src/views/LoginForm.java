@@ -30,6 +30,7 @@ public class LoginForm extends javax.swing.JFrame {
         svgLogin.setSVGImage("./views/icon/svg/login-image.svg");
         svgShow.setSVGImage("./views/icon/svg/icons8_eye.svg");
         svgHide.setSVGImage("./views/icon/svg/icons8_hide.svg");
+        svgUneti.setSVGImage("./views/icon/svg/uneti.svg");
         super.paintAll(g);
     }
 
@@ -38,8 +39,8 @@ public class LoginForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        iconUneti = new javax.swing.JLabel();
         svgLogin = new views.label.SVGImage();
+        svgUneti = new views.label.SVGImage();
         jPanel2 = new javax.swing.JPanel();
         lbExit = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -64,10 +65,9 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconUneti.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        iconUneti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/uneti-icon.png"))); // NOI18N
-        jPanel1.add(iconUneti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 130));
+        svgLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel1.add(svgLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 500, 370));
+        jPanel1.add(svgUneti, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 350, 340));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 520));
 
@@ -185,7 +185,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        checkLogin();
+        checkLogin();       
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void svgHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgHideMouseClicked
@@ -220,7 +220,6 @@ public class LoginForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLogin;
-    private javax.swing.JLabel iconUneti;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -235,6 +234,7 @@ public class LoginForm extends javax.swing.JFrame {
     private views.label.SVGImage svgHide;
     private views.label.SVGImage svgLogin;
     private views.label.SVGImage svgShow;
+    private views.label.SVGImage svgUneti;
     private views.label.SVGImage svgUser;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
