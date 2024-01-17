@@ -14,7 +14,7 @@ public class Jdbc {
     public static Connection getConnection(){
         Connection c = null;
         try {
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlphongthuchanh","root","@lonaGM26");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/qlphongthuchanh","root","");
         } catch (SQLException e){
             e.printStackTrace();
         }
