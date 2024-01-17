@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import javax.swing.UIManager;
 import models.NguoiDung;
+import views.models.ListMenu;
 
 public class AdminMain extends javax.swing.JFrame {
     
@@ -17,6 +18,7 @@ public class AdminMain extends javax.swing.JFrame {
     
     private void myInit(){
         setBackground(new Color(0, 0, 0, 0));
+        adminMenu.initMoving(AdminMain.this);
     }
     
     public static NguoiDung getUser(){
@@ -28,24 +30,35 @@ public class AdminMain extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new views.panel.PanelBorder();
-        adminMenu1 = new views.panel.AdminMenu();
+        adminMenu = new views.panel.AdminMenu();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        adminDashBroad1 = new views.panel.AdminDashBroad();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(242, 242, 242));
+
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setViewportView(adminDashBroad1);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(adminMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 990, Short.MAX_VALUE))
+                .addComponent(adminMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(adminMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+            .addComponent(adminMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -78,7 +91,9 @@ public class AdminMain extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.panel.AdminMenu adminMenu1;
+    private views.panel.AdminDashBroad adminDashBroad1;
+    private views.panel.AdminMenu adminMenu;
+    private javax.swing.JScrollPane jScrollPane1;
     private views.panel.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }

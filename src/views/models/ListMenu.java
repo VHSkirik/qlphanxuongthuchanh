@@ -8,7 +8,6 @@ import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
-import views.panel.MenuItem;
 
 public class ListMenu<E extends Object> extends JList<E> {
 

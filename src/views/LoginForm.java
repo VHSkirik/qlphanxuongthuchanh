@@ -9,12 +9,12 @@ import models.NguoiDung;
 import services.LoginService;
 
 public class LoginForm extends javax.swing.JFrame {
-
+    
     public LoginForm() {
         initComponents();
         myInit();
     }
-
+    
     private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
         svgShow.setVisible(false);
@@ -25,7 +25,7 @@ public class LoginForm extends javax.swing.JFrame {
         String matkhau = txtPassword.getText().trim();
         LoginService.checkLogin(taikhoan, matkhau);
     }
-
+    
     @Override
     public void paintAll(Graphics g) {
         svgUser.setSVGImage("./views/icon/svg/icons8_user.svg");
@@ -35,7 +35,7 @@ public class LoginForm extends javax.swing.JFrame {
         svgUneti.setSVGImage("./views/icon/svg/uneti.svg");
         super.paintAll(g);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,7 +187,9 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        performLogin();
+//        performLogin();
+        this.dispose();
+        new AdminMain(new NguoiDung()).setVisible(true);
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void svgHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgHideMouseClicked
@@ -203,10 +205,10 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_svgShowMouseClicked
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-            performLogin();
+//        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+//            performLogin();
     }//GEN-LAST:event_txtPasswordKeyPressed
-
+    
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
