@@ -204,7 +204,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-            checkLogin();
+            performLogin();
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     public static void main(String args[]) {
