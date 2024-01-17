@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import views.models.ListMenu;
 import views.models.Model_Menu;
 
 public class AdminMenu extends javax.swing.JPanel {
@@ -20,31 +21,35 @@ public class AdminMenu extends javax.swing.JPanel {
     public AdminMenu() {
         initComponents();
         setOpaque(false);
-        listMenu1.setOpaque(false);
-        listMenu1.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        listMenu.setOpaque(false);
+        listMenu.setCursor(new Cursor(Cursor.HAND_CURSOR));
         myInit();
     }
 
     private void myInit() {
-        listMenu1.addItem(new Model_Menu("", "Admin", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("2", "Phòng", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("multi_user", "Người Dùng", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("feedback", "Phản Hồi", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("", "Admin", Model_Menu.MenuType.TITLE));
+        listMenu.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("2", "Phòng", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("multi_user", "Người Dùng", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("feedback", "Phản Hồi", Model_Menu.MenuType.MENU));
 
-        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
+        listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+        listMenu.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
 
-        listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
 
-        listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
-        listMenu1.addItem(new Model_Menu("", "Khác", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
+        listMenu.addItem(new Model_Menu("", "Khác", Model_Menu.MenuType.TITLE));
+        listMenu.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));
 
+    }
+    
+    public ListMenu<String> getListMenu(){
+        return this.listMenu;
     }
 
     public void initMoving(JFrame frame) {
@@ -91,7 +96,7 @@ public class AdminMenu extends javax.swing.JPanel {
         panelMoving = new javax.swing.JPanel();
         sVGImage1 = new views.label.SVGImage();
         jLabel1 = new javax.swing.JLabel();
-        listMenu1 = new views.models.ListMenu<>();
+        listMenu = new views.models.ListMenu<>();
 
         addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -134,14 +139,14 @@ public class AdminMenu extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelMoving, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(listMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMoving, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(listMenu1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addComponent(listMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -152,7 +157,7 @@ public class AdminMenu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private views.models.ListMenu<String> listMenu1;
+    private views.models.ListMenu<String> listMenu;
     private javax.swing.JPanel panelMoving;
     private views.label.SVGImage sVGImage1;
     // End of variables declaration//GEN-END:variables
