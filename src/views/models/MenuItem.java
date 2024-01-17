@@ -1,4 +1,4 @@
-package views.panel;
+package views.models;
 
 import java.awt.Color;
 import java.awt.Font;
