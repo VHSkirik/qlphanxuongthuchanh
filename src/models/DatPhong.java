@@ -8,17 +8,19 @@ public class DatPhong {
     private String ThoiGianDat;
     private String MucDichSuDUng;
     private String TrangThai;
+    private String NgayTao;
 
     public DatPhong() {
     }
 
-    public DatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai) {
+    public DatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, String NgayTao) {
         this.MaYeuCau = MaYeuCau;
         this.MaNguoiDung = MaNguoiDung;
         this.MaPhongThucHanh = MaPhongThucHanh;
         this.ThoiGianDat = ThoiGianDat;
         this.MucDichSuDUng = MucDichSuDUng;
         this.TrangThai = TrangThai;
+        this.NgayTao = NgayTao;
     }
 
     public Integer getMaYeuCau() {
@@ -67,6 +69,14 @@ public class DatPhong {
 
     public void setTrangThai(String TrangThai) {
         this.TrangThai = TrangThai;
+    }
+    
+     public String getNgayTao() {
+        return NgayTao;
+    }
+
+    public void setNgayTao(String NgayTao) {
+        this.NgayTao = NgayTao;
     }
 
 }
