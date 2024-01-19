@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import views.models.EventMenuSelected;
 import views.models.ListMenu;
 import views.models.Model_Menu;
 
@@ -17,6 +18,8 @@ public class AdminMenu extends javax.swing.JPanel {
 
     private int x;
     private int y;
+    private EventMenuSelected event;
+
 
     public AdminMenu() {
         initComponents();
@@ -70,6 +73,12 @@ public class AdminMenu extends javax.swing.JPanel {
 
         });
 
+    }
+    
+        
+    public void addEventMenuSelected(EventMenuSelected event){
+        this.event = event;
+        listMenu.addEventMenuSelected(event);
     }
 
     @Override
