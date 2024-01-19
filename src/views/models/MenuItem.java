@@ -10,6 +10,7 @@ import views.models.Model_Menu;
 public class MenuItem extends javax.swing.JPanel {
 
     private boolean selected;
+    private boolean over;
 
     public MenuItem(Model_Menu data) {
         initComponents();
@@ -29,6 +30,10 @@ public class MenuItem extends javax.swing.JPanel {
     public void setSelected(boolean selected) {
         this.selected = selected;
         repaint();
+    }
+
+    public void setOver(boolean over) {
+        this.over = over;
     }
 
     @SuppressWarnings("unchecked")
@@ -65,10 +70,14 @@ public class MenuItem extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        if (selected) {
+        if (selected || over) {
             Graphics2D g2 = (Graphics2D) g;
             g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2.setColor(new Color(255, 255, 255, 80));
+            if (selected) {
+                g2.setColor(new Color(255, 255, 255, 80));
+            } else {
+                g2.setColor(new Color(255, 255, 255, 50));
+            }
             g2.fillRoundRect(10, 0, getWidth() - 20, getHeight(), 10, 10);
         }
         super.paintComponent(g);

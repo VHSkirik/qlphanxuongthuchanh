@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 public class Table extends JTable {
 
     public Table() {
-        setShowHorizontalLines(true);
+        setShowHorizontalLines(false);
         setGridColor(new Color(230, 230, 230));
         setRowHeight(40);
         getTableHeader().setReorderingAllowed(false);
@@ -32,12 +32,14 @@ public class Table extends JTable {
                     com.setBackground(Color.WHITE);
                     setBorder(noFocusBorder);
                     if (selected) {
-                        com.setForeground(new Color(15, 89, 140));
+                        com.setForeground(Color.BLACK.RED);
                     } else {
                         com.setForeground(new Color(102, 102, 102));
                     }
                     return com;
                 } else {
+                    if (o == null)
+                        return null;
                     StatusType type = (StatusType) o;
                     CellStatus cell = new CellStatus(type);
                     return cell;
