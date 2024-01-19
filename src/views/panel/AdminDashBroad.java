@@ -1,7 +1,7 @@
-
 package views.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
 import java.awt.Graphics;
 import views.models.Model_Card;
 import views.models.StatusType;
@@ -12,28 +12,21 @@ public class AdminDashBroad extends javax.swing.JPanel {
         initComponents();
         setData();
     }
-    
-    private void setData(){
-        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg",39,39), "Tiêu đề", "Giá trị", "Mô tả");
-        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg",39,39), "Tiêu đề", "Giá trị", "Mô tả");
-        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg",39,39), "Tiêu đề", "Giá trị", "Mô tả");
+
+    private void setData() {
+        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
+        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
+        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
         card1.SetData(data1);
         card2.SetData(data2);
         card3.SetData(data3);
         //add row table
-        table.addRow(new Object[]{"Mike Bhand", "mikebhand@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Ross Kopelman", "rosskopelman@gmail.com", "Subscriber", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"Mike Hussy", "mikehussy@gmail.com", "Admin", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Kevin Pietersen", "kevinpietersen@gmail.com", "Admin", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"Andrew Strauss", "andrewstrauss@gmail.com", "Editor", "25 Apr,2018", StatusType.APPROVED});
+        spTable.getViewport().setBackground(Color.WHITE);
+        table.addRow(new Object[]{"1", "2", "1", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"2", "3", "1", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"3", "4", "2", "25 Apr,2018", StatusType.REJECT});
+
     }
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -46,7 +39,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
         header1 = new views.panel.Header();
         panelBorder1 = new views.panel.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        spTable = new javax.swing.JScrollPane();
         table = new views.models.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
@@ -72,7 +65,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
         jLabel1.setText("Các yêu cầu dùng phòng gần đây");
 
-        jScrollPane2.setBorder(null);
+        spTable.setBorder(null);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,7 +83,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(table);
+        spTable.setViewportView(table);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -99,7 +92,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(spTable)
                     .addComponent(jLabel1))
                 .addGap(17, 17, 17))
         );
@@ -109,7 +102,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addGap(16, 16, 16))
         );
 
@@ -143,9 +136,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); 
+        super.paintComponent(g);
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.models.Card card1;
@@ -153,9 +146,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
     private views.models.Card card3;
     private views.panel.Header header1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane2;
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JLayeredPane panelConstainCard;
+    private javax.swing.JScrollPane spTable;
     private views.models.Table table;
     // End of variables declaration//GEN-END:variables
 }
