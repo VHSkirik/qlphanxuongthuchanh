@@ -1,10 +1,11 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Graphics;
 
-public class AdminPhong extends javax.swing.JPanel {
+public class AdminNguoiDung extends javax.swing.JPanel {
 
-    public AdminPhong() {
+    public AdminNguoiDung() {
         initComponents();
         myInit();
     }
@@ -14,8 +15,8 @@ public class AdminPhong extends javax.swing.JPanel {
         btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg",45, 45));
         btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45, 45));
         btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg",45, 45));
-        lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/classroom.svg", 40, 40));
-        tbPhong.setRowHeight(50);
+        lbTitleUser.setIcon(new FlatSVGIcon("./views/icon/svg/multiUser.svg",30, 30));
+        lbTitleInfo.setIcon(new FlatSVGIcon("./views/icon/svg/infor_black.svg",30, 30));
     }
 
     @SuppressWarnings("unchecked")
@@ -24,8 +25,11 @@ public class AdminPhong extends javax.swing.JPanel {
 
         panelBorder1 = new views.panel.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbPhong = new javax.swing.JTable();
-        lbTitle = new javax.swing.JLabel();
+        tbNguoiDung = new javax.swing.JTable();
+        lbTitleInfo = new javax.swing.JLabel();
+        lbTitleUser = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbThongTinNguoiDung = new javax.swing.JTable();
         panelBorder2 = new views.panel.PanelBorder();
         jToolBar1 = new javax.swing.JToolBar();
         btThem = new javax.swing.JButton();
@@ -39,45 +43,68 @@ public class AdminPhong extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
-        tbPhong.setModel(new javax.swing.table.DefaultTableModel(
+        tbNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Phòng", "Tên Phòng", "Loại Phòng", "Địa Điểm", "Sức Chứa", "Tình Trạng"
+                "Tên Đăng Nhập", "Mật Khẩu", "Loại Phòng", "Địa Điểm"
             }
         ));
-        jScrollPane1.setViewportView(tbPhong);
+        jScrollPane1.setViewportView(tbNguoiDung);
 
-        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbTitle.setForeground(new java.awt.Color(127, 127, 127));
-        lbTitle.setText("Danh sách phòng thực hành");
+        lbTitleInfo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitleInfo.setForeground(new java.awt.Color(127, 127, 127));
+        lbTitleInfo.setText("Thông tin chi tiết");
+
+        lbTitleUser.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitleUser.setForeground(new java.awt.Color(127, 127, 127));
+        lbTitleUser.setText("Danh sách người dùng");
+
+        tbThongTinNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Họ Tên", "Tuổi", "Địa Chỉ", "Chuyên Môn", "Số Điện Thoại"
+            }
+        ));
+        jScrollPane2.setViewportView(tbThongTinNguoiDung);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 826, Short.MAX_VALUE)
-                        .addGap(32, 32, 32))))
+                .addGap(21, 21, 21)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 899, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelBorder1Layout.createSequentialGroup()
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lbTitleUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbTitleInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(21, 21, 21))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lbTitleUser)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addGap(16, 16, 16)
+                .addComponent(lbTitleInfo)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                .addGap(30, 30, 30))
         );
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
@@ -132,9 +159,9 @@ public class AdminPhong extends javax.swing.JPanel {
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(18, 18, 18)
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addGap(26, 26, 26))
+                .addGap(34, 34, 34))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +172,7 @@ public class AdminPhong extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -164,12 +191,16 @@ public class AdminPhong extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelBorder2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(15, 15, 15))
+                .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExcel;
@@ -178,11 +209,14 @@ public class AdminPhong extends javax.swing.JPanel {
     private javax.swing.JButton btXoa;
     private views.panel.Header header1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
-    private javax.swing.JLabel lbTitle;
+    private javax.swing.JLabel lbTitleInfo;
+    private javax.swing.JLabel lbTitleUser;
     private views.panel.PanelBorder panelBorder1;
     private views.panel.PanelBorder panelBorder2;
-    private javax.swing.JTable tbPhong;
+    private javax.swing.JTable tbNguoiDung;
+    private javax.swing.JTable tbThongTinNguoiDung;
     // End of variables declaration//GEN-END:variables
 }

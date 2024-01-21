@@ -11,7 +11,7 @@ import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
-import views.panel.admin.AdminTaiKhoan;
+import views.panel.admin.AdminNguoiDung;
 
 public class AdminMain extends javax.swing.JFrame {
 
@@ -20,7 +20,7 @@ public class AdminMain extends javax.swing.JFrame {
     private final AdminPhong adminPhong;
     private final AdminThietBi adminThietBi;
     private final AdminYeuCau adminYeuCau;
-    private final AdminTaiKhoan adminTaiKhoan;
+    private final AdminNguoiDung adminNguoiDung;
 
     public AdminMain(NguoiDung user) {
         AdminMain.user = user;
@@ -29,7 +29,7 @@ public class AdminMain extends javax.swing.JFrame {
         adminPhong = new AdminPhong();
         adminThietBi = new AdminThietBi();
         adminYeuCau = new AdminYeuCau();
-        adminTaiKhoan = new AdminTaiKhoan(AdminMain.getUser());
+        adminNguoiDung = new AdminNguoiDung();
         myInit();
     }
 
@@ -51,10 +51,10 @@ public class AdminMain extends javax.swing.JFrame {
                         setMainPanel(adminThietBi);
                         break;
                     case 4:
-                        setMainPanel(adminYeuCau);
+                        setMainPanel(adminNguoiDung);
                         break;
-                    case 9:
-                        setMainPanel(adminTaiKhoan);
+                    case 5:
+                        setMainPanel(adminYeuCau);
                         break;
                     case 11:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
