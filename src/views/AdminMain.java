@@ -11,15 +11,17 @@ import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
+import views.panel.admin.AdminTaiKhoan;
 
 public class AdminMain extends javax.swing.JFrame {
 
     private static NguoiDung user;
-    private AdminDashBroad dashBroad;
-    private AdminPhong adminPhong;
-    private AdminThietBi adminThietBi;
-    private AdminYeuCau adminYeuCau;
-    
+    private final AdminDashBroad dashBroad;
+    private final AdminPhong adminPhong;
+    private final AdminThietBi adminThietBi;
+    private final AdminYeuCau adminYeuCau;
+    private final AdminTaiKhoan adminTaiKhoan;
+
     public AdminMain(NguoiDung user) {
         AdminMain.user = user;
         initComponents();
@@ -27,6 +29,7 @@ public class AdminMain extends javax.swing.JFrame {
         adminPhong = new AdminPhong();
         adminThietBi = new AdminThietBi();
         adminYeuCau = new AdminYeuCau();
+        adminTaiKhoan = new AdminTaiKhoan(AdminMain.getUser());
         myInit();
     }
 
@@ -49,11 +52,16 @@ public class AdminMain extends javax.swing.JFrame {
                         break;
                     case 4:
                         setMainPanel(adminYeuCau);
+                        break;
+                    case 9:
+                        setMainPanel(adminTaiKhoan);
+                        break;
                     case 11:
-                        int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?","Đăng xuất",JOptionPane.YES_NO_OPTION);
-                        if (checkLogout == JOptionPane.YES_OPTION)
+                        int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
+                        if (checkLogout == JOptionPane.YES_OPTION) {
                             AdminMain.this.dispose();
-                        new LoginForm().setVisible(true);
+                            new LoginForm().setVisible(true);
+                        }
                         break;
                     case 14:
                         int checkExit = JOptionPane.showConfirmDialog(AdminMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
@@ -66,8 +74,8 @@ public class AdminMain extends javax.swing.JFrame {
         });
         setMainPanel(dashBroad);
     }
-    
-    private void setMainPanel(JComponent component){
+
+    private void setMainPanel(JComponent component) {
         mainPanel.removeAll();
         mainPanel.add(component);
         mainPanel.repaint();
@@ -101,16 +109,16 @@ public class AdminMain extends javax.swing.JFrame {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 972, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 706, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
