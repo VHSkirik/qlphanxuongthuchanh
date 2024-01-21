@@ -1,6 +1,8 @@
 
 package views.models;
 
+import views.table.StatusType;
+
 public class CellStatus extends javax.swing.JPanel {
 
     public CellStatus(StatusType type) {
@@ -12,7 +14,7 @@ public class CellStatus extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        status = new views.models.TableStatus();
+        status = new views.table.TableStatus();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -39,6 +41,6 @@ public class CellStatus extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.models.TableStatus status;
+    private views.table.TableStatus status;
     // End of variables declaration//GEN-END:variables
 }

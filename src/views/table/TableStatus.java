@@ -1,4 +1,4 @@
-package views.models;
+package views.table;
 
 import java.awt.Color;
 import java.awt.GradientPaint;

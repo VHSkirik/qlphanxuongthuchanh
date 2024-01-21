@@ -2,26 +2,79 @@ package views;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import models.NguoiDung;
-import views.models.ListMenu;
+import views.models.EventMenuSelected;
+import views.panel.admin.AdminDashBroad;
+import views.panel.admin.AdminPhong;
+import views.panel.admin.AdminThietBi;
+import views.panel.admin.AdminYeuCau;
 
 public class AdminMain extends javax.swing.JFrame {
-    
-    private static NguoiDung user;
 
+    private static NguoiDung user;
+    private AdminDashBroad dashBroad;
+    private AdminPhong adminPhong;
+    private AdminThietBi adminThietBi;
+    private AdminYeuCau adminYeuCau;
+    
     public AdminMain(NguoiDung user) {
         AdminMain.user = user;
         initComponents();
+        dashBroad = new AdminDashBroad();
+        adminPhong = new AdminPhong();
+        adminThietBi = new AdminThietBi();
+        adminYeuCau = new AdminYeuCau();
         myInit();
     }
-    
-    private void myInit(){
+
+    private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
-        adminMenu.initMoving(AdminMain.this);
+        menu.initMoving(AdminMain.this);
+        menu.addEventMenuSelected(new EventMenuSelected() {
+            @Override
+            public void selected(int index) {
+                System.out.println("Selected: " + index);
+                switch (index) {
+                    case 1:
+                        setMainPanel(dashBroad);
+                        break;
+                    case 2:
+                        setMainPanel(adminPhong);
+                        break;
+                    case 3:
+                        setMainPanel(adminThietBi);
+                        break;
+                    case 4:
+                        setMainPanel(adminYeuCau);
+                    case 11:
+                        int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?","Đăng xuất",JOptionPane.YES_NO_OPTION);
+                        if (checkLogout == JOptionPane.YES_OPTION)
+                            AdminMain.this.dispose();
+                        new LoginForm().setVisible(true);
+                        break;
+                    case 14:
+                        int checkExit = JOptionPane.showConfirmDialog(AdminMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
+                        if (checkExit == JOptionPane.YES_OPTION) {
+                            System.exit(0);
+                        }
+                        break;
+                }
+            }
+        });
+        setMainPanel(dashBroad);
     }
     
-    public static NguoiDung getUser(){
+    private void setMainPanel(JComponent component){
+        mainPanel.removeAll();
+        mainPanel.add(component);
+        mainPanel.repaint();
+        mainPanel.revalidate();
+    }
+
+    public static NguoiDung getUser() {
         return AdminMain.user;
     }
 
@@ -30,34 +83,33 @@ public class AdminMain extends javax.swing.JFrame {
     private void initComponents() {
 
         panelBorder1 = new views.panel.PanelBorder();
-        adminMenu = new views.panel.AdminMenu();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        adminDashBroad1 = new views.panel.AdminDashBroad();
+        menu = new views.panel.AdminMenu();
+        mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         panelBorder1.setBackground(new java.awt.Color(242, 242, 242));
 
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setViewportView(adminDashBroad1);
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addComponent(adminMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
+                .addComponent(menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 972, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(adminMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -76,7 +128,7 @@ public class AdminMain extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-        public static void main(String[] args) {
+    public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (Exception ex) {
@@ -91,9 +143,8 @@ public class AdminMain extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.panel.AdminDashBroad adminDashBroad1;
-    private views.panel.AdminMenu adminMenu;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel mainPanel;
+    private views.panel.AdminMenu menu;
     private views.panel.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 }
