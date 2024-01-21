@@ -8,12 +8,12 @@ package views.panel.admin;
  *
  * @author @VHSkirik
  */
-public class Panel_ThietBi extends javax.swing.JPanel {
+public class AdminYeuCau extends javax.swing.JPanel {
 
     /**
-     * Creates new form Panel_ThietBi
+     * Creates new form Panel_YeuCau
      */
-    public Panel_ThietBi() {
+    public AdminYeuCau() {
         initComponents();
     }
 
