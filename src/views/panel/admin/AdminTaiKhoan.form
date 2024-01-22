@@ -60,7 +60,7 @@
                                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                   <Component id="textfieldBorder1" max="32767" attributes="0"/>
                                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Component id="lbEmail" min="-2" pref="113" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
                                   <Component id="textfieldBorder4" max="32767" attributes="0"/>
                               </Group>
@@ -80,9 +80,9 @@
                                   <EmptySpace min="-2" pref="84" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="jButton1" max="32767" attributes="0"/>
+                                          <Component id="btSua" max="32767" attributes="0"/>
                                           <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                                          <Component id="jButton2" max="32767" attributes="0"/>
+                                          <Component id="btDoiMatKhau" max="32767" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="14" pref="14" max="-2" attributes="0"/>
@@ -110,7 +110,7 @@
                       <Component id="textfieldBorder1" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="textfieldBorder4" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jLabel5" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="lbEmail" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="35" pref="35" max="-2" attributes="0"/>
@@ -129,8 +129,8 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="40" max="-2" attributes="0"/>
-                              <Component id="jButton2" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="btSua" min="-2" pref="40" max="-2" attributes="0"/>
+                              <Component id="btDoiMatKhau" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -153,6 +153,7 @@
         </Component>
         <Component class="views.textfield.TextfieldBorder" name="textfieldBorder1">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="15" style="0"/>
             </Property>
@@ -160,6 +161,7 @@
         </Component>
         <Component class="views.textfield.TextfieldBorder" name="textfieldBorder2">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="15" style="0"/>
             </Property>
@@ -167,6 +169,7 @@
         </Component>
         <Component class="views.textfield.TextfieldBorder" name="textfieldBorder3">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="15" style="0"/>
             </Property>
@@ -174,6 +177,7 @@
         </Component>
         <Component class="views.textfield.TextfieldBorder" name="textfieldBorder4">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="15" style="0"/>
             </Property>
@@ -184,17 +188,18 @@
         </Component>
         <Component class="views.textfield.TextfieldBorder" name="textfieldBorder5">
           <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="15" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btSua">
           <Properties>
             <Property name="text" type="java.lang.String" value="S&#x1eed;a"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="btDoiMatKhau">
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x110;&#x1ed5;i M&#x1ead;t Kh&#x1ea9;u"/>
           </Properties>
@@ -232,7 +237,7 @@
             <Property name="text" type="java.lang.String" value="M&#x1ead;t Kh&#x1ea9;u"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="lbEmail">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
