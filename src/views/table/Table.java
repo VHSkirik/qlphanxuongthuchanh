@@ -1,4 +1,4 @@
-package views.models;
+package views.table;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import views.models.CellStatus;
 
 public class Table extends JTable {
 

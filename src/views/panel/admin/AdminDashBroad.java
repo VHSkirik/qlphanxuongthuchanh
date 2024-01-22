@@ -1,10 +1,10 @@
-package views.panel;
+package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import java.awt.Graphics;
 import views.models.Model_Card;
-import views.models.StatusType;
+import views.table.StatusType;
 
 public class AdminDashBroad extends javax.swing.JPanel {
 
@@ -25,6 +25,12 @@ public class AdminDashBroad extends javax.swing.JPanel {
         table.addRow(new Object[]{"1", "2", "1", "25 Apr,2018", StatusType.PENDING});
         table.addRow(new Object[]{"2", "3", "1", "25 Apr,2018", StatusType.APPROVED});
         table.addRow(new Object[]{"3", "4", "2", "25 Apr,2018", StatusType.REJECT});
+        table.addRow(new Object[]{"4", "2", "1", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"5", "3", "1", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"6", "4", "2", "25 Apr,2018", StatusType.REJECT});
+        table.addRow(new Object[]{"7", "2", "1", "25 Apr,2018", StatusType.PENDING});
+        table.addRow(new Object[]{"8", "3", "1", "25 Apr,2018", StatusType.APPROVED});
+        table.addRow(new Object[]{"9", "4", "2", "25 Apr,2018", StatusType.REJECT});
 
     }
 
@@ -40,7 +46,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
         panelBorder1 = new views.panel.PanelBorder();
         jLabel1 = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
-        table = new views.models.Table();
+        table = new views.table.Table();
 
         setBackground(new java.awt.Color(242, 242, 242));
 
@@ -63,7 +69,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Các yêu cầu dùng phòng gần đây");
+        jLabel1.setText("Các yêu cầu sử dụng phòng gần đây");
 
         spTable.setBorder(null);
 
@@ -101,9 +107,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+                .addGap(49, 49, 49)
+                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -149,6 +155,6 @@ public class AdminDashBroad extends javax.swing.JPanel {
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JLayeredPane panelConstainCard;
     private javax.swing.JScrollPane spTable;
-    private views.models.Table table;
+    private views.table.Table table;
     // End of variables declaration//GEN-END:variables
 }

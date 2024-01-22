@@ -5,6 +5,8 @@ public class ThongTinNguoiDung {
     private Integer MaThongTin;
     private Integer MaNguoiDung;
     private String Hoten;
+    //gioi tinh
+    //ngay sinh
     private String SoDienThoai;
     private String ChuyenMon;
     private String DiaChi;

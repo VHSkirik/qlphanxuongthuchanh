@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import javax.swing.JFrame;
+import views.models.EventMenuSelected;
 import views.models.ListMenu;
 import views.models.Model_Menu;
 
@@ -17,6 +18,8 @@ public class AdminMenu extends javax.swing.JPanel {
 
     private int x;
     private int y;
+    private EventMenuSelected event;
+
 
     public AdminMenu() {
         initComponents();
@@ -39,7 +42,6 @@ public class AdminMenu extends javax.swing.JPanel {
         listMenu.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
 
         listMenu.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
-        listMenu.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
 
         listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -70,6 +72,12 @@ public class AdminMenu extends javax.swing.JPanel {
 
         });
 
+    }
+    
+        
+    public void addEventMenuSelected(EventMenuSelected event){
+        this.event = event;
+        listMenu.addEventMenuSelected(event);
     }
 
     @Override

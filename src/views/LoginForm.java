@@ -6,7 +6,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import javax.swing.UIManager;
 import models.NguoiDung;
-import services.LoginService;
 
 public class LoginForm extends javax.swing.JFrame {
     
@@ -21,9 +20,11 @@ public class LoginForm extends javax.swing.JFrame {
     }
     
     public void performLogin() {
-        String taikhoan = txtUsername.getText().trim();
-        String matkhau = txtPassword.getText().trim();
-        LoginService.checkLogin(taikhoan, matkhau);
+//        String taikhoan = txtUsername.getText().trim();
+//        String matkhau = txtPassword.getText().trim();
+//        LoginService.checkLogin(taikhoan, matkhau);
+        this.dispose();
+        new AdminMain(new NguoiDung()).setVisible(true);
     }
     
     @Override
@@ -62,6 +63,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -130,7 +132,6 @@ public class LoginForm extends javax.swing.JFrame {
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 185, -1));
 
-        btLogin.setBackground(new java.awt.Color(255, 255, 255));
         btLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btLogin.setForeground(new java.awt.Color(25, 118, 211));
         btLogin.setText("ĐĂNG NHẬP");
@@ -142,7 +143,7 @@ public class LoginForm extends javax.swing.JFrame {
         jPanel2.add(btLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 384, 430, 38));
 
         txtUsername.setBackground(new java.awt.Color(25, 118, 211));
-        txtUsername.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 18)); // NOI18N
+        txtUsername.setFont(new java.awt.Font("JetBrains Mono Light", 0, 18)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(255, 255, 255));
         txtUsername.setBorder(null);
         txtUsername.setCaretColor(new java.awt.Color(255, 255, 255));
@@ -187,9 +188,7 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-//        performLogin();
-        this.dispose();
-        new AdminMain(new NguoiDung()).setVisible(true);
+        performLogin();
     }//GEN-LAST:event_btLoginActionPerformed
 
     private void svgHideMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_svgHideMouseClicked
@@ -205,8 +204,8 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_svgShowMouseClicked
 
     private void txtPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyPressed
-//        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
-//            performLogin();
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            performLogin();
     }//GEN-LAST:event_txtPasswordKeyPressed
     
     public static void main(String args[]) {
