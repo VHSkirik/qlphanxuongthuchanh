@@ -1,21 +1,17 @@
 
 package views.panel.admin;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
-/**
- *
- * @author @VHSkirik
- */
 public class NguoiDungDialog extends javax.swing.JDialog {
+    
+    private AdminNguoiDung adminNguoiDung;
 
-    public NguoiDungDialog(java.awt.Frame parent, boolean modal) {
+    public NguoiDungDialog(AdminNguoiDung adminNguoiDung, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        this.adminNguoiDung = adminNguoiDung;
         setUndecorated(true);
         setBackground(new Color(255,255,255,0));
         initComponents();
@@ -151,25 +147,6 @@ public class NguoiDungDialog extends javax.swing.JDialog {
             this.dispose();
     }//GEN-LAST:event_btHuyActionPerformed
 
-    public static void main(String args[]) {
-        try {
-            UIManager.setLookAndFeel(new FlatLightLaf());
-        } catch (UnsupportedLookAndFeelException ex){
-            
-        }
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                NguoiDungDialog dialog = new NguoiDungDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuy;
