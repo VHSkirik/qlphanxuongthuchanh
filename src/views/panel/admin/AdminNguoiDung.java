@@ -4,11 +4,16 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.NguoiDungDAO;
 import java.awt.Graphics;
 import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
+import models.OperationResult;
+import services.NguoiDungService;
 
 public class AdminNguoiDung extends javax.swing.JPanel {
-    
+
+    private List<NguoiDung> dsNguoiDung;
     private DefaultTableModel dtmNguoiDung;
     private DefaultTableModel dtmThongTin;
 
@@ -18,26 +23,26 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         dtmThongTin = (DefaultTableModel) tbThongTinNguoiDung.getModel();
         myInit();
     }
-    
-    private void myInit(){
+
+    private void myInit() {
         initImage();
         initTable();
     }
-    
-    private void initImage(){
-        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg",45, 45));
-        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg",45, 45));
-        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45, 45));
-        btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg",45, 45));
-        lbTitleUser.setIcon(new FlatSVGIcon("./views/icon/svg/multiUser.svg",30, 30));
-        lbTitleInfo.setIcon(new FlatSVGIcon("./views/icon/svg/infor_black.svg",30, 30));
+
+    private void initImage() {
+        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg", 45, 45));
+        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg", 45, 45));
+        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg", 45, 45));
+        btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg", 45, 45));
+        lbTitleUser.setIcon(new FlatSVGIcon("./views/icon/svg/multiUser.svg", 30, 30));
+        lbTitleInfo.setIcon(new FlatSVGIcon("./views/icon/svg/infor_black.svg", 30, 30));
     }
-    
-    private void initTable(){
+
+    public void initTable() {
         //nguoidung 
-        List<NguoiDung> dsNguoiDung = NguoiDungDAO.getIns().findALl();
+        dsNguoiDung = NguoiDungDAO.getIns().findALl();
         dtmNguoiDung.setRowCount(0);
-        for (NguoiDung nd : dsNguoiDung){
+        for (NguoiDung nd : dsNguoiDung) {
             dtmNguoiDung.addRow(new Object[]{
                 nd.getTenDangNhap(),
                 nd.getMatKhau(),
@@ -158,6 +163,11 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btThem.setIconTextGap(0);
         btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btThem);
 
         btSua.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -167,6 +177,11 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSua.setIconTextGap(0);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btSua);
 
         btXoa.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -176,6 +191,11 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btXoa.setIconTextGap(0);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
@@ -234,6 +254,40 @@ public class AdminNguoiDung extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        new NguoiDungDialog(this, new JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_btThemActionPerformed
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        int rowIndex = tbNguoiDung.getSelectedRow();
+        if (rowIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần sửa");
+        } else {
+            NguoiDung currentNguoiDung = dsNguoiDung.get(rowIndex);
+            new NguoiDungDialog(this, new JFrame(), true, currentNguoiDung).setVisible(true);
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        int rowIndex = tbNguoiDung.getSelectedRow();
+        if (rowIndex == -1) {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
+        } else {
+            int rs = JOptionPane.showConfirmDialog(this, "Xác nhận xóa bản ghi hiện tại? \nĐiều này có thể ảnh hưởng các bảng khác.", "Xóa", JOptionPane.YES_NO_OPTION);
+            if (rs == JOptionPane.YES_OPTION){
+                NguoiDung currentNguoiDung = dsNguoiDung.get(rowIndex);
+                NguoiDungService nguoiDungService = new NguoiDungService();
+                OperationResult os = nguoiDungService.deleteNguoiDung(currentNguoiDung.getMaNguoiDung());
+                if(os.isSuccess()){
+                    JOptionPane.showMessageDialog(this, "Xóa Thành Công.");
+                    initTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa Thất Bại.");
+                }
+            }
+        }
+    }//GEN-LAST:event_btXoaActionPerformed
 
     @Override
     protected void paintComponent(Graphics g) {
