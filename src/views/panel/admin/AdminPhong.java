@@ -1,6 +1,7 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import javax.swing.JFrame;
 
 public class AdminPhong extends javax.swing.JPanel {
 
@@ -93,6 +94,11 @@ public class AdminPhong extends javax.swing.JPanel {
         btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btThem.setIconTextGap(0);
         btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btThem);
 
         btSua.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -169,6 +175,10 @@ public class AdminPhong extends javax.swing.JPanel {
                 .addGap(15, 15, 15))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        new PhongDialog(new JFrame(), true).setVisible(true);
+    }//GEN-LAST:event_btThemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
