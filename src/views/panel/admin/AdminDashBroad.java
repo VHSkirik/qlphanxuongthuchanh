@@ -69,7 +69,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Các yêu cầu sử dụng phòng gần nhất");
+        jLabel1.setText("Các yêu cầu sử dụng phòng gần đây");
 
         spTable.setBorder(null);
 

@@ -137,7 +137,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="7f" green="7f" red="7f" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Ca&#x301;c y&#xea;u c&#xe2;&#x300;u s&#x1b0;&#x309; du&#x323;ng pho&#x300;ng g&#xe2;&#x300;n nh&#xe2;&#x301;t"/>
+            <Property name="text" type="java.lang.String" value="Ca&#x301;c y&#xea;u c&#xe2;&#x300;u s&#x1b0;&#x309; du&#x323;ng pho&#x300;ng g&#xe2;&#x300;n &#x111;&#xe2;y"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="spTable">
