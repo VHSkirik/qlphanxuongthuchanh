@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.ThietBi;
@@ -55,7 +56,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO thietbi (TenThietBi, LoaiThietBi, NgaySuDung, MoTa, TinhTrang, MaPhongThucHanh) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, thietBi.getTenThietBi());
             stm.setString(2, thietBi.getLoaiThietBi());
             stm.setString(3, thietBi.getNgaySuDung());
@@ -63,6 +64,12 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
             stm.setString(5, thietBi.getTinhTrang());
             stm.setInt(6, thietBi.getMaPhongThucHanh());
             rs = stm.executeUpdate();
+             if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                thietBi.setMaThietBi(generatedKeys.getInt(1));
+            }
+        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();

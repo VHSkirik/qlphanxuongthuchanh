@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.PhongThucHanh;
@@ -54,13 +55,20 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO phongthuchanh (TenPhong, LoaiPhong, DiaDiem, SucChua, TinhTrang) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, phongThucHanh.getTenPhong());
             stm.setString(2, phongThucHanh.getLoaiPhong());
             stm.setString(3, phongThucHanh.getDiaDiem());
             stm.setInt(4, phongThucHanh.getSucChua());
             stm.setString(5, phongThucHanh.getTinhTrang());
             rs = stm.executeUpdate();
+               if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                phongThucHanh.setMaPhongThucHanh(generatedKeys.getInt(1));
+            }
+        }
+
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();
