@@ -12,6 +12,7 @@ import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
+import views.panel.admin.AdminTaiKhoan;
 
 public class AdminMain extends javax.swing.JFrame {
 
@@ -21,6 +22,7 @@ public class AdminMain extends javax.swing.JFrame {
     private final AdminThietBi adminThietBi;
     private final AdminYeuCau adminYeuCau;
     private final AdminNguoiDung adminNguoiDung;
+    private final AdminTaiKhoan adminTaiKhoan;
 
     public AdminMain(NguoiDung user) {
         AdminMain.user = user;
@@ -30,6 +32,7 @@ public class AdminMain extends javax.swing.JFrame {
         adminThietBi = new AdminThietBi();
         adminYeuCau = new AdminYeuCau();
         adminNguoiDung = new AdminNguoiDung();
+        adminTaiKhoan = new AdminTaiKhoan();
         myInit();
     }
 
@@ -56,14 +59,17 @@ public class AdminMain extends javax.swing.JFrame {
                     case 5:
                         setMainPanel(adminYeuCau);
                         break;
-                    case 11:
+                    case 9:
+                        setMainPanel(adminTaiKhoan);
+                        break;
+                    case 10:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             AdminMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 14:
+                    case 13:
                         int checkExit = JOptionPane.showConfirmDialog(AdminMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
