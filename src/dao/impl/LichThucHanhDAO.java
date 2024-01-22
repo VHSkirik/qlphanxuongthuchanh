@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.LichThucHanh;
@@ -54,13 +55,19 @@ public class LichThucHanhDAO implements DAOInterface<LichThucHanh> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO lichthuchanh (MaNguoiDung, MaPhongThucHanh, ThoiGianBatDau, ThoiGianKetThuc, NoiDungThucHanh) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, lichThucHanh.getMaNguoiDung());
             stm.setInt(2, lichThucHanh.getMaPhongThucHanh());
             stm.setString(3, lichThucHanh.getThoiGianBatDau());
             stm.setString(4, lichThucHanh.getThoiGianKetThuc());
             stm.setString(5, lichThucHanh.getNoiDungThucHanh());
             rs = stm.executeUpdate();
+              if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                lichThucHanh.setMaLichThucHanh(generatedKeys.getInt(1));
+            }
+        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();

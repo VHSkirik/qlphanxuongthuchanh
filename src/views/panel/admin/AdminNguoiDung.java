@@ -1,22 +1,51 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.NguoiDungDAO;
 import java.awt.Graphics;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.NguoiDung;
 
 public class AdminNguoiDung extends javax.swing.JPanel {
+    
+    private DefaultTableModel dtmNguoiDung;
+    private DefaultTableModel dtmThongTin;
 
     public AdminNguoiDung() {
         initComponents();
+        dtmNguoiDung = (DefaultTableModel) tbNguoiDung.getModel();
+        dtmThongTin = (DefaultTableModel) tbThongTinNguoiDung.getModel();
         myInit();
     }
     
     private void myInit(){
+        initImage();
+        initTable();
+    }
+    
+    private void initImage(){
         btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg",45, 45));
         btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg",45, 45));
         btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45, 45));
         btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg",45, 45));
         lbTitleUser.setIcon(new FlatSVGIcon("./views/icon/svg/multiUser.svg",30, 30));
         lbTitleInfo.setIcon(new FlatSVGIcon("./views/icon/svg/infor_black.svg",30, 30));
+    }
+    
+    private void initTable(){
+        //nguoidung 
+        List<NguoiDung> dsNguoiDung = NguoiDungDAO.getIns().findALl();
+        dtmNguoiDung.setRowCount(0);
+        for (NguoiDung nd : dsNguoiDung){
+            dtmNguoiDung.addRow(new Object[]{
+                nd.getTenDangNhap(),
+                nd.getMatKhau(),
+                nd.getEmail(),
+                nd.getLoaiNguoiDung()
+            });
+        }
+        //thongtin
     }
 
     @SuppressWarnings("unchecked")
@@ -43,6 +72,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
+        tbNguoiDung.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         tbNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -51,9 +81,17 @@ public class AdminNguoiDung extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Tên Đăng Nhập", "Mật Khẩu", "Loại Phòng", "Địa Điểm"
+                "Tên Đăng Nhập", "Mật Khẩu", "Email", "Loại Người Dùng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbNguoiDung);
 
         lbTitleInfo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N

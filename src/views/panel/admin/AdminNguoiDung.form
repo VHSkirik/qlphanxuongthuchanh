@@ -97,12 +97,15 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tbNguoiDung">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="JetBrains Mono Light" size="14" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="4">
-                    <Column editable="true" title="T&#xea;n &#x110;&#x103;ng Nh&#xe2;&#x323;p" type="java.lang.Object"/>
-                    <Column editable="true" title="M&#xe2;&#x323;t Kh&#xe2;&#x309;u" type="java.lang.Object"/>
-                    <Column editable="true" title="Loa&#x323;i Pho&#x300;ng" type="java.lang.Object"/>
-                    <Column editable="true" title="&#x110;i&#x323;a &#x110;i&#xea;&#x309;m" type="java.lang.Object"/>
+                    <Column editable="false" title="T&#xea;n &#x110;&#x103;ng Nh&#xe2;&#x323;p" type="java.lang.Object"/>
+                    <Column editable="false" title="M&#xe2;&#x323;t Kh&#xe2;&#x309;u" type="java.lang.Object"/>
+                    <Column editable="false" title="Email" type="java.lang.Object"/>
+                    <Column editable="false" title="Lo&#x1ea1;i Ng&#x1b0;&#x1edd;i D&#xf9;ng" type="java.lang.Object"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

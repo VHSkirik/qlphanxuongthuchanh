@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -57,7 +58,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO datphong (MaNguoiDung, MaPhongThucHanh, ThoiGianDat, MucDichSuDUng, TrangThai, NgayTao) VALUES (?, ?, ?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, datPhong.getMaNguoiDung());
             stm.setInt(2, datPhong.getMaPhongThucHanh());
             stm.setString(3, datPhong.getThoiGianDat());
@@ -65,6 +66,13 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
             stm.setString(5, datPhong.getTrangThai());
             stm.setString(6, datPhong.getNgayTao());
             rs = stm.executeUpdate();
+            
+        if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                datPhong.setMaYeuCau(generatedKeys.getInt(1));
+            }
+        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();
