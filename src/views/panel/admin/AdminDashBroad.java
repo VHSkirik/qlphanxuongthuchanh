@@ -69,7 +69,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Các yêu cầu sử dụng phòng gần nhất");
+        jLabel1.setText("Các yêu cầu sử dụng phòng gần đây");
 
         spTable.setBorder(null);
 
@@ -107,9 +107,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(31, 31, 31)
-                .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+                .addGap(49, 49, 49)
+                .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

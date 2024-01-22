@@ -9,15 +9,15 @@ import javax.swing.JLabel;
 
 public class TableStatus extends JLabel {
 
-    public StatusType getType() {
-        return type;
-    }
-
+    private StatusType type;
+    
     public TableStatus() {
         setForeground(Color.WHITE);
     }
-
-    private StatusType type;
+    
+    public StatusType getType() {
+        return type;
+    }
 
     public void setType(StatusType type) {
         this.type = type;
@@ -36,10 +36,10 @@ public class TableStatus extends JLabel {
             } else if (type == StatusType.APPROVED) {
                 gp = new GradientPaint(0, 0, new Color(142, 142, 250), 0, getHeight(), new Color(123, 123, 245));
             } else {
-                gp = new GradientPaint(0, 0, new Color(241, 208, 62), 0, getHeight(), new Color(211, 184, 61));
+                gp = new GradientPaint(0, 0, new Color(240, 130, 130), 0, getHeight(), new Color(200, 110, 110));
             }
             g2.setPaint(gp);
-            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 1, 1);
+            g2.fillRoundRect(0, 0, getWidth(), getHeight(), 3, 3);
         }
         super.paintComponent(g);
     }

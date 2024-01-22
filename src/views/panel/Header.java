@@ -62,8 +62,8 @@ public class Header extends javax.swing.JPanel {
 //        g2.fillRect(0, 0, 25, getHeight());
 //        g2.fillRect(getWidth() - 25, getHeight() - 25, getWidth(), getHeight());
         super.paintComponent(g);
-        svgSearch.setSVGImage("./views/icon/svg/search.svg", 5, 5);
-        svgList.setSVGImage("./views/icon/svg/list.svg", 5, 5);
+        svgSearch.setSVGImage("./views/icon/svg/search.svg", 36, 36);
+        svgList.setSVGImage("./views/icon/svg/list.svg", 36, 36);
     }
 
 

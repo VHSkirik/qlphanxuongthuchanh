@@ -17,7 +17,7 @@ public class SVGImage extends JLabel {
     public void setSVGImage(String imageURL, int w, int h) {
         if (svgIcon != null)
             return;
-        svgIcon = new FlatSVGIcon(imageURL, getWidth() - w, getHeight() - h);
+        svgIcon = new FlatSVGIcon(imageURL, w , h);
         setIcon(svgIcon);
     }
 }
