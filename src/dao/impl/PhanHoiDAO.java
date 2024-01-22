@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.PhanHoi;
@@ -53,12 +54,19 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO phanhoi (MaNguoiDung, MaPhongThucHanh, NoiDung, DiemDanhGia) VALUES (?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, phanHoi.getMaNguoiDung());
             stm.setInt(2, phanHoi.getMaPhongThucHanh());
             stm.setString(3, phanHoi.getNoiDung());
             stm.setInt(4, phanHoi.getDiemDanhGia());
             rs = stm.executeUpdate();
+               if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                phanHoi.setMaPhanHoi(generatedKeys.getInt(1));
+            }
+        }
+
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();

@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import models.BaoCaoThietBi;
@@ -52,11 +53,18 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO baocaothietbi (MaThietBi, NgayBaoCao, NoiDungBaoCao) VALUES (?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
+            PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, baoCaoThietBi.getMaThietBi());
             stm.setString(2, baoCaoThietBi.getNgayBaoCao());
             stm.setString(3, baoCaoThietBi.getNoiDungBaoCao());
             rs = stm.executeUpdate();
+            
+        if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                baoCaoThietBi.setMaBaoCao(generatedKeys.getInt(1));
+            }
+        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();

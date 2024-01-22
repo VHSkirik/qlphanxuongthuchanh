@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,12 +75,18 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO nguoidung (TenDangNhap,MatKhau,Email,LoaiNguoiDung) VALUES(?,?,?,?)";
-            PreparedStatement stm = c.prepareStatement(query);
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, nguoiDung.getTenDangNhap());
             stm.setString(2, nguoiDung.getMatKhau());
             stm.setString(3, nguoiDung.getEmail());
             stm.setString(4, nguoiDung.getLoaiNguoiDung());
             rs = stm.executeUpdate();
+              if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                nguoiDung.setMaNguoiDung(generatedKeys.getInt(1));
+            }
+        }
             Jdbc.closeConnection(c);
         } catch (SQLException e) {
             e.printStackTrace();

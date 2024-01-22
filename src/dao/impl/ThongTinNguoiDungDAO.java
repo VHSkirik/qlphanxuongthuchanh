@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import models.ThongTinNguoiDung;
+import java.sql.Statement;
 
 public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
     private static final ThongTinNguoiDungDAO ttndDAO = new ThongTinNguoiDungDAO();
@@ -49,25 +50,34 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
     }
 
     public int create(ThongTinNguoiDung thongTinNguoiDung) {
-        int rs = -1;
+    int rs = -1;
 
-        try {
-            Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO thongtinnguoidung (MaNguoiDung, Hoten, SoDienThoai, ChuyenMon, DiaChi) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement stm = c.prepareStatement(query);
-            stm.setInt(1, thongTinNguoiDung.getMaNguoiDung());
-            stm.setString(2, thongTinNguoiDung.getHoten());
-            stm.setString(3, thongTinNguoiDung.getSoDienThoai());
-            stm.setString(4, thongTinNguoiDung.getChuyenMon());
-            stm.setString(5, thongTinNguoiDung.getDiaChi());
-            rs = stm.executeUpdate();
-            Jdbc.closeConnection(c);
-        } catch (SQLException var6) {
-            var6.printStackTrace();
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "INSERT INTO thongtinnguoidung (MaNguoiDung, Hoten, SoDienThoai, ChuyenMon, DiaChi) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        stm.setInt(1, thongTinNguoiDung.getMaNguoiDung());
+        stm.setString(2, thongTinNguoiDung.getHoten());
+        stm.setString(3, thongTinNguoiDung.getSoDienThoai());
+        stm.setString(4, thongTinNguoiDung.getChuyenMon());
+        stm.setString(5, thongTinNguoiDung.getDiaChi());
+        rs = stm.executeUpdate();
+
+        if (rs != -1) {
+            ResultSet generatedKeys = stm.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                thongTinNguoiDung.setMaThongTin(generatedKeys.getInt(1));
+            }
         }
 
-        return rs;
+        Jdbc.closeConnection(c);
+    } catch (SQLException var6) {
+        var6.printStackTrace();
     }
+
+    return rs;
+}
+
 
     public int update(ThongTinNguoiDung thongTinNguoiDung, int id) {
         int rs = -1;
