@@ -3,6 +3,7 @@ package services;
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhanHoiDAO;
 import dao.impl.PhongThucHanhDAO;
+import java.util.List;
 import models.PhanHoi;
 import models.OperationResult;
 
@@ -52,5 +53,13 @@ public class PhanHoiService {
     public OperationResult deletePhanHoi(int ma) {
         int result = PhanHoiDAO.getIns().delete(ma);
         return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
+    }
+    
+    public List<PhanHoi>  getAll(){
+            return PhanHoiDAO.getIns().findALl();
+        }
+    
+     public List<PhanHoi>  get(String fieldName, String value){
+            return PhanHoiDAO.getIns().findAllByField(fieldName, value);
     }
 }

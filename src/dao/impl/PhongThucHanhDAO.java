@@ -144,4 +144,33 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return dsPhongThucHanh;
     }
+    
+      public List<PhongThucHanh> findAllByField(String fieldName, String value) {
+        List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM phongthuchanh WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                PhongThucHanh phongThucHanh = new PhongThucHanh(
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("TenPhong"),
+                        rs.getString("LoaiPhong"),
+                        rs.getString("DiaDiem"),
+                        rs.getInt("SucChua"),
+                        rs.getString("TinhTrang")
+                );
+                dsPhongThucHanh.add(phongThucHanh);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsPhongThucHanh;
+    }
 }

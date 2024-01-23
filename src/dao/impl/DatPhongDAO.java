@@ -206,4 +206,34 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return latestDatPhongList;
     }
+     
+     public List<DatPhong> findAllByField(String fieldName, String value) {
+        List<DatPhong> dsDatPhong = new ArrayList();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM datphong WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                DatPhong datPhong = new DatPhong(
+                        rs.getInt("MaYeuCau"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("ThoiGianDat"),
+                        rs.getString("MucDichSuDUng"),
+                        rs.getString("TrangThai"),
+                        rs.getString("NgayTao")
+                );
+                dsDatPhong.add(datPhong);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsDatPhong;
+    }
 }

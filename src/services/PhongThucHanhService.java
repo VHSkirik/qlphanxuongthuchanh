@@ -2,6 +2,7 @@ package services;
 
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhongThucHanhDAO;
+import java.util.List;
 import models.OperationResult;
 import models.PhongThucHanh;
 
@@ -35,5 +36,13 @@ public class PhongThucHanhService {
     public OperationResult deletePhongThucHanh(int maPhongThucHanh) {
         int result = PhongThucHanhDAO.getIns().delete(maPhongThucHanh);
         return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
+    }
+    
+    public List<PhongThucHanh>  getAll(){
+            return PhongThucHanhDAO.getIns().findALl();
+        }
+    
+     public List<PhongThucHanh>  get(String fieldName, String value){
+            return PhongThucHanhDAO.getIns().findAllByField(fieldName, value);
     }
 }

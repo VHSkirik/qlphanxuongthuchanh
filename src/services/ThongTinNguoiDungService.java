@@ -2,6 +2,7 @@ package services;
 
 import dao.impl.NguoiDungDAO;
 import dao.impl.ThongTinNguoiDungDAO;
+import java.util.List;
 import models.OperationResult;
 import models.ThongTinNguoiDung;
 
@@ -48,5 +49,13 @@ public class ThongTinNguoiDungService {
             int result = ThongTinNguoiDungDAO.getIns().delete(maThongTin);
             return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
     }
+    }
+    
+      public List<ThongTinNguoiDung>  getAll(){
+            return ThongTinNguoiDungDAO.getIns().findALl();
+        }
+      
+       public List<ThongTinNguoiDung>  get(String fieldName, String value){
+            return ThongTinNguoiDungDAO.getIns().findAllByField(fieldName, value);
     }
 }
