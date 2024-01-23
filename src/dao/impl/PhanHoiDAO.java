@@ -140,4 +140,32 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
 
         return dsPhanHoi;
     }
+    
+    public List<PhanHoi> findAllByField(String fieldName, String value) {
+        List<PhanHoi> dsPhanHoi = new ArrayList();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM phanhoi WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                PhanHoi phanHoi = new PhanHoi(
+                        rs.getInt("MaPhanHoi"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("NoiDung"),
+                        rs.getInt("DiemDanhGia")
+                );
+                dsPhanHoi.add(phanHoi);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsPhanHoi;
+    }
 }

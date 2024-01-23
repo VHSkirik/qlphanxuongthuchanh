@@ -1,6 +1,7 @@
     package services;
 
     import dao.impl.NguoiDungDAO;
+import java.util.List;
     import models.NguoiDung;
     import models.OperationResult;
 
@@ -40,4 +41,12 @@
             int result = NguoiDungDAO.getIns().delete(ma);
             return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
         }
+        
+        public List<NguoiDung>  getAll(){
+            return NguoiDungDAO.getIns().findALl();
+        }
+        
+          public List<NguoiDung>  get(String fieldName, String value){
+            return NguoiDungDAO.getIns().findAllByField(fieldName, value);
+    }
     }

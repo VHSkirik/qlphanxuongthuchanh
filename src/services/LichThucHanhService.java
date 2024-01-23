@@ -3,6 +3,7 @@ package services;
 import dao.impl.LichThucHanhDAO;
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhongThucHanhDAO;
+import java.util.List;
 import models.LichThucHanh;
 import models.OperationResult;
 
@@ -53,6 +54,14 @@ public class LichThucHanhService {
     public OperationResult deleteLichThucHanh(int ma) {
         int result = LichThucHanhDAO.getIns().delete(ma);
         return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
+    }
+    
+     public List<LichThucHanh>  getAll(){
+            return LichThucHanhDAO.getIns().findALl();
+        }
+     
+      public List<LichThucHanh>  get(String fieldName, String value){
+            return LichThucHanhDAO.getIns().findAllByField(fieldName, value);
     }
 }
 
