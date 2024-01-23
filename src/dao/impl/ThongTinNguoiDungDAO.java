@@ -146,4 +146,33 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
 
         return dsThongTinNguoiDung;
     }
+    
+    public List<ThongTinNguoiDung> findAllByField(String fieldName, String value){
+        List<ThongTinNguoiDung> dsThongTinNguoiDung = new ArrayList();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM thongtinnguoidung WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while(rs.next()) {
+                ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung(
+                        rs.getInt("MaThongTin"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getString("Hoten"),
+                        rs.getString("SoDienThoai"),
+                        rs.getString("ChuyenMon"),
+                        rs.getString("DiaChi")
+                );
+                dsThongTinNguoiDung.add(thongTinNguoiDung);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsThongTinNguoiDung;
+    }
 }

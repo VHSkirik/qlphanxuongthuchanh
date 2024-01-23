@@ -2,6 +2,7 @@ package services;
 
 import dao.impl.PhongThucHanhDAO;
 import dao.impl.ThietBiDAO;
+import java.util.List;
 import models.OperationResult;
 import models.ThietBi;
 
@@ -46,5 +47,13 @@ public class ThietBiService {
     public OperationResult deleteThietBi(int ma) {
         int result = ThietBiDAO.getIns().delete(ma);
         return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
+    }
+    
+     public List<ThietBi>  getAll(){
+            return ThietBiDAO.getIns().findALl();
+    }
+     
+     public List<ThietBi>  get(String fieldName, String value){
+            return ThietBiDAO.getIns().findAllByField(fieldName, value);
     }
 }

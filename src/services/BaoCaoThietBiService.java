@@ -2,6 +2,7 @@ package services;
 
 import dao.impl.BaoCaoThietBiDAO;
 import dao.impl.ThietBiDAO;
+import java.util.List;
 import models.BaoCaoThietBi;
 import models.OperationResult;
 
@@ -43,5 +44,13 @@ public class BaoCaoThietBiService {
     public OperationResult deleteBaoCaoThietBi(int ma) {
         int result = BaoCaoThietBiDAO.getIns().delete(ma);
         return (result == -1) ? OperationResult.DELETE_FAILURE : OperationResult.DELETE_SUCCESS;
+    }
+    
+    public List<BaoCaoThietBi>  getAll(){
+            return BaoCaoThietBiDAO.getIns().findALl();
+    }
+    
+    public List<BaoCaoThietBi>  get(String fieldName, String value){
+            return BaoCaoThietBiDAO.getIns().findAllByField(fieldName, value);
     }
 }

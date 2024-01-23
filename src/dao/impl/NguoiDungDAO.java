@@ -155,4 +155,28 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
         }
         return dsNguoiDung;
     }
+    public List<NguoiDung> findAllByField(String fieldName, String value) {
+        List<NguoiDung> danhSachNguoiDung = new ArrayList<>();
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM nguoidung WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, value);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                NguoiDung nguoiDung = new NguoiDung(
+                        rs.getInt("MaNguoiDung"),
+                        rs.getString("TenDangNhap"),
+                        rs.getString("MatKhau"),
+                        rs.getString("Email"),
+                        rs.getString("LoaiNguoiDung")
+                );
+                danhSachNguoiDung.add(nguoiDung);
+            }
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return danhSachNguoiDung;
+    }
 }

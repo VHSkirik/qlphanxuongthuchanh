@@ -143,4 +143,32 @@ public class LichThucHanhDAO implements DAOInterface<LichThucHanh> {
 
         return dsLichThucHanh;
     }
+    public List<LichThucHanh> findAllByField(String fieldName, String value) {
+        List<LichThucHanh> dsLichThucHanh = new ArrayList();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM lichthuchanh WHERE " + fieldName + " = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                LichThucHanh lichThucHanh = new LichThucHanh(
+                        rs.getInt("MaLichThucHanh"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("ThoiGianBatDau"),
+                        rs.getString("ThoiGianKetThuc"),
+                        rs.getString("NoiDungThucHanh")
+                );
+                dsLichThucHanh.add(lichThucHanh);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsLichThucHanh;
+    }
 }

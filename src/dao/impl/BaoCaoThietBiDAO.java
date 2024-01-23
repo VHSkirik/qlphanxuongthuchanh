@@ -136,4 +136,33 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
         return dsBaoCaoThietBi;
     }
+
+   public List<BaoCaoThietBi> findAllByField(String fieldName, String value) {
+    List<BaoCaoThietBi> dsBaoCaoThietBi = new ArrayList<>();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT * FROM baocaothietbi WHERE " + fieldName + " = ?";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, value);
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(
+                    rs.getInt("MaBaoCao"),
+                    rs.getInt("MaThietBi"),
+                    rs.getString("NgayBaoCao"),
+                    rs.getString("NoiDungBaoCao")
+            );
+            dsBaoCaoThietBi.add(baoCaoThietBi);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return dsBaoCaoThietBi;
+}
+
 }
