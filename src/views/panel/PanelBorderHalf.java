@@ -4,25 +4,11 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-public class PanelBorder extends javax.swing.JPanel {
+public class PanelBorderHalf extends javax.swing.JPanel {
 
-    private boolean drawBorder = false;
-
-    public PanelBorder() {
+    public PanelBorderHalf() {
         initComponents();
         setOpaque(false);
-    }
-
-    public void drawRoundBorder(Graphics g) {
-        if (drawBorder == true) {
-            Graphics2D g2 = (Graphics2D) g;
-            g2.setColor(getForeground());
-            g2.drawRoundRect(0, 0, getWidth() - 1, getHeight(), 15, 15);
-        }
-    }
-
-    public void setDrawBorder(boolean drawBorder) {
-        this.drawBorder = drawBorder;
     }
 
     @Override
@@ -31,7 +17,7 @@ public class PanelBorder extends javax.swing.JPanel {
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2.setColor(getBackground());
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), 15, 15);
-        drawRoundBorder(g);
+        g2.fillRect(0, getHeight()-20, getWidth(), 20);
         super.paintComponent(g2);
     }
 
