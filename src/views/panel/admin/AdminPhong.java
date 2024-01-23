@@ -6,10 +6,12 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import models.OperationResult;
 import models.PhongThucHanh;
+import services.PhongThucHanhService;
 import views.FormInterface;
 
-public class AdminPhong extends javax.swing.JPanel implements FormInterface{
+public class AdminPhong extends javax.swing.JPanel implements FormInterface {
 
     private List<PhongThucHanh> dsPhong;
     private DefaultTableModel dtmPhong;
@@ -17,9 +19,10 @@ public class AdminPhong extends javax.swing.JPanel implements FormInterface{
     public AdminPhong() {
         initComponents();
         dtmPhong = (DefaultTableModel) tbPhong.getModel();
-        tbPhong.getColumnModel().getColumn(0).setMaxWidth(120);
-        tbPhong.getColumnModel().getColumn(1).setMaxWidth(120);
-        tbPhong.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tbPhong.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbPhong.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbPhong.getColumnModel().getColumn(2).setPreferredWidth(250);
+        tbPhong.getColumnModel().getColumn(4).setPreferredWidth(5);
         tbPhong.setRowHeight(35);
         myInit();
     }
@@ -165,6 +168,11 @@ public class AdminPhong extends javax.swing.JPanel implements FormInterface{
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btXoa.setIconTextGap(0);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
@@ -230,13 +238,32 @@ public class AdminPhong extends javax.swing.JPanel implements FormInterface{
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
         int currentRow = tbPhong.getSelectedRow();
-        if (currentRow != -1){
+        if (currentRow != -1) {
             PhongThucHanh phongThucHanh = dsPhong.get(currentRow);
             new PhongDialog(this, new JFrame(), true, phongThucHanh).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần sửa.");
         }
     }//GEN-LAST:event_btSuaActionPerformed
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        int currentRow = tbPhong.getSelectedRow();
+        if (currentRow != -1) {
+            int maPhong = Integer.parseInt(dtmPhong.getValueAt(currentRow, 0).toString());
+            int rs = JOptionPane.showConfirmDialog(this, "Xóa bản ghi có mã " + maPhong + "?", "Xóa", JOptionPane.YES_NO_OPTION);
+            if (rs == JOptionPane.YES_OPTION) {
+                OperationResult os = new PhongThucHanhService().deletePhongThucHanh(maPhong);
+                if (os.isSuccess()) {
+                    JOptionPane.showMessageDialog(this, "Xóa thành công.");
+                    this.initTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Xóa thất bại.\nHãy kiểm tra lại.");
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa.");
+        }
+    }//GEN-LAST:event_btXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
