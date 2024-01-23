@@ -1,22 +1,56 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.PhongThucHanhDAO;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import models.PhongThucHanh;
+import views.FormInterface;
 
-public class AdminPhong extends javax.swing.JPanel {
+public class AdminPhong extends javax.swing.JPanel implements FormInterface{
+
+    private List<PhongThucHanh> dsPhong;
+    private DefaultTableModel dtmPhong;
 
     public AdminPhong() {
         initComponents();
+        dtmPhong = (DefaultTableModel) tbPhong.getModel();
+        tbPhong.getColumnModel().getColumn(0).setMaxWidth(120);
+        tbPhong.getColumnModel().getColumn(1).setMaxWidth(120);
+        tbPhong.getColumnModel().getColumn(2).setPreferredWidth(300);
+        tbPhong.setRowHeight(35);
         myInit();
     }
-    
-    private void myInit(){
-        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg",45, 45));
-        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg",45, 45));
-        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45, 45));
-        btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg",45, 45));
+
+    private void myInit() {
+        initImage();
+        initTable();
+    }
+
+    private void initImage() {
+        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg", 45, 45));
+        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg", 45, 45));
+        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg", 45, 45));
+        btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg", 45, 45));
         lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/classroom.svg", 40, 40));
-        tbPhong.setRowHeight(50);
+    }
+
+    @Override
+    public void initTable() {
+        dsPhong = PhongThucHanhDAO.getIns().findALl();
+        dtmPhong.setRowCount(0);
+        for (PhongThucHanh phong : dsPhong) {
+            dtmPhong.addRow(new Object[]{
+                phong.getMaPhongThucHanh(),
+                phong.getTenPhong(),
+                phong.getLoaiPhong(),
+                phong.getDiaDiem(),
+                phong.getSucChua(),
+                phong.getTinhTrang()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -40,6 +74,7 @@ public class AdminPhong extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
+        tbPhong.setFont(new java.awt.Font("JetBrains Mono Light", 0, 16)); // NOI18N
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -50,7 +85,15 @@ public class AdminPhong extends javax.swing.JPanel {
             new String [] {
                 "Mã Phòng", "Tên Phòng", "Loại Phòng", "Địa Điểm", "Sức Chứa", "Tình Trạng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbPhong);
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -108,6 +151,11 @@ public class AdminPhong extends javax.swing.JPanel {
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSua.setIconTextGap(0);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btSua);
 
         btXoa.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -177,8 +225,18 @@ public class AdminPhong extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        new PhongDialog(new JFrame(), true).setVisible(true);
+        new PhongDialog(this, new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_btThemActionPerformed
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        int currentRow = tbPhong.getSelectedRow();
+        if (currentRow != -1){
+            PhongThucHanh phongThucHanh = dsPhong.get(currentRow);
+            new PhongDialog(this, new JFrame(), true, phongThucHanh).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần sửa.");
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

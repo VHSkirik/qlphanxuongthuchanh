@@ -2,6 +2,7 @@ package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.NguoiDungDAO;
+import dao.impl.ThongTinNguoiDungDAO;
 import java.awt.Graphics;
 import java.util.List;
 import javax.swing.JFrame;
@@ -9,11 +10,13 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
 import models.OperationResult;
+import models.ThongTinNguoiDung;
 import services.NguoiDungService;
 
 public class AdminNguoiDung extends javax.swing.JPanel {
 
     private List<NguoiDung> dsNguoiDung;
+    private List<ThongTinNguoiDung> dsThongTin;
     private DefaultTableModel dtmNguoiDung;
     private DefaultTableModel dtmThongTin;
 
@@ -44,13 +47,27 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         dtmNguoiDung.setRowCount(0);
         for (NguoiDung nd : dsNguoiDung) {
             dtmNguoiDung.addRow(new Object[]{
+                nd.getMaNguoiDung(),
                 nd.getTenDangNhap(),
                 nd.getMatKhau(),
                 nd.getEmail(),
                 nd.getLoaiNguoiDung()
             });
         }
-        //thongtin
+        //thongtinchitiet
+        dsThongTin = ThongTinNguoiDungDAO.getIns().findALl();
+        dtmThongTin.setRowCount(0);
+        for (ThongTinNguoiDung ttnd : dsThongTin) {
+            dtmThongTin.addRow(new Object[]{
+                ttnd.getMaNguoiDung(),
+                ttnd.getHoten(),
+                "",
+                "",
+                ttnd.getDiaChi(),
+                ttnd.getChuyenMon(),
+                ttnd.getSoDienThoai()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -80,17 +97,17 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         tbNguoiDung.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         tbNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Tên Đăng Nhập", "Mật Khẩu", "Email", "Loại Người Dùng"
+                "Mã Người Dùng", "Tên Đăng Nhập", "Mật Khẩu", "Email", "Loại Người Dùng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -107,15 +124,16 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         lbTitleUser.setForeground(new java.awt.Color(127, 127, 127));
         lbTitleUser.setText("Danh sách người dùng");
 
+        tbThongTinNguoiDung.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         tbThongTinNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Họ Tên", "Tuổi", "Địa Chỉ", "Chuyên Môn", "Số Điện Thoại"
+                "Mã Người Dùng", "Họ Tên", "Giới Tính", "Ngày Sinh", "Địa Chỉ", "Chuyên Môn", "Số Điện Thoại"
             }
         ));
         jScrollPane2.setViewportView(tbThongTinNguoiDung);
@@ -260,23 +278,23 @@ public class AdminNguoiDung extends javax.swing.JPanel {
     }//GEN-LAST:event_btThemActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        int rowIndex = tbNguoiDung.getSelectedRow();
-        if (rowIndex == -1) {
+        int currentRow = tbNguoiDung.getSelectedRow();
+        if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần sửa");
         } else {
-            NguoiDung currentNguoiDung = dsNguoiDung.get(rowIndex);
+            NguoiDung currentNguoiDung = dsNguoiDung.get(currentRow);
             new NguoiDungDialog(this, new JFrame(), true, currentNguoiDung).setVisible(true);
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        int rowIndex = tbNguoiDung.getSelectedRow();
-        if (rowIndex == -1) {
+        int currentRow = tbNguoiDung.getSelectedRow();
+        if (currentRow == -1) {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
         } else {
             int rs = JOptionPane.showConfirmDialog(this, "Xác nhận xóa bản ghi hiện tại? \nĐiều này có thể ảnh hưởng các bảng khác.", "Xóa", JOptionPane.YES_NO_OPTION);
             if (rs == JOptionPane.YES_OPTION){
-                NguoiDung currentNguoiDung = dsNguoiDung.get(rowIndex);
+                NguoiDung currentNguoiDung = dsNguoiDung.get(currentRow);
                 NguoiDungService nguoiDungService = new NguoiDungService();
                 OperationResult os = nguoiDungService.deleteNguoiDung(currentNguoiDung.getMaNguoiDung());
                 if(os.isSuccess()){
