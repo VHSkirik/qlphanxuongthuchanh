@@ -252,7 +252,7 @@
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                   <Component id="jToolBar1" min="-2" pref="267" max="-2" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="header1" pref="0" max="32767" attributes="0"/>
+                  <Component id="pnTimKiem" pref="0" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -266,7 +266,7 @@
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="header1" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnTimKiem" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -364,7 +364,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="views.panel.Header" name="header1">
+        <Component class="views.panel.Header" name="pnTimKiem">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

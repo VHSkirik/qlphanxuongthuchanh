@@ -4,9 +4,13 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.NguoiDungDAO;
 import dao.impl.ThongTinNguoiDungDAO;
 import java.awt.Graphics;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
 import models.OperationResult;
@@ -19,9 +23,13 @@ public class AdminNguoiDung extends javax.swing.JPanel {
     private List<ThongTinNguoiDung> dsThongTin;
     private DefaultTableModel dtmNguoiDung;
     private DefaultTableModel dtmThongTin;
+    private JTextField txtTimKiem;
+    private JComboBox<String> cbTuyChon;
 
     public AdminNguoiDung() {
         initComponents();
+        txtTimKiem = pnTimKiem.getTextFieldTK();
+        cbTuyChon = pnTimKiem.getCbTuyChonTK();
         dtmNguoiDung = (DefaultTableModel) tbNguoiDung.getModel();
         dtmThongTin = (DefaultTableModel) tbThongTinNguoiDung.getModel();
         myInit();
@@ -30,6 +38,8 @@ public class AdminNguoiDung extends javax.swing.JPanel {
     private void myInit() {
         initImage();
         initTable();
+        initTimKiem();
+
     }
 
     private void initImage() {
@@ -70,6 +80,52 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         }
     }
 
+    private void initTimKiem() {
+        cbTuyChon.addItem("Mã Người Dùng");
+        cbTuyChon.addItem("Tên Đăng Nhập");
+        cbTuyChon.addItem("Email");
+        txtTimKiem.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                NguoiDungService nguoiDungService = new NguoiDungService();
+                String value = txtTimKiem.getText();
+                if (!value.isBlank()) {
+                    dsNguoiDung = nguoiDungService.get("MaNguoiDung", value);
+                    dtmNguoiDung.setRowCount(0);
+                    for (NguoiDung nd : dsNguoiDung) {
+                        dtmNguoiDung.addRow(new Object[]{
+                            nd.getMaNguoiDung(),
+                            nd.getTenDangNhap(),
+                            nd.getMatKhau(),
+                            nd.getEmail(),
+                            nd.getLoaiNguoiDung()
+                        });
+                    }
+                } else {
+                    initTable();
+                }
+            }
+        });
+    }
+
+    private String getAttribute(String ColumnName) {
+        String rs;
+        switch (ColumnName) {
+            case "Mã Người Dùng":
+                rs = "MaNguoiDung";
+                break;
+            case "Tên Đăng Nhập":
+                rs = "TenDangNhap";
+                break;
+            case "Email":
+                rs = "Email";
+                break;
+            default:
+                rs = "";
+        }
+        return rs;
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -88,7 +144,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btExcel = new javax.swing.JButton();
-        header1 = new views.panel.Header();
+        pnTimKiem = new views.panel.Header();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -226,7 +282,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         btExcel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jToolBar1.add(btExcel);
 
-        header1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnTimKiem.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -236,7 +292,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(pnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
         );
         panelBorder2Layout.setVerticalGroup(
@@ -247,7 +303,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
                 .addContainerGap(14, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
 
@@ -293,11 +349,11 @@ public class AdminNguoiDung extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Chưa chọn bản ghi cần xóa");
         } else {
             int rs = JOptionPane.showConfirmDialog(this, "Xác nhận xóa bản ghi hiện tại? \nĐiều này có thể ảnh hưởng các bảng khác.", "Xóa", JOptionPane.YES_NO_OPTION);
-            if (rs == JOptionPane.YES_OPTION){
+            if (rs == JOptionPane.YES_OPTION) {
                 NguoiDung currentNguoiDung = dsNguoiDung.get(currentRow);
                 NguoiDungService nguoiDungService = new NguoiDungService();
                 OperationResult os = nguoiDungService.deleteNguoiDung(currentNguoiDung.getMaNguoiDung());
-                if(os.isSuccess()){
+                if (os.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Xóa Thành Công.");
                     initTable();
                 } else {
@@ -317,7 +373,6 @@ public class AdminNguoiDung extends javax.swing.JPanel {
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
-    private views.panel.Header header1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToolBar.Separator jSeparator1;
@@ -326,6 +381,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
     private javax.swing.JLabel lbTitleUser;
     private views.panel.PanelBorder panelBorder1;
     private views.panel.PanelBorder panelBorder2;
+    private views.panel.Header pnTimKiem;
     private javax.swing.JTable tbNguoiDung;
     private javax.swing.JTable tbThongTinNguoiDung;
     // End of variables declaration//GEN-END:variables

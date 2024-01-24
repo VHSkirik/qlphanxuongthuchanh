@@ -3,6 +3,7 @@ package views.panel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import javax.swing.JTextField;
 
 public class Header extends javax.swing.JPanel {
 
@@ -10,18 +11,28 @@ public class Header extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
     }
+    
+    public javax.swing.JComboBox<String> getCbTuyChonTK(){
+        return cbTuyChonTK;
+    }
+    
+    public JTextField getTextFieldTK(){
+        return txtTimKiem;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         svgSearch = new views.label.SVGImage();
-        searchText1 = new views.textfield.SearchText();
-        svgList = new views.label.SVGImage();
+        txtTimKiem = new views.textfield.SearchText();
+        cbTuyChonTK = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        searchText1.setFont(new java.awt.Font("JetBrains Mono Light", 0, 16)); // NOI18N
+        txtTimKiem.setFont(new java.awt.Font("JetBrains Mono Light", 0, 16)); // NOI18N
+
+        cbTuyChonTK.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -30,10 +41,10 @@ public class Header extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(svgSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(searchText1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(svgList, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbTuyChonTK, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -42,13 +53,13 @@ public class Header extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(svgSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(3, 3, 3)
-                .addComponent(searchText1, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                .addGap(3, 3, 3))
             .addGroup(layout.createSequentialGroup()
+                .addGap(3, 3, 3)
+                .addComponent(txtTimKiem, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(svgList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbTuyChonTK)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -63,13 +74,12 @@ public class Header extends javax.swing.JPanel {
 //        g2.fillRect(getWidth() - 25, getHeight() - 25, getWidth(), getHeight());
         super.paintComponent(g);
         svgSearch.setSVGImage("./views/icon/svg/search.svg", 36, 36);
-        svgList.setSVGImage("./views/icon/svg/list.svg", 36, 36);
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.textfield.SearchText searchText1;
-    private views.label.SVGImage svgList;
+    private javax.swing.JComboBox<String> cbTuyChonTK;
     private views.label.SVGImage svgSearch;
+    private views.textfield.SearchText txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
