@@ -4,6 +4,7 @@ import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import models.NguoiDung;
 
@@ -184,7 +185,10 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
-        System.exit(0);
+        int rs = JOptionPane.showConfirmDialog(this, "Thoát chương trình?","Thoát",JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION){
+            System.exit(0);
+        }
     }//GEN-LAST:event_lbExitMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed

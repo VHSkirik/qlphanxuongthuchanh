@@ -1,19 +1,25 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.DatPhongDAO;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.List;
+import models.DatPhong;
 import views.models.Model_Card;
 import views.table.StatusType;
 
 public class AdminDashBroad extends javax.swing.JPanel {
 
+    private List<DatPhong> dsDatPhong;
+
     public AdminDashBroad() {
         initComponents();
-        setData();
+        spTable.getViewport().setBackground(Color.WHITE);
+        myInit();
     }
 
-    private void setData() {
+    private void myInit() {
         Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
         Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
         Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
@@ -21,17 +27,33 @@ public class AdminDashBroad extends javax.swing.JPanel {
         card2.SetData(data2);
         card3.SetData(data3);
         //add row table
-        spTable.getViewport().setBackground(Color.WHITE);
-        table.addRow(new Object[]{"1", "2", "1", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"2", "3", "1", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"3", "4", "2", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"4", "2", "1", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"5", "3", "1", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"6", "4", "2", "25 Apr,2018", StatusType.REJECT});
-        table.addRow(new Object[]{"7", "2", "1", "25 Apr,2018", StatusType.PENDING});
-        table.addRow(new Object[]{"8", "3", "1", "25 Apr,2018", StatusType.APPROVED});
-        table.addRow(new Object[]{"9", "4", "2", "25 Apr,2018", StatusType.REJECT});
+        initDataTable();
 
+    }
+
+    private void initDataTable() {
+        dsDatPhong = DatPhongDAO.getIns().getLatestDatPhong(4);
+        
+        for (DatPhong datPhong : dsDatPhong){
+            StatusType status;
+            String trangThai = datPhong.getTrangThai();
+            
+            if (trangThai.equals("DangCho")){
+                status = StatusType.PENDING;
+            } else if (trangThai.equals("DaPheDuyet")){
+                status = StatusType.APPROVED;
+            } else {
+                status = StatusType.REJECT;
+            }
+            
+            table.addRow(new Object[]{
+                datPhong.getMaYeuCau(),
+                datPhong.getMaNguoiDung(),
+                datPhong.getMaPhongThucHanh(),
+                datPhong.getThoiGianDat(),
+                status
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -98,16 +120,19 @@ public class AdminDashBroad extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spTable)
-                    .addComponent(jLabel1))
-                .addGap(17, 17, 17))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
+                        .addGap(17, 17, 17))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
+                .addGap(39, 39, 39)
                 .addComponent(jLabel1)
-                .addGap(49, 49, 49)
+                .addGap(35, 35, 35)
                 .addComponent(spTable, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
