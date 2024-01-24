@@ -7,6 +7,7 @@ public class AdminThietBi extends javax.swing.JPanel {
 
     public AdminThietBi() {
         initComponents();
+        
         myInit();
     }
     
@@ -33,7 +34,7 @@ public class AdminThietBi extends javax.swing.JPanel {
         btExcel = new javax.swing.JButton();
         header1 = new views.panel.Header();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbThietBi = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -111,7 +112,7 @@ public class AdminThietBi extends javax.swing.JPanel {
                 .addGap(35, 35, 35))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbThietBi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -122,7 +123,7 @@ public class AdminThietBi extends javax.swing.JPanel {
                 "Mã Thiết Bị", "Tên Thiết Bị", "Loại THiết Bị", "Ngày Sử Dụng", "Mô Tả", "Tình Trạng", "Mã Phòng"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbThietBi);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -190,10 +191,10 @@ public class AdminThietBi extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorder panelBorder1;
     private views.panel.PanelBorder panelBorder2;
+    private javax.swing.JTable tbThietBi;
     // End of variables declaration//GEN-END:variables
 }

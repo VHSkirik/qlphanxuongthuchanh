@@ -3,7 +3,9 @@ package views.panel.admin;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import models.OperationResult;
 import models.PhongThucHanh;
+import services.PhongThucHanhService;
 import views.FormInterface;
 
 public class PhongDialog extends javax.swing.JDialog {
@@ -36,6 +38,7 @@ public class PhongDialog extends javax.swing.JDialog {
         pnMain.setDrawBorder(true);
         initImage();
         if (function == 1) {
+            lbTitle.setText("SỬA PHÒNG THỰC HÀNH");
             initData();
         }
     }
@@ -74,7 +77,7 @@ public class PhongDialog extends javax.swing.JDialog {
         btHuy = new javax.swing.JButton();
         btSubmit = new javax.swing.JButton();
         panelBorderHalf1 = new views.panel.PanelBorderHalf();
-        jLabel1 = new javax.swing.JLabel();
+        lbTitle = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         lbDiaDiem = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -144,10 +147,10 @@ public class PhongDialog extends javax.swing.JDialog {
 
         panelBorderHalf1.setBackground(new java.awt.Color(25, 118, 211));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("THÊM PHÒNG THỰC HÀNH");
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lbTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbTitle.setText("THÊM PHÒNG THỰC HÀNH");
 
         javax.swing.GroupLayout panelBorderHalf1Layout = new javax.swing.GroupLayout(panelBorderHalf1);
         panelBorderHalf1.setLayout(panelBorderHalf1Layout);
@@ -155,14 +158,14 @@ public class PhongDialog extends javax.swing.JDialog {
             panelBorderHalf1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorderHalf1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         panelBorderHalf1Layout.setVerticalGroup(
             panelBorderHalf1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorderHalf1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
@@ -216,15 +219,35 @@ public class PhongDialog extends javax.swing.JDialog {
             String tinhTrang = cbTinhTrang.getSelectedItem().toString();
             
             if (tenPhong.isBlank() || loaiPhong.isBlank() || diaDiem.isBlank() || tinhTrang.isBlank() || sucChua.isBlank()) {
-                JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin");
+                JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
                 return;
             } 
             
+            PhongThucHanhService phongThucHanhService = new PhongThucHanhService();
+            
             if (function == 0){
-                
+                //create
+                OperationResult os = phongThucHanhService.createPhongThucHanh(tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang);
+                if (os.isSuccess()){
+                    JOptionPane.showMessageDialog(this, "Thêm thành công.");
+                    mainForm.initTable();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Thêm thất bại.");
+                }
+            } else {
+                //edit
+                OperationResult os = phongThucHanhService.updatePhongThucHanh(phongThucHanh.getMaPhongThucHanh(), tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang);
+                if (os.isSuccess()){
+                    JOptionPane.showMessageDialog(this, "Sửa thành công.");
+                    mainForm.initTable();
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Sửa thất bại.");
+                }
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ");
+            JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ.");
         }
     }//GEN-LAST:event_btSubmitActionPerformed
 
@@ -233,7 +256,6 @@ public class PhongDialog extends javax.swing.JDialog {
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btSubmit;
     private javax.swing.JComboBox<String> cbTinhTrang;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -245,6 +267,7 @@ public class PhongDialog extends javax.swing.JDialog {
     private javax.swing.JTextField lbMaPhong;
     private javax.swing.JTextField lbSucChua;
     private javax.swing.JTextField lbTenPhong;
+    private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorderHalf panelBorderHalf1;
     private views.panel.PanelBorder pnMain;
     // End of variables declaration//GEN-END:variables
