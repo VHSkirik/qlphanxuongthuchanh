@@ -84,13 +84,17 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         cbTuyChon.addItem("Mã Người Dùng");
         cbTuyChon.addItem("Tên Đăng Nhập");
         cbTuyChon.addItem("Email");
+        cbTuyChon.addActionListener((e) -> {
+            txtTimKiem.setText("");
+            initTable();
+        });
         txtTimKiem.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 NguoiDungService nguoiDungService = new NguoiDungService();
                 String value = txtTimKiem.getText();
                 if (!value.isBlank()) {
-                    dsNguoiDung = nguoiDungService.get("MaNguoiDung", value);
+                    dsNguoiDung = nguoiDungService.get(getAttribute(cbTuyChon.getSelectedIndex()), value);
                     dtmNguoiDung.setRowCount(0);
                     for (NguoiDung nd : dsNguoiDung) {
                         dtmNguoiDung.addRow(new Object[]{
@@ -108,16 +112,16 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         });
     }
 
-    private String getAttribute(String ColumnName) {
+    private String getAttribute(int SelectedIndex) {
         String rs;
-        switch (ColumnName) {
-            case "Mã Người Dùng":
+        switch (SelectedIndex) {
+            case 0:
                 rs = "MaNguoiDung";
                 break;
-            case "Tên Đăng Nhập":
+            case 1:
                 rs = "TenDangNhap";
                 break;
-            case "Email":
+            case 2:
                 rs = "Email";
                 break;
             default:

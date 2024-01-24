@@ -159,9 +159,9 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
         List<NguoiDung> danhSachNguoiDung = new ArrayList<>();
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM nguoidung WHERE " + fieldName + " = ?";
+            String query = "SELECT * FROM nguoidung WHERE " + fieldName + " like ?";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(1, value);
+            stm.setString(1, "%"+value+"%");
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 NguoiDung nguoiDung = new NguoiDung(
