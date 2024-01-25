@@ -52,7 +52,7 @@
                           <Component id="mainPanel" pref="972" max="32767" attributes="0"/>
                           <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="information1" max="32767" attributes="0"/>
+                      <Component id="pnUserTitle" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -61,8 +61,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="menu" pref="718" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
-                  <Component id="information1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="pnUserTitle" min="-2" pref="69" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="mainPanel" max="32767" attributes="0"/>
                   <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
@@ -79,7 +80,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
         </Container>
-        <Component class="views.panel.Information" name="information1">
+        <Component class="views.panel.Information" name="pnUserTitle">
         </Component>
       </SubComponents>
     </Container>
