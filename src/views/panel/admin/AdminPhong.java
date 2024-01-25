@@ -2,6 +2,8 @@ package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.PhongThucHanhDAO;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -11,9 +13,9 @@ import javax.swing.table.DefaultTableModel;
 import models.OperationResult;
 import models.PhongThucHanh;
 import services.PhongThucHanhService;
-import views.FormInterface;
+import views.UserFormInterface;
 
-public class AdminPhong extends javax.swing.JPanel implements FormInterface {
+public class AdminPhong extends javax.swing.JPanel implements UserFormInterface {
 
     private List<PhongThucHanh> dsPhong;
     private DefaultTableModel dtmPhong;
@@ -50,8 +52,12 @@ public class AdminPhong extends javax.swing.JPanel implements FormInterface {
     @Override
     public void initTable() {
         dsPhong = PhongThucHanhDAO.getIns().findALl();
+        initDataPhongThucHanh(dsPhong);
+    }
+
+    private void initDataPhongThucHanh(List<PhongThucHanh> currentDsPhong) {
         dtmPhong.setRowCount(0);
-        for (PhongThucHanh phong : dsPhong) {
+        for (PhongThucHanh phong : currentDsPhong) {
             dtmPhong.addRow(new Object[]{
                 phong.getMaPhongThucHanh(),
                 phong.getTenPhong(),
@@ -62,11 +68,26 @@ public class AdminPhong extends javax.swing.JPanel implements FormInterface {
             });
         }
     }
-    
-    private void initTimKiem(){
-        cbTuyChon.addItem("Mã Người Dùng");
-        cbTuyChon.addItem("Tên Đăng Nhập");
-        cbTuyChon.addItem("Email");
+
+    private void initTimKiem() {
+        cbTuyChon.addItem("Tên Phòng");
+        cbTuyChon.addActionListener((e) -> {
+            txtTimKiem.setText("");
+            initTable();
+        });
+        txtTimKiem.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyReleased(KeyEvent e) {
+                PhongThucHanhService phongThucHanhService = new PhongThucHanhService();
+                String value = txtTimKiem.getText().trim();
+                if (!value.isBlank()) {
+                    List<PhongThucHanh> dsPhongTimKiem = phongThucHanhService.get("TenPhong", value);
+                    initDataPhongThucHanh(dsPhongTimKiem);
+                } else {
+                    initTable();
+                }
+            }
+        });
     }
 
     @SuppressWarnings("unchecked")

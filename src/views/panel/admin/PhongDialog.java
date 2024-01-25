@@ -6,15 +6,15 @@ import javax.swing.JOptionPane;
 import models.OperationResult;
 import models.PhongThucHanh;
 import services.PhongThucHanhService;
-import views.FormInterface;
+import views.UserFormInterface;
 
 public class PhongDialog extends javax.swing.JDialog {
     
-    private FormInterface mainForm;
+    private UserFormInterface mainForm;
     private PhongThucHanh phongThucHanh;
     private int function;
     
-    public PhongDialog(FormInterface mainForm, java.awt.Frame parent, boolean modal) {
+    public PhongDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.mainForm = mainForm;
         function = 0;
@@ -23,7 +23,7 @@ public class PhongDialog extends javax.swing.JDialog {
         myInit();
     }
     
-    public PhongDialog(FormInterface mainForm, java.awt.Frame parent, boolean modal, PhongThucHanh phongThucHanh) {
+    public PhongDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal, PhongThucHanh phongThucHanh) {
         super(parent, modal);
         this.mainForm = mainForm;
         this.phongThucHanh = phongThucHanh;
@@ -53,7 +53,8 @@ public class PhongDialog extends javax.swing.JDialog {
             lbMaPhong.setText(phongThucHanh.getMaPhongThucHanh() + "");
             lbTenPhong.setText(phongThucHanh.getTenPhong());
             lbLoaiPhong.setText(phongThucHanh.getLoaiPhong());
-            lbDiaDiem.setText(phongThucHanh.getDiaDiem());
+            cbDiaDiem.setSelectedItem(phongThucHanh.getDiaDiem());
+            //toa nha
             lbSucChua.setText(phongThucHanh.getSucChua() + "");
             cbTinhTrang.setSelectedItem(phongThucHanh.getTinhTrang());
         } catch (Exception e) {
@@ -79,9 +80,11 @@ public class PhongDialog extends javax.swing.JDialog {
         panelBorderHalf1 = new views.panel.PanelBorderHalf();
         lbTitle = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lbDiaDiem = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         lbSucChua = new javax.swing.JTextField();
+        cbDiaDiem = new javax.swing.JComboBox<>();
+        cbToaNha = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -117,11 +120,11 @@ public class PhongDialog extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(51, 51, 51));
         jLabel5.setText("Tình trạng");
-        pnMain.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 20));
+        pnMain.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 140, 20));
 
         cbTinhTrang.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 14)); // NOI18N
         cbTinhTrang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SanSang", "DangSuaChua", "DaDuocSuDung" }));
-        pnMain.add(cbTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 330, 40));
+        pnMain.add(cbTinhTrang, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 540, 330, 40));
 
         btHuy.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btHuy.setForeground(new java.awt.Color(255, 0, 0));
@@ -131,7 +134,7 @@ public class PhongDialog extends javax.swing.JDialog {
                 btHuyActionPerformed(evt);
             }
         });
-        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 530, 150, 40));
+        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 600, 150, 40));
 
         btSubmit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSubmit.setForeground(new java.awt.Color(25, 118, 211));
@@ -143,7 +146,7 @@ public class PhongDialog extends javax.swing.JDialog {
                 btSubmitActionPerformed(evt);
             }
         });
-        pnMain.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 530, 150, 40));
+        pnMain.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 600, 150, 40));
 
         panelBorderHalf1.setBackground(new java.awt.Color(25, 118, 211));
 
@@ -176,16 +179,23 @@ public class PhongDialog extends javax.swing.JDialog {
         jLabel6.setText("Địa điểm");
         pnMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 140, 20));
 
-        lbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
-        pnMain.add(lbDiaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
-
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Sức chứa");
-        pnMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 140, 20));
+        pnMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 140, 20));
 
         lbSucChua.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
-        pnMain.add(lbSucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 40));
+        pnMain.add(lbSucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 330, 40));
+
+        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
+        pnMain.add(cbDiaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
+
+        pnMain.add(cbToaNha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 40));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel8.setText("Tòa Nhà");
+        pnMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 140, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,7 +207,7 @@ public class PhongDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 595, Short.MAX_VALUE)
+            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
         );
 
         pack();
@@ -214,7 +224,7 @@ public class PhongDialog extends javax.swing.JDialog {
         try {
             String tenPhong = lbTenPhong.getText();
             String loaiPhong = lbLoaiPhong.getText();
-            String diaDiem = lbDiaDiem.getText();
+            String diaDiem = cbDiaDiem.getSelectedItem().toString();
             String sucChua = lbSucChua.getText();
             String tinhTrang = cbTinhTrang.getSelectedItem().toString();
             
@@ -255,14 +265,16 @@ public class PhongDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btSubmit;
+    private javax.swing.JComboBox<String> cbDiaDiem;
     private javax.swing.JComboBox<String> cbTinhTrang;
+    private javax.swing.JComboBox<String> cbToaNha;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField lbDiaDiem;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField lbLoaiPhong;
     private javax.swing.JTextField lbMaPhong;
     private javax.swing.JTextField lbSucChua;
