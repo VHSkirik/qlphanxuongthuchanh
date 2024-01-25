@@ -26,7 +26,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
     }
 
     //Constructer for edit 
-    public NguoiDungDialog(AdminNguoiDung adminNguoiDung, java.awt.Frame parent, boolean modal, NguoiDung nguoiDung) {
+    public NguoiDungDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal, NguoiDung nguoiDung) {
         super(parent, modal);
         this.mainForm = mainForm;
         this.nguoiDung = nguoiDung;
