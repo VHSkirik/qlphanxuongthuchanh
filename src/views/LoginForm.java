@@ -7,27 +7,34 @@ import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import models.NguoiDung;
+import models.OperationResult;
+import services.LoginService;
 
 public class LoginForm extends javax.swing.JFrame {
-    
+
     public LoginForm() {
         initComponents();
         myInit();
     }
-    
+
     private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
         svgShow.setVisible(false);
     }
-    
+
     public void performLogin() {
-//        String taikhoan = txtUsername.getText().trim();
-//        String matkhau = txtPassword.getText().trim();
-//        LoginService.checkLogin(taikhoan, matkhau);
-        this.dispose();
-        new AdminMain(new NguoiDung()).setVisible(true);
+        String taikhoan = txtUsername.getText();
+        String matkhau = txtPassword.getText();
+        if (taikhoan.isBlank() || matkhau.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
+        } else {
+            OperationResult rs = LoginService.checkLogin(taikhoan, matkhau);
+            if (rs.isLoginSuccess()) {
+                this.dispose();
+            }
+        }
     }
-    
+
     @Override
     public void paintAll(Graphics g) {
         svgUser.setSVGImage("./views/icon/svg/icons8_user.svg");
@@ -37,7 +44,7 @@ public class LoginForm extends javax.swing.JFrame {
         svgUneti.setSVGImage("./views/icon/svg/uneti.svg");
         super.paintAll(g);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -185,8 +192,8 @@ public class LoginForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void lbExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbExitMouseClicked
-        int rs = JOptionPane.showConfirmDialog(this, "Thoát chương trình?","Thoát",JOptionPane.YES_NO_OPTION);
-        if (rs == JOptionPane.YES_OPTION){
+        int rs = JOptionPane.showConfirmDialog(this, "Thoát chương trình?", "Thoát", JOptionPane.YES_NO_OPTION);
+        if (rs == JOptionPane.YES_OPTION) {
             System.exit(0);
         }
     }//GEN-LAST:event_lbExitMouseClicked
@@ -211,7 +218,7 @@ public class LoginForm extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             performLogin();
     }//GEN-LAST:event_txtPasswordKeyPressed
-    
+
     public static void main(String args[]) {
         try {
             UIManager.setLookAndFeel(new FlatLightLaf());

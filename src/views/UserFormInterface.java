@@ -1,5 +1,5 @@
 package views;
 
-public interface FormInterface {
+public interface UserFormInterface {
     public void initTable();
 }

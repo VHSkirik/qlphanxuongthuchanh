@@ -16,8 +16,9 @@ import models.NguoiDung;
 import models.OperationResult;
 import models.ThongTinNguoiDung;
 import services.NguoiDungService;
+import views.UserFormInterface;
 
-public class AdminNguoiDung extends javax.swing.JPanel {
+public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterface{
 
     private List<NguoiDung> dsNguoiDung;
     private List<ThongTinNguoiDung> dsThongTin;
@@ -51,6 +52,7 @@ public class AdminNguoiDung extends javax.swing.JPanel {
         lbTitleInfo.setIcon(new FlatSVGIcon("./views/icon/svg/infor_black.svg", 30, 30));
     }
 
+    @Override
     public void initTable() {
         //nguoidung 
         dsNguoiDung = NguoiDungDAO.getIns().findALl();

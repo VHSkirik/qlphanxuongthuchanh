@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package services;
 
 import dao.impl.NguoiDungDAO;
 import javax.swing.JOptionPane;
 import models.NguoiDung;
+import models.OperationResult;
+import views.AdminMain;
 import views.CanBoMain;
 import views.GiaoVienMain;
 
@@ -15,16 +13,9 @@ import views.GiaoVienMain;
  * @author ducanh
  */
 public class LoginService {
-     public static void checkLogin(String username, String password) {
-        if (username.isBlank() || password.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ thông tin!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
-        } else {
-            NguoiDung ngd = NguoiDungDAO.getIns().findUserName(username);
-            handleLoginResult(ngd, password);
-        }
-    }
 
-    private static void handleLoginResult(NguoiDung nv, String password) {
+    public static OperationResult checkLogin(String username, String password) {
+        NguoiDung nv = NguoiDungDAO.getIns().findUserName(username);
         if (nv == null) {
             JOptionPane.showMessageDialog(null, "Tài khoản không tồn tại!", "Cảnh Báo", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -33,24 +24,25 @@ public class LoginService {
             } else {
                 JOptionPane.showMessageDialog(null, "Đăng nhập thành công!", "Thông báo", JOptionPane.INFORMATION_MESSAGE);
                 openMainForm(nv);
+                return OperationResult.LOGIN_SUCCESS;
             }
         }
-    }
-    
-      private static void openMainForm(NguoiDung nv) {
-        String lnd = nv.getLoaiNguoiDung();
-//        if(lnd.equals("Admin")){
-//            AdminMain admin = new AdminMain(nv);
-//            admin.setVisible(true);
-//        } else
-            if(lnd.equals("CanBoKiemKe")){
-            CanBoMain cb = new CanBoMain(nv);
-            cb.setVisible(true);
-        } else if(lnd.equals("GiaoVien")){
-          GiaoVienMain gv = new GiaoVienMain(nv);
-      }
-        
+        return OperationResult.LOGIN_FAILURE;
     }
 
-    
+    private static void openMainForm(NguoiDung nv) {
+        String lnd = nv.getLoaiNguoiDung();
+        if (lnd.equals("Admin")) {
+            AdminMain admin = new AdminMain(nv);
+            admin.setVisible(true);
+        } else if (lnd.equals("CanBoKiemKe")) {
+            CanBoMain cb = new CanBoMain(nv);
+            cb.setVisible(true);
+        } else if (lnd.equals("GiaoVien")) {
+            GiaoVienMain gv = new GiaoVienMain(nv);
+            gv.setVisible(true);
+        }
+
+    }
+
 }

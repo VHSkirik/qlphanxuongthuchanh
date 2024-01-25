@@ -33,7 +33,7 @@ public class PanelBorderHalf extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 136, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

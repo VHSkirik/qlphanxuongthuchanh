@@ -6,16 +6,17 @@ import javax.swing.JOptionPane;
 import models.NguoiDung;
 import models.OperationResult;
 import services.NguoiDungService;
+import views.UserFormInterface;
 
 public class NguoiDungDialog extends javax.swing.JDialog {
 
-    private AdminNguoiDung adminNguoiDung;
+    private UserFormInterface mainForm;
     private NguoiDung nguoiDung;
     private String function;
 
-    public NguoiDungDialog(AdminNguoiDung adminNguoiDung, java.awt.Frame parent, boolean modal) {
+    public NguoiDungDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        this.adminNguoiDung = adminNguoiDung;
+        this.mainForm = mainForm;
         function = "CREATE";
         setUndecorated(true);
         setBackground(new Color(255, 255, 255, 0));
@@ -25,9 +26,9 @@ public class NguoiDungDialog extends javax.swing.JDialog {
     }
 
     //Constructer for edit 
-    public NguoiDungDialog(AdminNguoiDung adminNguoiDung, java.awt.Frame parent, boolean modal, NguoiDung nguoiDung) {
+    public NguoiDungDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal, NguoiDung nguoiDung) {
         super(parent, modal);
-        this.adminNguoiDung = adminNguoiDung;
+        this.mainForm = mainForm;
         this.nguoiDung = nguoiDung;
         function = "EDIT";
         setUndecorated(true);
@@ -201,7 +202,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
                 if (rs.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Thêm Thành Công.");
                     this.dispose();
-                    adminNguoiDung.initTable();
+                    mainForm.initTable();
                 } else {
                     JOptionPane.showMessageDialog(this, "Thêm Thất Bại.");
                 }
@@ -211,7 +212,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
                 if (rs.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Sửa Thành Công.");
                     this.dispose();
-                    adminNguoiDung.initTable();
+                    mainForm.initTable();
                 } else {
                     JOptionPane.showMessageDialog(this, "Sửa Thất Bại.");
                 }
