@@ -29,6 +29,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         tbPhong.getColumnModel().getColumn(1).setPreferredWidth(150);
         tbPhong.getColumnModel().getColumn(2).setPreferredWidth(250);
         tbPhong.getColumnModel().getColumn(4).setPreferredWidth(5);
+        tbPhong.getColumnModel().getColumn(5).setPreferredWidth(5);
         tbPhong.setRowHeight(35);
         txtTimKiem = header1.getTextFieldTK();
         cbTuyChon = header1.getCbTuyChonTK();
@@ -63,6 +64,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
                 phong.getTenPhong(),
                 phong.getLoaiPhong(),
                 phong.getDiaDiem(),
+                phong.getToa(),
                 phong.getSucChua(),
                 phong.getTinhTrang()
             });
@@ -118,17 +120,17 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         tbPhong.setFont(new java.awt.Font("JetBrains Mono Light", 0, 16)); // NOI18N
         tbPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Phòng", "Tên Phòng", "Loại Phòng", "Địa Điểm", "Sức Chứa", "Tình Trạng"
+                "Mã Phòng", "Tên Phòng", "Loại Phòng", "Địa Điểm", "Tòa", "Sức Chứa", "Tình Trạng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
