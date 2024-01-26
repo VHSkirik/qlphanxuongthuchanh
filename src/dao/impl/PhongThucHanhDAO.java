@@ -12,6 +12,7 @@ import java.util.List;
 import models.PhongThucHanh;
 
 public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
+
     private static final PhongThucHanhDAO pthDAO = new PhongThucHanhDAO();
 
     public PhongThucHanhDAO() {
@@ -56,7 +57,7 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO phongthuchanh (TenPhong, LoaiPhong, DiaDiem, SucChua, TinhTrang, Toa) VALUES (?, ?, ?, ?, ?,?)";
-        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, phongThucHanh.getTenPhong());
             stm.setString(2, phongThucHanh.getLoaiPhong());
             stm.setString(3, phongThucHanh.getDiaDiem());
@@ -64,12 +65,12 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
             stm.setString(5, phongThucHanh.getTinhTrang());
             stm.setString(6, phongThucHanh.getToa());
             rs = stm.executeUpdate();
-               if (rs != -1) {
-            ResultSet generatedKeys = stm.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                phongThucHanh.setMaPhongThucHanh(generatedKeys.getInt(1));
+            if (rs != -1) {
+                ResultSet generatedKeys = stm.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    phongThucHanh.setMaPhongThucHanh(generatedKeys.getInt(1));
+                }
             }
-        }
 
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
@@ -148,15 +149,15 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return dsPhongThucHanh;
     }
-    
-      public List<PhongThucHanh> findAllByField(String fieldName, String value) {
+
+    public List<PhongThucHanh> findAllByField(String fieldName, String value) {
         List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
 
         try {
             Connection c = Jdbc.getConnection();
             String query = "SELECT * FROM phongthuchanh WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(1, "%"+value+"%");
+            stm.setString(1, "%" + value + "%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -179,36 +180,57 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return dsPhongThucHanh;
     }
-      
-      public List<PhongThucHanh> findAllByDiaDiem(String diaDiem) {
-    List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
 
-    try {
-        Connection c = Jdbc.getConnection();
-        String query = "SELECT * FROM phongthuchanh WHERE LOWER(DiaDiem) LIKE LOWER(?)";
-        PreparedStatement stm = c.prepareStatement(query);
-        stm.setString(1, "%" + diaDiem + "%");
-        ResultSet rs = stm.executeQuery();
+    public List<PhongThucHanh> findAllByDiaDiem(String diaDiem) {
+        List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
 
-        while (rs.next()) {
-            PhongThucHanh phongThucHanh = new PhongThucHanh(
-                    rs.getInt("MaPhongThucHanh"),
-                    rs.getString("TenPhong"),
-                    rs.getString("LoaiPhong"),
-                    rs.getString("DiaDiem"),
-                    rs.getInt("SucChua"),
-                    rs.getString("TinhTrang"),
-                    rs.getString("Toa")
-            );
-            dsPhongThucHanh.add(phongThucHanh);
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM phongthuchanh WHERE LOWER(DiaDiem) LIKE LOWER(?)";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%" + diaDiem + "%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                PhongThucHanh phongThucHanh = new PhongThucHanh(
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("TenPhong"),
+                        rs.getString("LoaiPhong"),
+                        rs.getString("DiaDiem"),
+                        rs.getInt("SucChua"),
+                        rs.getString("TinhTrang"),
+                        rs.getString("Toa")
+                );
+                dsPhongThucHanh.add(phongThucHanh);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
         }
-
-        Jdbc.closeConnection(c);
-    } catch (SQLException var7) {
-        var7.printStackTrace();
+        return dsPhongThucHanh;
     }
 
-    return dsPhongThucHanh;
-}
+    public List<String> findToaByDiaDiem(String diaDiem) {
+        List<String> dsToa = new ArrayList<>();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT Toa FROM phongthuchanh WHERE DiaDiem LIKE ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%" + diaDiem + "%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String toa = rs.getString("Toa");
+                dsToa.add(toa);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+        return dsToa;
+    }
 
 }

@@ -225,10 +225,11 @@ public class PhongDialog extends javax.swing.JDialog {
             String tenPhong = lbTenPhong.getText();
             String loaiPhong = lbLoaiPhong.getText();
             String diaDiem = cbDiaDiem.getSelectedItem().toString();
+            String toaNha = cbToaNha.getSelectedItem().toString();
             String sucChua = lbSucChua.getText();
             String tinhTrang = cbTinhTrang.getSelectedItem().toString();
             
-            if (tenPhong.isBlank() || loaiPhong.isBlank() || diaDiem.isBlank() || tinhTrang.isBlank() || sucChua.isBlank()) {
+            if (tenPhong.isBlank() || loaiPhong.isBlank() || diaDiem.isBlank() || toaNha.isBlank() || tinhTrang.isBlank() || sucChua.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
                 return;
             } 
@@ -237,7 +238,7 @@ public class PhongDialog extends javax.swing.JDialog {
             
             if (function == 0){
                 //create
-                OperationResult os = phongThucHanhService.createPhongThucHanh(tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang);
+                OperationResult os = phongThucHanhService.createPhongThucHanh(tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang, toaNha);
                 if (os.isSuccess()){
                     JOptionPane.showMessageDialog(this, "Thêm thành công.");
                     mainForm.initTable();
@@ -247,7 +248,7 @@ public class PhongDialog extends javax.swing.JDialog {
                 }
             } else {
                 //edit
-                OperationResult os = phongThucHanhService.updatePhongThucHanh(phongThucHanh.getMaPhongThucHanh(), tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang);
+                OperationResult os = phongThucHanhService.updatePhongThucHanh(phongThucHanh.getMaPhongThucHanh(), tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang, toaNha);
                 if (os.isSuccess()){
                     JOptionPane.showMessageDialog(this, "Sửa thành công.");
                     mainForm.initTable();
