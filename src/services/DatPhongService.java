@@ -3,15 +3,16 @@ package services;
 import dao.impl.DatPhongDAO;
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhongThucHanhDAO;
+import java.util.Date;
 import java.util.List;
 import models.DatPhong;
 import models.OperationResult;
 
 public class DatPhongService {
 
-    public OperationResult createDatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, String NgayTao) {
+    public OperationResult createDatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, Date NgayTao) {
         // Kiểm tra trống
-        if (ThoiGianDat.isBlank() || MucDichSuDUng.isBlank() || TrangThai.isBlank() || NgayTao.isBlank()) {
+        if (ThoiGianDat.isBlank() || MucDichSuDUng.isBlank() || TrangThai.isBlank() ) {
             return OperationResult.ADD_FAILURE;
         } else if (NguoiDungDAO.getIns().findOne(MaNguoiDung) != null) {
                 return OperationResult.ADD_FAILURE;
@@ -27,9 +28,9 @@ public class DatPhongService {
 }
       
 
-    public OperationResult updateDatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, String NgayTao) {
+    public OperationResult updateDatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, Date NgayTao) {
         // Kiểm tra trống
-        if (ThoiGianDat.isBlank() || MucDichSuDUng.isBlank() || TrangThai.isBlank() || NgayTao.isBlank()) {
+        if (ThoiGianDat.isBlank() || MucDichSuDUng.isBlank() || TrangThai.isBlank()  ){
             return OperationResult.EDIT_FAILURE;
         } 
         else if (NguoiDungDAO.getIns().findOne(MaNguoiDung) != null) {

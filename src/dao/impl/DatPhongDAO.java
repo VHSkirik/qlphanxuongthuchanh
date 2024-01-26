@@ -1,13 +1,14 @@
 package dao.impl;
 
-
 import dao.DAOInterface;
 import dao.Jdbc;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +41,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getString("ThoiGianDat"),
                         rs.getString("MucDichSuDUng"),
                         rs.getString("TrangThai"),
-                        rs.getString("NgayTao")
+                        rs.getDate("NgayTao")
                 );
             }
 
@@ -52,27 +53,33 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
         return datPhong;
     }
 
-    public int create(DatPhong datPhong) {
+     public int create(DatPhong datPhong) {
         int rs = -1;
 
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO datphong (MaNguoiDung, MaPhongThucHanh, ThoiGianDat, MucDichSuDUng, TrangThai, NgayTao) VALUES (?, ?, ?, ?, ?, ?)";
-        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, datPhong.getMaNguoiDung());
             stm.setInt(2, datPhong.getMaPhongThucHanh());
             stm.setString(3, datPhong.getThoiGianDat());
             stm.setString(4, datPhong.getMucDichSuDUng());
             stm.setString(5, datPhong.getTrangThai());
-            stm.setString(6, datPhong.getNgayTao());
+
+            // Lấy thời gian hiện tại
+            LocalDateTime now = LocalDateTime.now();
+            // Chuyển đổi thành kiểu java.sql.Date
+            Date currentDate = Date.valueOf(now.toLocalDate());
+
+            stm.setDate(6, currentDate);
             rs = stm.executeUpdate();
-            
-        if (rs != -1) {
-            ResultSet generatedKeys = stm.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                datPhong.setMaYeuCau(generatedKeys.getInt(1));
+
+            if (rs != -1) {
+                ResultSet generatedKeys = stm.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    datPhong.setMaYeuCau(generatedKeys.getInt(1));
+                }
             }
-        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();
@@ -80,29 +87,27 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return rs;
     }
+     
+   public int update(DatPhong datPhong, int id) {
+    int rs = -1;
 
-    public int update(DatPhong datPhong, int id) {
-        int rs = -1;
-
-        try {
-            Connection c = Jdbc.getConnection();
-            String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, ThoiGianDat = ?, MucDichSuDUng = ?, TrangThai = ?, NgayTao = ? WHERE MaYeuCau = ?";
-            PreparedStatement stm = c.prepareStatement(query);
-            stm.setInt(1, datPhong.getMaNguoiDung());
-            stm.setInt(2, datPhong.getMaPhongThucHanh());
-            stm.setString(3, datPhong.getThoiGianDat());
-            stm.setString(4, datPhong.getMucDichSuDUng());
-            stm.setString(5, datPhong.getTrangThai());
-            stm.setString(6, datPhong.getNgayTao());
-            stm.setInt(7, id);
-            rs = stm.executeUpdate();
-            Jdbc.closeConnection(c);
-        } catch (SQLException var7) {
-            var7.printStackTrace();
-        }
-
-        return rs;
+    try {Connection c = Jdbc.getConnection();
+        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, ThoiGianDat = ?, MucDichSuDUng = ?, TrangThai = ?, NgayTao = CURRENT_TIMESTAMP WHERE MaYeuCau = ?";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setInt(1, datPhong.getMaNguoiDung());
+        stm.setInt(2, datPhong.getMaPhongThucHanh());
+        stm.setString(3, datPhong.getThoiGianDat());
+        stm.setString(4, datPhong.getMucDichSuDUng());
+        stm.setString(5, datPhong.getTrangThai());
+        stm.setInt(6, id);
+        rs = stm.executeUpdate();
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
     }
+
+    return rs;
+}
 
     public int delete(int id) {
         int rs = -1;
@@ -138,7 +143,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getString("ThoiGianDat"),
                         rs.getString("MucDichSuDUng"),
                         rs.getString("TrangThai"),
-                        rs.getString("NgayTao")
+                        rs.getDate("NgayTao")
                 );
                 dsDatPhong.add(datPhong);
             }
@@ -175,12 +180,12 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
     
     
     //in ra danh sach ngay tao gan nhat limit = số bản ghi
-     public List<DatPhong> getLatestDatPhong(int limit) {
+    public List<DatPhong> getLatestDatPhong(int limit) {//in ra danh sach ngay tao gan nhat limit = số bản ghi
         List<DatPhong> latestDatPhongList = new ArrayList<>();
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM datphong ORDER BY NgayTao DESC LIMIT ?";
+            String query = "SELECT * FROM datphong where TrangThai ='DangCho' ORDER BY NgayTao ASC LIMIT ? ";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, limit);
             ResultSet rs = stm.executeQuery();
@@ -193,7 +198,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getString("ThoiGianDat"),
                         rs.getString("MucDichSuDUng"),
                         rs.getString("TrangThai"),
-                        rs.getString("NgayTao")
+                        rs.getDate("NgayTao")
                 );
                 latestDatPhongList.add(datPhong);
             }
@@ -206,14 +211,15 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return latestDatPhongList;
     }
-     
-     public List<DatPhong> findAllByField(String fieldName, String value) {
+
+    public List<DatPhong> findAllByField(String fieldName, String value) {
         List<DatPhong> dsDatPhong = new ArrayList();
 
         try {
             Connection c = Jdbc.getConnection();
             String query = "SELECT * FROM datphong WHERE " + fieldName + " = ?";
             PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, value);
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -224,7 +230,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getString("ThoiGianDat"),
                         rs.getString("MucDichSuDUng"),
                         rs.getString("TrangThai"),
-                        rs.getString("NgayTao")
+                        rs.getDate("NgayTao")
                 );
                 dsDatPhong.add(datPhong);
             }

@@ -37,7 +37,8 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
                         rs.getString("LoaiPhong"),
                         rs.getString("DiaDiem"),
                         rs.getInt("SucChua"),
-                        rs.getString("TinhTrang")
+                        rs.getString("TinhTrang"),
+                        rs.getString("Toa")
                 );
             }
 
@@ -54,13 +55,14 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO phongthuchanh (TenPhong, LoaiPhong, DiaDiem, SucChua, TinhTrang) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO phongthuchanh (TenPhong, LoaiPhong, DiaDiem, SucChua, TinhTrang, Toa) VALUES (?, ?, ?, ?, ?,?)";
         PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, phongThucHanh.getTenPhong());
             stm.setString(2, phongThucHanh.getLoaiPhong());
             stm.setString(3, phongThucHanh.getDiaDiem());
             stm.setInt(4, phongThucHanh.getSucChua());
             stm.setString(5, phongThucHanh.getTinhTrang());
+            stm.setString(6, phongThucHanh.getToa());
             rs = stm.executeUpdate();
                if (rs != -1) {
             ResultSet generatedKeys = stm.getGeneratedKeys();
@@ -82,14 +84,15 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE phongthuchanh SET TenPhong = ?, LoaiPhong = ?, DiaDiem = ?, SucChua = ?, TinhTrang = ? WHERE MaPhongThucHanh = ?";
+            String query = "UPDATE phongthuchanh SET TenPhong = ?, LoaiPhong = ?, DiaDiem = ?, SucChua = ?, TinhTrang = ?, Toa =? WHERE MaPhongThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setString(1, phongThucHanh.getTenPhong());
             stm.setString(2, phongThucHanh.getLoaiPhong());
             stm.setString(3, phongThucHanh.getDiaDiem());
             stm.setInt(4, phongThucHanh.getSucChua());
             stm.setString(5, phongThucHanh.getTinhTrang());
-            stm.setInt(6, id);
+            stm.setString(6, phongThucHanh.getToa());
+            stm.setInt(7, id);
             rs = stm.executeUpdate();
             Jdbc.closeConnection(c);
         } catch (SQLException var7) {
@@ -132,7 +135,8 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
                         rs.getString("LoaiPhong"),
                         rs.getString("DiaDiem"),
                         rs.getInt("SucChua"),
-                        rs.getString("TinhTrang")
+                        rs.getString("TinhTrang"),
+                        rs.getString("Toa")
                 );
                 dsPhongThucHanh.add(phongThucHanh);
             }
@@ -150,8 +154,9 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM phongthuchanh WHERE " + fieldName + " = ?";
+            String query = "SELECT * FROM phongthuchanh WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
             PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%"+value+"%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -161,7 +166,8 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
                         rs.getString("LoaiPhong"),
                         rs.getString("DiaDiem"),
                         rs.getInt("SucChua"),
-                        rs.getString("TinhTrang")
+                        rs.getString("TinhTrang"),
+                        rs.getString("Toa")
                 );
                 dsPhongThucHanh.add(phongThucHanh);
             }
@@ -173,4 +179,36 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return dsPhongThucHanh;
     }
+      
+      public List<PhongThucHanh> findAllByDiaDiem(String diaDiem) {
+    List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT * FROM phongthuchanh WHERE LOWER(DiaDiem) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + diaDiem + "%");
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            PhongThucHanh phongThucHanh = new PhongThucHanh(
+                    rs.getInt("MaPhongThucHanh"),
+                    rs.getString("TenPhong"),
+                    rs.getString("LoaiPhong"),
+                    rs.getString("DiaDiem"),
+                    rs.getInt("SucChua"),
+                    rs.getString("TinhTrang"),
+                    rs.getString("Toa")
+            );
+            dsPhongThucHanh.add(phongThucHanh);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return dsPhongThucHanh;
+}
+
 }
