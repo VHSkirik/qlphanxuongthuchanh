@@ -1,7 +1,9 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.PhongThucHanhDAO;
 import java.awt.Color;
+import java.util.List;
 import javax.swing.JOptionPane;
 import models.OperationResult;
 import models.PhongThucHanh;
@@ -9,11 +11,11 @@ import services.PhongThucHanhService;
 import views.UserFormInterface;
 
 public class PhongDialog extends javax.swing.JDialog {
-    
+
     private UserFormInterface mainForm;
     private PhongThucHanh phongThucHanh;
     private int function;
-    
+
     public PhongDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.mainForm = mainForm;
@@ -22,7 +24,7 @@ public class PhongDialog extends javax.swing.JDialog {
         initComponents();
         myInit();
     }
-    
+
     public PhongDialog(UserFormInterface mainForm, java.awt.Frame parent, boolean modal, PhongThucHanh phongThucHanh) {
         super(parent, modal);
         this.mainForm = mainForm;
@@ -32,7 +34,7 @@ public class PhongDialog extends javax.swing.JDialog {
         initComponents();
         myInit();
     }
-    
+
     private void myInit() {
         setBackground(new Color(255, 255, 255, 0));
         pnMain.setDrawBorder(true);
@@ -42,26 +44,31 @@ public class PhongDialog extends javax.swing.JDialog {
             initData();
         }
     }
-    
+
     private void initImage() {
         btSubmit.setIcon(new FlatSVGIcon("./views/icon/svg/Checkmark.svg", 40, 40));
         btHuy.setIcon(new FlatSVGIcon("./views/icon/svg/Cancel_2.svg", 40, 40));
     }
-    
+
     private void initData() {
-        try {
             lbMaPhong.setText(phongThucHanh.getMaPhongThucHanh() + "");
             lbTenPhong.setText(phongThucHanh.getTenPhong());
             lbLoaiPhong.setText(phongThucHanh.getLoaiPhong());
-            cbDiaDiem.setSelectedItem(phongThucHanh.getDiaDiem());
-            //toa nha
+            initDataToaNha();
+            cbToaNha.setSelectedItem(phongThucHanh.getToa());
             lbSucChua.setText(phongThucHanh.getSucChua() + "");
             cbTinhTrang.setSelectedItem(phongThucHanh.getTinhTrang());
-        } catch (Exception e) {
-            e.printStackTrace();
+            revalidate();
+    }
+
+    private void initDataToaNha() {
+        List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem()+"");
+        System.out.println(dsToa);
+        for (String toa : dsToa) {
+            cbToaNha.addItem(toa);
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,9 +194,11 @@ public class PhongDialog extends javax.swing.JDialog {
         lbSucChua.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         pnMain.add(lbSucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 330, 40));
 
+        cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
         pnMain.add(cbDiaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
 
+        cbToaNha.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         pnMain.add(cbToaNha, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 40));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -228,18 +237,18 @@ public class PhongDialog extends javax.swing.JDialog {
             String toaNha = cbToaNha.getSelectedItem().toString();
             String sucChua = lbSucChua.getText();
             String tinhTrang = cbTinhTrang.getSelectedItem().toString();
-            
+
             if (tenPhong.isBlank() || loaiPhong.isBlank() || diaDiem.isBlank() || toaNha.isBlank() || tinhTrang.isBlank() || sucChua.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
                 return;
-            } 
-            
+            }
+
             PhongThucHanhService phongThucHanhService = new PhongThucHanhService();
-            
-            if (function == 0){
+
+            if (function == 0) {
                 //create
                 OperationResult os = phongThucHanhService.createPhongThucHanh(tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang, toaNha);
-                if (os.isSuccess()){
+                if (os.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Thêm thành công.");
                     mainForm.initTable();
                     this.dispose();
@@ -249,7 +258,7 @@ public class PhongDialog extends javax.swing.JDialog {
             } else {
                 //edit
                 OperationResult os = phongThucHanhService.updatePhongThucHanh(phongThucHanh.getMaPhongThucHanh(), tenPhong, loaiPhong, diaDiem, Integer.parseInt(sucChua), tinhTrang, toaNha);
-                if (os.isSuccess()){
+                if (os.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Sửa thành công.");
                     mainForm.initTable();
                     this.dispose();
