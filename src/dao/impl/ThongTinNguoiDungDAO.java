@@ -152,8 +152,9 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM thongtinnguoidung WHERE " + fieldName + " = ?";
+            String query = "SELECT * FROM thongtinnguoidung WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
             PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%"+value+"%");
             ResultSet rs = stm.executeQuery();
 
             while(rs.next()) {

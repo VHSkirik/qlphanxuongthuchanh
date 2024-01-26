@@ -8,17 +8,17 @@ public class PhongThucHanh {
     private String DiaDiem;
     private Integer SucChua;
     private String TinhTrang;
+    private String Toa;
 
-    public PhongThucHanh() {
-    }
 
-    public PhongThucHanh(Integer MaPhongThucHanh, String TenPhong, String LoaiPhong, String DiaDiem, Integer SucChua, String TinhTrang) {
+    public PhongThucHanh(Integer MaPhongThucHanh, String TenPhong, String LoaiPhong, String DiaDiem, Integer SucChua, String TinhTrang, String Toa) {
         this.MaPhongThucHanh = MaPhongThucHanh;
         this.TenPhong = TenPhong;
         this.LoaiPhong = LoaiPhong;
         this.DiaDiem = DiaDiem;
         this.SucChua = SucChua;
         this.TinhTrang = TinhTrang;
+        this.Toa = Toa;
     }
 
     public Integer getMaPhongThucHanh() {
@@ -67,6 +67,14 @@ public class PhongThucHanh {
 
     public void setTinhTrang(String TinhTrang) {
         this.TinhTrang = TinhTrang;
+    }
+    
+    public String getToa(){
+        return Toa;
+    }
+    
+    public void setTOa(String Toa){
+        this.Toa = Toa;
     }
 
 }

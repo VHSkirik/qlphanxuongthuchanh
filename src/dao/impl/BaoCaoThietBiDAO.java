@@ -142,9 +142,9 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
     try {
         Connection c = Jdbc.getConnection();
-        String query = "SELECT * FROM baocaothietbi WHERE " + fieldName + " = ?";
-        PreparedStatement stm = c.prepareStatement(query);
-        stm.setString(1, value);
+        String query = "SELECT * FROM baocaothietbi WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%"+value+"%");
         ResultSet rs = stm.executeQuery();
 
         while (rs.next()) {

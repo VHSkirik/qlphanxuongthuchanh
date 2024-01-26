@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Date;
+
 public class DatPhong {
 
     private Integer MaYeuCau;
@@ -8,12 +10,12 @@ public class DatPhong {
     private String ThoiGianDat;
     private String MucDichSuDUng;
     private String TrangThai;
-    private String NgayTao;
+    private Date NgayTao;
 
     public DatPhong() {
     }
 
-    public DatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, String NgayTao) {
+    public DatPhong(Integer MaYeuCau, Integer MaNguoiDung, Integer MaPhongThucHanh, String ThoiGianDat, String MucDichSuDUng, String TrangThai, Date NgayTao) {
         this.MaYeuCau = MaYeuCau;
         this.MaNguoiDung = MaNguoiDung;
         this.MaPhongThucHanh = MaPhongThucHanh;
@@ -71,11 +73,11 @@ public class DatPhong {
         this.TrangThai = TrangThai;
     }
     
-     public String getNgayTao() {
+     public Date getNgayTao() {
         return NgayTao;
     }
 
-    public void setNgayTao(String NgayTao) {
+    public void setNgayTao(Date NgayTao) {
         this.NgayTao = NgayTao;
     }
 
