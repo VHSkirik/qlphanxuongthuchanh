@@ -38,10 +38,12 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getInt("MaYeuCau"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("ThoiGianDat"),
-                        rs.getString("MucDichSuDUng"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("MonHoc"),
                         rs.getString("TrangThai"),
-                        rs.getDate("NgayTao")
+                        rs.getString("NgayTao")
                 );
             }
 
@@ -58,12 +60,14 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO datphong (MaNguoiDung, MaPhongThucHanh, ThoiGianDat, MucDichSuDUng, TrangThai, NgayTao) VALUES (?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO datphong (MaNguoiDung, MaPhongThucHanh, NgayThucHanh,TietBatDau, TietKetThuc, MonHoc, TrangThai, NgayTao) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, datPhong.getMaNguoiDung());
             stm.setInt(2, datPhong.getMaPhongThucHanh());
-            stm.setString(3, datPhong.getThoiGianDat());
-            stm.setString(4, datPhong.getMucDichSuDUng());
+            stm.setString(3, datPhong.getNgayThucHanh());
+            stm.setInt(4, datPhong.getTietBatDau());
+            stm.setInt(5, datPhong.getTietKetThuc());
+            stm.setString(6, datPhong.getMonHoc());
             stm.setString(5, datPhong.getTrangThai());
 
             // Lấy thời gian hiện tại
@@ -92,14 +96,16 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
     int rs = -1;
 
     try {Connection c = Jdbc.getConnection();
-        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, ThoiGianDat = ?, MucDichSuDUng = ?, TrangThai = ?, NgayTao = CURRENT_TIMESTAMP WHERE MaYeuCau = ?";
+        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, NgayThucHanh = ?,TietBatDau = ?, TietKetThuc = ?,  MonHoc = ?, TrangThai = ?, NgayTao = CURRENT_TIMESTAMP WHERE MaYeuCau = ?";
         PreparedStatement stm = c.prepareStatement(query);
         stm.setInt(1, datPhong.getMaNguoiDung());
         stm.setInt(2, datPhong.getMaPhongThucHanh());
-        stm.setString(3, datPhong.getThoiGianDat());
-        stm.setString(4, datPhong.getMucDichSuDUng());
-        stm.setString(5, datPhong.getTrangThai());
-        stm.setInt(6, id);
+        stm.setString(3, datPhong.getNgayThucHanh());
+        stm.setInt(4, datPhong.getTietBatDau());
+        stm.setInt(5, datPhong.getTietKetThuc());
+        stm.setString(6, datPhong.getMonHoc());
+        stm.setString(7, datPhong.getTrangThai());
+        stm.setInt(8, id);
         rs = stm.executeUpdate();
         Jdbc.closeConnection(c);
     } catch (SQLException var7) {
@@ -137,13 +143,15 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
             while (rs.next()) {
                 DatPhong datPhong = new DatPhong(
-                        rs.getInt("MaYeuCau"),
+                       rs.getInt("MaYeuCau"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("ThoiGianDat"),
-                        rs.getString("MucDichSuDUng"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("MonHoc"),
                         rs.getString("TrangThai"),
-                        rs.getDate("NgayTao")
+                        rs.getString("NgayTao")
                 );
                 dsDatPhong.add(datPhong);
             }
@@ -195,10 +203,12 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getInt("MaYeuCau"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("ThoiGianDat"),
-                        rs.getString("MucDichSuDUng"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("MonHoc"),
                         rs.getString("TrangThai"),
-                        rs.getDate("NgayTao")
+                        rs.getString("NgayTao")
                 );
                 latestDatPhongList.add(datPhong);
             }
@@ -227,10 +237,12 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
                         rs.getInt("MaYeuCau"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("ThoiGianDat"),
-                        rs.getString("MucDichSuDUng"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("MonHoc"),
                         rs.getString("TrangThai"),
-                        rs.getDate("NgayTao")
+                        rs.getString("NgayTao")
                 );
                 dsDatPhong.add(datPhong);
             }
