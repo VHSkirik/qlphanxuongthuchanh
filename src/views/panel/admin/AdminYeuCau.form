@@ -55,11 +55,11 @@
                           <Component id="header3" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jToolBar3" alignment="0" pref="339" max="32767" attributes="0"/>
-                              <Component id="jScrollPane2" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                              <Component id="jToolBar3" pref="358" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="pnChiTiet" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -296,11 +296,11 @@
                                   <Component id="lbMaYeuCau" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="lbThoiGian1" min="-2" pref="87" max="-2" attributes="0"/>
+                                      <Component id="lbTietBatDau" min="-2" pref="87" max="-2" attributes="0"/>
                                       <EmptySpace pref="19" max="32767" attributes="0"/>
                                       <Component id="jLabel9" min="-2" pref="47" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="lbThoiGian2" min="-2" pref="98" max="-2" attributes="0"/>
+                                      <Component id="lbTietKetThuc" min="-2" pref="98" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="lbThoiGian" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -338,8 +338,8 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="lbThoiGian1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="lbThoiGian2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="lbTietBatDau" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="lbTietKetThuc" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           <Component id="jLabel9" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="30" max="32767" attributes="0"/>
@@ -496,7 +496,7 @@
                 <Property name="text" type="java.lang.String" value="Ti&#xea;&#x301;t"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="lbThoiGian1">
+            <Component class="javax.swing.JTextField" name="lbTietBatDau">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -510,7 +510,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="lbThoiGian2">
+            <Component class="javax.swing.JTextField" name="lbTietKetThuc">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>

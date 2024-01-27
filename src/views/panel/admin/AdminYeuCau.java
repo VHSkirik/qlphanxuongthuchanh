@@ -78,8 +78,8 @@ public class AdminYeuCau extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        lbThoiGian1 = new javax.swing.JTextField();
-        lbThoiGian2 = new javax.swing.JTextField();
+        lbTietBatDau = new javax.swing.JTextField();
+        lbTietKetThuc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -209,15 +209,15 @@ public class AdminYeuCau extends javax.swing.JPanel {
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Tiết");
 
-        lbThoiGian1.setBackground(new java.awt.Color(255, 255, 255));
-        lbThoiGian1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        lbThoiGian1.setForeground(new java.awt.Color(0, 0, 0));
-        lbThoiGian1.setEnabled(false);
+        lbTietBatDau.setBackground(new java.awt.Color(255, 255, 255));
+        lbTietBatDau.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        lbTietBatDau.setForeground(new java.awt.Color(0, 0, 0));
+        lbTietBatDau.setEnabled(false);
 
-        lbThoiGian2.setBackground(new java.awt.Color(255, 255, 255));
-        lbThoiGian2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        lbThoiGian2.setForeground(new java.awt.Color(0, 0, 0));
-        lbThoiGian2.setEnabled(false);
+        lbTietKetThuc.setBackground(new java.awt.Color(255, 255, 255));
+        lbTietKetThuc.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        lbTietKetThuc.setForeground(new java.awt.Color(0, 0, 0));
+        lbTietKetThuc.setEnabled(false);
 
         jLabel9.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -248,11 +248,11 @@ public class AdminYeuCau extends javax.swing.JPanel {
                             .addComponent(lbMaYeuCau)
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChiTietLayout.createSequentialGroup()
-                                .addComponent(lbThoiGian1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lbTietBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(lbThoiGian2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbTietKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(lbThoiGian))
                         .addGap(48, 48, 48))))
         );
@@ -280,8 +280,8 @@ public class AdminYeuCau extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addGroup(pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbThoiGian1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbThoiGian2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTietBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTietKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -304,10 +304,10 @@ public class AdminYeuCau extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(header3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jToolBar3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGap(50, 50, 50)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
                         .addComponent(pnChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(31, 31, 31))
         );
@@ -360,8 +360,10 @@ public class AdminYeuCau extends javax.swing.JPanel {
                 lbMaYeuCau.setText(datPhong.getMaYeuCau()+"");
                 lbMaGiaoVien.setText(datPhong.getMaNguoiDung()+"");
                 lbMaPhong.setText(datPhong.getMaPhongThucHanh()+"");
-                lbThoiGian.setText(datPhong.getThoiGianDat());
-                lbMucDich.setText(datPhong.getMucDichSuDUng());
+                lbThoiGian.setText(datPhong.getNgayThucHanh());
+                lbMucDich.setText(datPhong.getMonHoc());
+                lbTietBatDau.setText(datPhong.getTietBatDau()+"");
+                lbTietKetThuc.setText(datPhong.getTietKetThuc()+"");
             }
         }
     }//GEN-LAST:event_tbYeuCauMouseClicked
@@ -392,8 +394,8 @@ public class AdminYeuCau extends javax.swing.JPanel {
     private javax.swing.JTextField lbMaYeuCau;
     private javax.swing.JTextArea lbMucDich;
     private javax.swing.JTextField lbThoiGian;
-    private javax.swing.JTextField lbThoiGian1;
-    private javax.swing.JTextField lbThoiGian2;
+    private javax.swing.JTextField lbTietBatDau;
+    private javax.swing.JTextField lbTietKetThuc;
     private views.panel.PanelBorder panelBorder1;
     private views.panel.PanelBorder pnChiTiet;
     private javax.swing.JTable tbYeuCau;
