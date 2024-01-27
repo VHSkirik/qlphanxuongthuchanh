@@ -6,6 +6,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import models.DatPhong;
+import services.NguoiDungService;
+import services.PhongThucHanhService;
+import services.ThongTinNguoiDungService;
 import views.models.Model_Card;
 import views.table.StatusType;
 
@@ -48,9 +51,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
             
             table.addRow(new Object[]{
                 datPhong.getMaYeuCau(),
-                datPhong.getMaNguoiDung(),
-                datPhong.getMaPhongThucHanh(),
-                datPhong.getThoiGianDat(),
+                new ThongTinNguoiDungService().get("MaNguoiDung", datPhong.getMaNguoiDung()+"").get(0).getHoten(),
+                new PhongThucHanhService().get("MaPhongThucHanh", datPhong.getMaPhongThucHanh()+"").get(0).getTenPhong(),
+                datPhong.getNgayThucHanh(),
                 status
             });
         }
@@ -99,11 +102,11 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Đặt Phòng", "Mã Giáo Viên", "Mã Phòng", "Thời Gian", "Trạng Thái"
+                "Mã Đặt Phòng", "Giáo Viên", "Phòng", "Thời Gian", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
