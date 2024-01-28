@@ -125,19 +125,21 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
     }
 
     private void initEvent() {
-        cbToaNha.addActionListener(new ActionListener() {
+        cbToaNha.addItemListener(new ItemListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (cbDiaDiem.getSelectedIndex() == 0) {
-                    dsHienTai = phongThucHanhService.getByDiaDiemAndToa("", "");
-                } else {
-                    if (cbToaNha.getSelectedIndex() == 0) {
-                        dsHienTai = phongThucHanhService.getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), "");
+            public void itemStateChanged(ItemEvent e) {
+                if (cbDiaDiem.getSelectedItem() != null && cbToaNha.getSelectedItem() != null) {
+                    if (cbDiaDiem.getSelectedIndex() == 0) {
+                        dsHienTai = phongThucHanhService.getByDiaDiemAndToa("", "");
                     } else {
-                        dsHienTai = phongThucHanhService.getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), "");
+                        if (cbToaNha.getSelectedIndex() == 0) {
+                            dsHienTai = phongThucHanhService.getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), "");
+                        } else {
+                            dsHienTai = phongThucHanhService.getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), cbToaNha.getSelectedItem().toString());
+                        }
                     }
+                    initDataPhongThucHanh(dsHienTai);
                 }
-                initDataPhongThucHanh(dsHienTai);
             }
         });
     }
