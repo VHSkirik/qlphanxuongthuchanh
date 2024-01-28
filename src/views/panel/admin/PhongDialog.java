@@ -39,8 +39,10 @@ public class PhongDialog extends javax.swing.JDialog {
         setBackground(new Color(255, 255, 255, 0));
         pnMain.setDrawBorder(true);
         initImage();
+        initDataDiaDiem();
         if (function == 1) {
             lbTitle.setText("SỬA PHÒNG THỰC HÀNH");
+            cbDiaDiem.setSelectedItem(phongThucHanh.getDiaDiem());
             initData();
         }
     }
@@ -51,27 +53,25 @@ public class PhongDialog extends javax.swing.JDialog {
     }
 
     private void initData() {
-            lbMaPhong.setText(phongThucHanh.getMaPhongThucHanh() + "");
-            lbTenPhong.setText(phongThucHanh.getTenPhong());
-            lbLoaiPhong.setText(phongThucHanh.getLoaiPhong());
-            initDataDiaDiem();
-            initDataToaNha();
-            lbSucChua.setText(phongThucHanh.getSucChua() + "");
-            cbTinhTrang.setSelectedItem(phongThucHanh.getTinhTrang());
-            revalidate();
+        lbMaPhong.setText(phongThucHanh.getMaPhongThucHanh() + "");
+        lbTenPhong.setText(phongThucHanh.getTenPhong());
+        lbLoaiPhong.setText(phongThucHanh.getLoaiPhong());
+        initDataToaNha();
+        lbSucChua.setText(phongThucHanh.getSucChua() + "");
+        cbTinhTrang.setSelectedItem(phongThucHanh.getTinhTrang());
+        revalidate();
     }
-    
-    private void initDataDiaDiem(){
+
+    private void initDataDiaDiem() {
         List<String> dsDiaDiem = PhongThucHanhDAO.getIns().findListDiaDiem();
-        for (String diaDiem : dsDiaDiem){
+        for (String diaDiem : dsDiaDiem) {
             cbDiaDiem.addItem(diaDiem);
         }
-        cbDiaDiem.setSelectedItem(phongThucHanh.getDiaDiem());
     }
 
     private void initDataToaNha() {
-        List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem()+"");
-        System.out.println(dsToa);
+        cbToaNha.removeAllItems();
+        List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem() + "");
         for (String toa : dsToa) {
             cbToaNha.addItem(toa);
         }
@@ -203,6 +203,11 @@ public class PhongDialog extends javax.swing.JDialog {
         pnMain.add(lbSucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 330, 40));
 
         cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
+        cbDiaDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDiaDiemActionPerformed(evt);
+            }
+        });
         pnMain.add(cbDiaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
 
         cbToaNha.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
@@ -277,6 +282,10 @@ public class PhongDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ.");
         }
     }//GEN-LAST:event_btSubmitActionPerformed
+
+    private void cbDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaDiemActionPerformed
+        initDataToaNha();
+    }//GEN-LAST:event_cbDiaDiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
