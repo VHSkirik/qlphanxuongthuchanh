@@ -197,7 +197,15 @@ public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterf
             new String [] {
                 "Mã Người Dùng", "Họ Tên", "Giới Tính", "Ngày Sinh", "Địa Chỉ", "Chuyên Môn", "Số Điện Thoại"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbThongTinNguoiDung);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);

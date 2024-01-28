@@ -23,9 +23,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
     private void myInit() {
         lbYeuCau.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
-        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
-        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
-        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
+        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_User.svg", 120, 120), "NGƯỜI DÙNG", "100", "Trên tất cả các cơ sở");
+        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Device.svg", 100, 100), "THIẾT BỊ", "1250", "Đang được sử dụng");
+        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Star.svg", 120, 120), "ĐIỂM", "9.6", "Đánh giá từ giáo viên");
         card1.SetData(data1);
         card2.SetData(data2);
         card3.SetData(data3);
