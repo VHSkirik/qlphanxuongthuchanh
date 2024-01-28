@@ -46,4 +46,8 @@ public class PhongThucHanhService {
      public List<PhongThucHanh>  get(String fieldName, String value){
             return PhongThucHanhDAO.getIns().findAllByField(fieldName, value);
     }
+     
+     public List<PhongThucHanh>  getByDiaDiemAndToa(String diaDiem, String toa){
+            return PhongThucHanhDAO.getIns().findAllByDiaDiemAndToa(diaDiem,toa);
+    }
 }
