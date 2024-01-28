@@ -17,6 +17,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
         dtmDatPhong = (DefaultTableModel) tbYeuCau.getModel();
         datPhongService = new DatPhongService();
         tbYeuCau.getColumnModel().getColumn(0).setPreferredWidth(5);
+        tbYeuCau.setAutoCreateRowSorter(true);
         myInit();
     }
     
@@ -26,9 +27,8 @@ public class AdminYeuCau extends javax.swing.JPanel {
     }
     
     private void initImage(){
-        btChapNhan.setIcon(new FlatSVGIcon("./views/icon/svg/accept.svg",45,45));
-        btTuChoi.setIcon(new FlatSVGIcon("./views/icon/svg/reject.svg",45,45));
-        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45,45));
+        btChapNhan.setIcon(new FlatSVGIcon("./views/icon/svg/Checkmark.svg",45,45));
+        btTuChoi.setIcon(new FlatSVGIcon("./views/icon/svg/Cancel_2.svg",45,45));
     }
     
     private void initData(){
@@ -56,14 +56,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbYeuCau = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        header3 = new views.panel.Header();
-        jToolBar3 = new javax.swing.JToolBar();
-        btChapNhan = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JToolBar.Separator();
-        btTuChoi = new javax.swing.JButton();
-        jSeparator2 = new javax.swing.JToolBar.Separator();
-        btXoa = new javax.swing.JButton();
+        cbTuyChon = new javax.swing.JComboBox<>();
         pnChiTiet = new views.panel.PanelBorder();
         jLabel2 = new javax.swing.JLabel();
         lbMaYeuCau = new javax.swing.JTextField();
@@ -81,12 +74,14 @@ public class AdminYeuCau extends javax.swing.JPanel {
         lbTietBatDau = new javax.swing.JTextField();
         lbTietKetThuc = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        btChapNhan = new javax.swing.JButton();
+        btTuChoi = new javax.swing.JButton();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Sắp xếp ");
+        jLabel1.setText("Tùy Chọn");
 
         jScrollPane2.setBorder(null);
 
@@ -114,45 +109,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tbYeuCau);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mặc định" }));
-
-        header3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jToolBar3.setBackground(new java.awt.Color(255, 255, 255));
-        jToolBar3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chức năng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14), new java.awt.Color(0, 0, 0))); // NOI18N
-        jToolBar3.setRollover(true);
-
-        btChapNhan.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btChapNhan.setForeground(new java.awt.Color(0, 0, 0));
-        btChapNhan.setText("Chấp Nhận");
-        btChapNhan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btChapNhan.setFocusable(false);
-        btChapNhan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btChapNhan.setIconTextGap(0);
-        btChapNhan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(btChapNhan);
-        jToolBar3.add(jSeparator1);
-
-        btTuChoi.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btTuChoi.setForeground(new java.awt.Color(0, 0, 0));
-        btTuChoi.setText("Từ Chối");
-        btTuChoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btTuChoi.setFocusable(false);
-        btTuChoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btTuChoi.setIconTextGap(0);
-        btTuChoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(btTuChoi);
-        jToolBar3.add(jSeparator2);
-
-        btXoa.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btXoa.setForeground(new java.awt.Color(0, 0, 0));
-        btXoa.setText("Xóa Yêu Cầu");
-        btXoa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btXoa.setFocusable(false);
-        btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btXoa.setIconTextGap(0);
-        btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar3.add(btXoa);
+        cbTuyChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Đang Chờ", "Đã Duyệt", "Từ Chối" }));
 
         jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -228,7 +185,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
         pnChiTietLayout.setHorizontalGroup(
             pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnChiTietLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(37, Short.MAX_VALUE)
                 .addGroup(pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnChiTietLayout.createSequentialGroup()
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -283,12 +240,28 @@ public class AdminYeuCau extends javax.swing.JPanel {
                     .addComponent(lbTietBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbTietKetThuc, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(pnChiTietLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
+
+        btChapNhan.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btChapNhan.setForeground(new java.awt.Color(0, 0, 0));
+        btChapNhan.setText("Chấp Nhận");
+        btChapNhan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btChapNhan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btChapNhan.setIconTextGap(0);
+        btChapNhan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+
+        btTuChoi.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btTuChoi.setForeground(new java.awt.Color(0, 0, 0));
+        btTuChoi.setText("Từ Chối");
+        btTuChoi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btTuChoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btTuChoi.setIconTextGap(0);
+        btTuChoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -300,38 +273,35 @@ public class AdminYeuCau extends javax.swing.JPanel {
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(header3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addComponent(cbTuyChon, 0, 263, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(41, 41, 41)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jToolBar3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
-                        .addGap(31, 31, 31)
-                        .addComponent(pnChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(31, 31, 31))
+                        .addComponent(btChapNhan, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btTuChoi, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(pnChiTiet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbTuyChon, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane2))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(header3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(8, 8, 8)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jToolBar3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(31, 31, 31))
+                        .addComponent(pnChiTiet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btChapNhan, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+                            .addComponent(btTuChoi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(30, 30, 30))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -372,9 +342,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChapNhan;
     private javax.swing.JButton btTuChoi;
-    private javax.swing.JButton btXoa;
-    private views.panel.Header header3;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbTuyChon;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -386,9 +354,6 @@ public class AdminYeuCau extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToolBar.Separator jSeparator1;
-    private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar jToolBar3;
     private javax.swing.JTextField lbMaGiaoVien;
     private javax.swing.JTextField lbMaPhong;
     private javax.swing.JTextField lbMaYeuCau;

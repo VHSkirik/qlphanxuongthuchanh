@@ -1,7 +1,11 @@
-
 package views.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.awt.Color;
+import java.awt.GradientPaint;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import models.NguoiDung;
 import models.ThongTinNguoiDung;
 import services.ThongTinNguoiDungService;
@@ -10,26 +14,28 @@ public class Information extends PanelBorderHalf {
 
     private NguoiDung nguoiDung;
     private ThongTinNguoiDung thongTinNguoiDung;
-    
+
     public Information() {
         initComponents();
-        lbUserIcon.setIcon(new FlatSVGIcon("./views/icon/svg/admin_2.svg",63,63));
+        lbUserIcon.setIcon(new FlatSVGIcon("./views/icon/svg/admin_2.svg", 63, 63));
     }
-    
-    private void setUserData(){
-        if (nguoiDung == null)
+
+    private void setUserData() {
+        if (nguoiDung == null) {
             return;
+        }
         lbUserName.setText(nguoiDung.getTenDangNhap());
         lbRole.setText(nguoiDung.getLoaiNguoiDung());
-        if (thongTinNguoiDung == null)
+        if (thongTinNguoiDung == null) {
             return;
+        }
         lbHoTen.setText(thongTinNguoiDung.getHoten());
         lbEmail.setText(nguoiDung.getEmail());
     }
-    
-    public void setNguoiDung(NguoiDung nguoiDung){
+
+    public void setNguoiDung(NguoiDung nguoiDung) {
         this.nguoiDung = nguoiDung;
-        this.thongTinNguoiDung = new ThongTinNguoiDungService().get("MaNguoiDung", this.nguoiDung.getMaNguoiDung()+"").get(0);
+        this.thongTinNguoiDung = new ThongTinNguoiDungService().get("MaNguoiDung", this.nguoiDung.getMaNguoiDung() + "").get(0);
         setUserData();
     }
 
@@ -79,10 +85,10 @@ public class Information extends PanelBorderHalf {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(290, Short.MAX_VALUE))
+                    .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(172, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
