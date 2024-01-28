@@ -43,7 +43,6 @@ public class AdminMain extends javax.swing.JFrame {
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
-                System.out.println("Selected: " + index);
                 switch (index) {
                     case 1:
                         setMainPanel(dashBroad);

@@ -216,14 +216,35 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT Toa FROM phongthuchanh WHERE DiaDiem LIKE ?";
+            String query = "SELECT DISTINCT Toa FROM phongthuchanh WHERE DiaDiem = ?";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(1, "%" + diaDiem + "%");
+            stm.setString(1, diaDiem);
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
                 String toa = rs.getString("Toa");
                 dsToa.add(toa);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+        return dsToa;
+    }
+    
+    public List<String> findListDiaDiem() {
+        List<String> dsToa = new ArrayList<>();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT DISTINCT DiaDiem FROM phongthuchanh";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                String diaDiem = rs.getString("DiaDiem");
+                dsToa.add(diaDiem);
             }
 
             Jdbc.closeConnection(c);
