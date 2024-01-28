@@ -17,7 +17,7 @@ import views.UserFormInterface;
 
 public class AdminPhong extends javax.swing.JPanel implements UserFormInterface {
 
-    private List<PhongThucHanh> dsPhong;
+    private List<PhongThucHanh> dsPhong, dsTimKiem;
     private DefaultTableModel dtmPhong;
     private JTextField txtTimKiem;
     private JComboBox<String> cbTuyChon;
@@ -39,6 +39,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
     private void myInit() {
         initImage();
         initTable();
+        initComboBox();
         initTimKiem();
     }
 
@@ -54,6 +55,30 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
     public void initTable() {
         dsPhong = PhongThucHanhDAO.getIns().findALl();
         initDataPhongThucHanh(dsPhong);
+    }
+
+    private void initComboBox() {
+        initDataDiaDiem();
+    }
+
+    private void initDataDiaDiem() {
+        List<String> dsDiaDiem = PhongThucHanhDAO.getIns().findListDiaDiem();
+        cbDiaDiem.removeAllItems();
+        cbDiaDiem.addItem("Tất Cả");
+        for (String diaDiem : dsDiaDiem) {
+            cbDiaDiem.addItem(diaDiem);
+        }
+    }
+
+    private void initDataToaNha() {
+        cbToaNha.removeAllItems();
+        cbToaNha.addItem("Tất Cả");
+        if (cbDiaDiem.getSelectedIndex() != 0) {
+            List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem() + "");
+            for (String toa : dsToa) {
+                cbToaNha.addItem(toa);
+            }
+        }
     }
 
     private void initDataPhongThucHanh(List<PhongThucHanh> currentDsPhong) {
@@ -101,9 +126,9 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         tbPhong = new javax.swing.JTable();
         lbTitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDiaDiem = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbToaNha = new javax.swing.JComboBox<>();
         panelBorder2 = new views.panel.PanelBorder();
         jToolBar1 = new javax.swing.JToolBar();
         btThem = new javax.swing.JButton();
@@ -147,15 +172,25 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Địa điểm");
 
-        jComboBox1.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
+        cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
+        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
+        cbDiaDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDiaDiemActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tòa Nhà");
 
-        jComboBox2.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        cbToaNha.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
+        cbToaNha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        cbToaNha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbToaNhaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -173,11 +208,11 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
                             .addGroup(panelBorder1Layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbDiaDiem, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cbToaNha, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         panelBorder1Layout.setVerticalGroup(
@@ -188,9 +223,9 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1)
+                    .addComponent(cbDiaDiem)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbToaNha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addGap(18, 18, 18))
@@ -334,15 +369,24 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         }
     }//GEN-LAST:event_btXoaActionPerformed
 
+    private void cbDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaDiemActionPerformed
+        initDataToaNha();
+
+    }//GEN-LAST:event_cbDiaDiemActionPerformed
+
+    private void cbToaNhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbToaNhaActionPerformed
+        
+    }//GEN-LAST:event_cbToaNhaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btExcel;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
+    private javax.swing.JComboBox<String> cbDiaDiem;
+    private javax.swing.JComboBox<String> cbToaNha;
     private views.panel.Header header1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
