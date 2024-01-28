@@ -232,7 +232,7 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
         }
         return dsToa;
     }
-    
+
     public List<String> findListDiaDiem() {
         List<String> dsToa = new ArrayList<>();
 
@@ -253,59 +253,77 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
         }
         return dsToa;
     }
-    
+
     public List<PhongThucHanh> findAllByDiaDiemAndToa(String diaDiem, String toa) {
-    List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
+        List<PhongThucHanh> dsPhongThucHanh = new ArrayList();
 
-    try {
-        Connection c = Jdbc.getConnection();
-        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM phongthuchanh WHERE ");
+        try {
+            Connection c = Jdbc.getConnection();
+            StringBuilder queryBuilder = new StringBuilder("SELECT * FROM phongthuchanh ");
 
-        if (!diaDiem.isBlank()) {
-            queryBuilder.append("LOWER(DiaDiem) LIKE LOWER(?)");
-        }
+            if (!diaDiem.isBlank() || !toa.isBlank()) {
+                queryBuilder.append(" Where ");
+                if (!diaDiem.isBlank()) {
+                    queryBuilder.append("LOWER(DiaDiem) LIKE LOWER(?)");
+                }
 
-        if (!toa.isBlank()) {
-            if (!diaDiem.isBlank()) {
-                queryBuilder.append(" AND ");
+                if (!toa.isBlank()) {
+                    if (!diaDiem.isBlank()) {
+                        queryBuilder.append(" AND ");
+                    }
+                    queryBuilder.append("LOWER(Toa) LIKE LOWER(?)");
+                }
+
+                PreparedStatement stm = c.prepareStatement(queryBuilder.toString());
+
+                int parameterIndex = 1;
+
+                if (!diaDiem.isBlank()) {
+                    stm.setString(parameterIndex++, "%" + diaDiem + "%");
+                }
+
+                if (!toa.isBlank()) {
+                    stm.setString(parameterIndex, "%" + toa + "%");
+                }
+
+                ResultSet rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    PhongThucHanh phongThucHanh = new PhongThucHanh(
+                            rs.getInt("MaPhongThucHanh"),
+                            rs.getString("TenPhong"),
+                            rs.getString("LoaiPhong"),
+                            rs.getString("DiaDiem"),
+                            rs.getInt("SucChua"),
+                            rs.getString("TinhTrang"),
+                            rs.getString("Toa")
+                    );
+                    dsPhongThucHanh.add(phongThucHanh);
+                }
+            } else {
+                PreparedStatement stm = c.prepareStatement(queryBuilder.toString());
+                ResultSet rs = stm.executeQuery();
+
+                while (rs.next()) {
+                    PhongThucHanh phongThucHanh = new PhongThucHanh(
+                            rs.getInt("MaPhongThucHanh"),
+                            rs.getString("TenPhong"),
+                            rs.getString("LoaiPhong"),
+                            rs.getString("DiaDiem"),
+                            rs.getInt("SucChua"),
+                            rs.getString("TinhTrang"),
+                            rs.getString("Toa")
+                    );
+                    dsPhongThucHanh.add(phongThucHanh);
+                }
+
             }
-            queryBuilder.append("LOWER(Toa) LIKE LOWER(?)");
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
         }
 
-        PreparedStatement stm = c.prepareStatement(queryBuilder.toString());
-
-        int parameterIndex = 1;
-
-        if (!diaDiem.isBlank()) {
-            stm.setString(parameterIndex++, "%" + diaDiem + "%");
-        }
-
-        if (!toa.isBlank()) {
-            stm.setString(parameterIndex, "%" + toa + "%");
-        }
-
-        ResultSet rs = stm.executeQuery();
-
-        while (rs.next()) {
-            PhongThucHanh phongThucHanh = new PhongThucHanh(
-                    rs.getInt("MaPhongThucHanh"),
-                    rs.getString("TenPhong"),
-                    rs.getString("LoaiPhong"),
-                    rs.getString("DiaDiem"),
-                    rs.getInt("SucChua"),
-                    rs.getString("TinhTrang"),
-                    rs.getString("Toa")
-            );
-            dsPhongThucHanh.add(phongThucHanh);
-        }
-
-        Jdbc.closeConnection(c);
-    } catch (SQLException var7) {
-        var7.printStackTrace();
+        return dsPhongThucHanh;
     }
-
-    return dsPhongThucHanh;
-}
-
 
 }

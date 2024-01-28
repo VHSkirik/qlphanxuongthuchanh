@@ -2,8 +2,6 @@ package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.PhongThucHanhDAO;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
@@ -46,7 +44,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         initImage();
         initTable();
         initComboBox();
-//        initTimKiem();
+        initTimKiem();
         initEvent();
     }
 
@@ -61,6 +59,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
     @Override
     public void initTable() {
         dsPhong = PhongThucHanhDAO.getIns().findALl();
+        dsHienTai = dsPhong;
         initDataPhongThucHanh(dsPhong);
     }
 
@@ -115,13 +114,25 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
             public void keyReleased(KeyEvent e) {
                 String value = txtTimKiem.getText().trim();
                 if (!value.isBlank()) {
-                    List<PhongThucHanh> dsPhongTimKiem = phongThucHanhService.get("TenPhong", value);
-                    initDataPhongThucHanh(dsPhongTimKiem);
+                    dtmPhong.setRowCount(0);
+                    for (PhongThucHanh phong : dsHienTai) {
+                        if (phong.getTenPhong().toLowerCase().contains(value.toLowerCase())) {
+                            dtmPhong.addRow(new Object[]{
+                                phong.getMaPhongThucHanh(),
+                                phong.getTenPhong(),
+                                phong.getLoaiPhong(),
+                                phong.getDiaDiem(),
+                                phong.getToa(),
+                                phong.getSucChua(),
+                                phong.getTinhTrang()});
+                        }
+                    }
                 } else {
-                    initTable();
+                    initDataPhongThucHanh(dsHienTai);
                 }
             }
-        });
+        }
+        );
     }
 
     private void initEvent() {
@@ -130,7 +141,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
             public void itemStateChanged(ItemEvent e) {
                 if (cbDiaDiem.getSelectedItem() != null && cbToaNha.getSelectedItem() != null) {
                     if (cbDiaDiem.getSelectedIndex() == 0) {
-                        dsHienTai = phongThucHanhService.getByDiaDiemAndToa("", "");
+                        dsHienTai = dsPhong;
                     } else {
                         if (cbToaNha.getSelectedIndex() == 0) {
                             dsHienTai = phongThucHanhService.getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), "");
@@ -282,7 +293,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         jLabel1.setText("Địa điểm");
 
         cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Medium", 0, 14)); // NOI18N
-        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
+        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
         cbDiaDiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbDiaDiemActionPerformed(evt);
