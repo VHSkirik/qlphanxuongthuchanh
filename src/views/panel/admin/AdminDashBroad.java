@@ -6,7 +6,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.List;
 import models.DatPhong;
-import services.NguoiDungService;
 import services.PhongThucHanhService;
 import services.ThongTinNguoiDungService;
 import views.models.Model_Card;
@@ -23,6 +22,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
     }
 
     private void myInit() {
+        lbYeuCau.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
         Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
         Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
         Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/coins.svg", 39, 39), "Tiêu đề", "Giá trị", "Mô tả");
@@ -35,18 +35,18 @@ public class AdminDashBroad extends javax.swing.JPanel {
     }
 
     private void initDataTable() {
-        dsDatPhong = DatPhongDAO.getIns().getLatestDatPhong(4);
+        dsDatPhong = DatPhongDAO.getIns().getLatestDatPhong(5);
         
         for (DatPhong datPhong : dsDatPhong){
             StatusType status;
             String trangThai = datPhong.getTrangThai();
             
             if (trangThai.equals("DangCho")){
-                status = StatusType.PENDING;
+                status = StatusType.DangCho;
             } else if (trangThai.equals("DaPheDuyet")){
-                status = StatusType.APPROVED;
+                status = StatusType.DaDuyet;
             } else {
-                status = StatusType.REJECT;
+                status = StatusType.TuChoi;
             }
             
             table.addRow(new Object[]{
@@ -54,6 +54,8 @@ public class AdminDashBroad extends javax.swing.JPanel {
                 new ThongTinNguoiDungService().get("MaNguoiDung", datPhong.getMaNguoiDung()+"").get(0).getHoten(),
                 new PhongThucHanhService().get("MaPhongThucHanh", datPhong.getMaPhongThucHanh()+"").get(0).getTenPhong(),
                 datPhong.getNgayThucHanh(),
+                datPhong.getTietBatDau(),
+                datPhong.getTietKetThuc(),
                 status
             });
         }
@@ -68,7 +70,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
         card2 = new views.models.Card();
         card3 = new views.models.Card();
         panelBorder1 = new views.panel.PanelBorder();
-        jLabel1 = new javax.swing.JLabel();
+        lbYeuCau = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
         table = new views.table.Table();
 
@@ -91,9 +93,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(127, 127, 127));
-        jLabel1.setText("Các yêu cầu sử dụng phòng gần đây");
+        lbYeuCau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbYeuCau.setForeground(new java.awt.Color(127, 127, 127));
+        lbYeuCau.setText("Các yêu cầu sử dụng phòng gần đây");
 
         spTable.setBorder(null);
 
@@ -102,11 +104,11 @@ public class AdminDashBroad extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Mã Đặt Phòng", "Giáo Viên", "Phòng", "Thời Gian", "Trạng Thái"
+                "ID", "Giáo Viên", "Phòng", "Thời Gian", "Tiết BD", "Tiết KT", "Trạng Thái"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -114,6 +116,9 @@ public class AdminDashBroad extends javax.swing.JPanel {
             }
         });
         spTable.setViewportView(table);
+        if (table.getColumnModel().getColumnCount() > 0) {
+            table.getColumnModel().getColumn(0).setPreferredWidth(5);
+        }
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -123,7 +128,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
                 .addGap(17, 17, 17)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
@@ -132,8 +137,8 @@ public class AdminDashBroad extends javax.swing.JPanel {
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(lbYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(spTable, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                 .addGap(32, 32, 32))
@@ -171,7 +176,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
     private views.models.Card card1;
     private views.models.Card card2;
     private views.models.Card card3;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lbYeuCau;
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JLayeredPane panelConstainCard;
     private javax.swing.JScrollPane spTable;

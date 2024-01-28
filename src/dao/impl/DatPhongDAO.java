@@ -193,7 +193,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM datphong where TrangThai ='DangCho' ORDER BY NgayTao ASC LIMIT ? ";
+            String query = "SELECT * FROM datphong ORDER BY NgayTao ASC LIMIT ? ";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, limit);
             ResultSet rs = stm.executeQuery();
