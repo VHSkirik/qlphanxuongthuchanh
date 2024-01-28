@@ -9,11 +9,12 @@ public class ThietBi {
     private String MoTa;
     private String TinhTrang;
     private Integer MaPhongThucHanh;
+    private int SoMay;
 
     public ThietBi() {
     }
 
-    public ThietBi(Integer MaThietBi, String TenThietBi, String LoaiThietBi, String NgaySuDung, String MoTa, String TinhTrang, Integer MaPhongThucHanh) {
+    public ThietBi(Integer MaThietBi, String TenThietBi, String LoaiThietBi, String NgaySuDung, String MoTa, String TinhTrang, Integer MaPhongThucHanh, int SoMay) {
         this.MaThietBi = MaThietBi;
         this.TenThietBi = TenThietBi;
         this.LoaiThietBi = LoaiThietBi;
@@ -21,6 +22,7 @@ public class ThietBi {
         this.MoTa = MoTa;
         this.TinhTrang = TinhTrang;
         this.MaPhongThucHanh = MaPhongThucHanh;
+        this.SoMay = SoMay;
     }
 
     public Integer getMaThietBi() {
@@ -78,5 +80,15 @@ public class ThietBi {
     public void setMaPhongThucHanh(Integer MaPhongThucHanh) {
         this.MaPhongThucHanh = MaPhongThucHanh;
     }
+
+    public int getSoMay() {
+        return SoMay;
+    }
+
+    public void setSoMay(int SoMay) {
+        this.SoMay = SoMay;
+    }
+
+  
 
 }
