@@ -54,11 +54,19 @@ public class PhongDialog extends javax.swing.JDialog {
             lbMaPhong.setText(phongThucHanh.getMaPhongThucHanh() + "");
             lbTenPhong.setText(phongThucHanh.getTenPhong());
             lbLoaiPhong.setText(phongThucHanh.getLoaiPhong());
+            initDataDiaDiem();
             initDataToaNha();
-            cbToaNha.setSelectedItem(phongThucHanh.getToa());
             lbSucChua.setText(phongThucHanh.getSucChua() + "");
             cbTinhTrang.setSelectedItem(phongThucHanh.getTinhTrang());
             revalidate();
+    }
+    
+    private void initDataDiaDiem(){
+        List<String> dsDiaDiem = PhongThucHanhDAO.getIns().findListDiaDiem();
+        for (String diaDiem : dsDiaDiem){
+            cbDiaDiem.addItem(diaDiem);
+        }
+        cbDiaDiem.setSelectedItem(phongThucHanh.getDiaDiem());
     }
 
     private void initDataToaNha() {
@@ -195,7 +203,6 @@ public class PhongDialog extends javax.swing.JDialog {
         pnMain.add(lbSucChua, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 460, 330, 40));
 
         cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
-        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lĩnh Nam", "Mỹ Xá", "Minh Khai" }));
         pnMain.add(cbDiaDiem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
 
         cbToaNha.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
