@@ -33,8 +33,7 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
             if (rs.next()) {
                 phanHoi = new PhanHoi(
                         rs.getInt("MaPhanHoi"),
-                        rs.getInt("MaNguoiDung"),
-                        rs.getInt("MaPhongThucHanh"),
+                        rs.getInt("MaLichThucHanh"),
                         rs.getString("NoiDung"),
                         rs.getInt("DiemDanhGia")
                 );
@@ -53,12 +52,11 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO phanhoi (MaNguoiDung, MaPhongThucHanh, NoiDung, DiemDanhGia) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO phanhoi ( MaLichThucHanh, NoiDung, DiemDanhGia) VALUES ( ?, ?, ?)";
         PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            stm.setInt(1, phanHoi.getMaNguoiDung());
-            stm.setInt(2, phanHoi.getMaPhongThucHanh());
-            stm.setString(3, phanHoi.getNoiDung());
-            stm.setInt(4, phanHoi.getDiemDanhGia());
+            stm.setInt(1, phanHoi.getMaLichThucHanh());
+            stm.setString(2, phanHoi.getNoiDung());
+            stm.setInt(3, phanHoi.getDiemDanhGia());
             rs = stm.executeUpdate();
                if (rs != -1) {
             ResultSet generatedKeys = stm.getGeneratedKeys();
@@ -80,13 +78,12 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE phanhoi SET MaNguoiDung = ?, MaPhongThucHanh = ?, NoiDung = ?, DiemDanhGia = ? WHERE MaPhanHoi = ?";
+            String query = "UPDATE phanhoi SET MaLichThucHanh, NoiDung = ?, DiemDanhGia = ? WHERE MaPhanHoi = ?";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setInt(1, phanHoi.getMaNguoiDung());
-            stm.setInt(2, phanHoi.getMaPhongThucHanh());
-            stm.setString(3, phanHoi.getNoiDung());
-            stm.setInt(4, phanHoi.getDiemDanhGia());
-            stm.setInt(5, id);
+            stm.setInt(1, phanHoi.getMaLichThucHanh());
+            stm.setString(2, phanHoi.getNoiDung());
+            stm.setInt(3, phanHoi.getDiemDanhGia());
+            stm.setInt(4, id);
             rs = stm.executeUpdate();
             Jdbc.closeConnection(c);
         } catch (SQLException var7) {
@@ -125,8 +122,7 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
             while (rs.next()) {
                 PhanHoi phanHoi = new PhanHoi(
                         rs.getInt("MaPhanHoi"),
-                        rs.getInt("MaNguoiDung"),
-                        rs.getInt("MaPhongThucHanh"),
+                        rs.getInt("MaLichThucHanh"),
                         rs.getString("NoiDung"),
                         rs.getInt("DiemDanhGia")
                 );
@@ -154,8 +150,7 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
             while (rs.next()) {
                 PhanHoi phanHoi = new PhanHoi(
                         rs.getInt("MaPhanHoi"),
-                        rs.getInt("MaNguoiDung"),
-                        rs.getInt("MaPhongThucHanh"),
+                        rs.getInt("MaLichThucHanh"),
                         rs.getString("NoiDung"),
                         rs.getInt("DiemDanhGia")
                 );

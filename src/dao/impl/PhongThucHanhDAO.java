@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import models.PhongThucHanh;
 
 public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
@@ -324,6 +326,30 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
         }
 
         return dsPhongThucHanh;
+    }
+    
+     public Map<Integer, String> findAllPhongByToa(String toa) {
+        Map<Integer, String> phongMap = new LinkedHashMap<>();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM phongthuchanh WHERE LOWER(Toa) LIKE LOWER(?)";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%" + toa + "%");
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                int idPhong = rs.getInt("MaPhongThucHanh");
+                String tenPhong = rs.getString("TenPhong");
+                phongMap.put(idPhong, tenPhong);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return phongMap;
     }
 
 }

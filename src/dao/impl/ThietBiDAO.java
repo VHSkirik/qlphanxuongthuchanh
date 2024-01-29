@@ -213,4 +213,39 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return thietBi;
     }
+    
+
+  public List<ThietBi> findAllByTenPhongThucHanh(String tenPhongThucHanh) {
+    List<ThietBi> dsThietBi = new ArrayList<>();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT * FROM thietbi WHERE MaPhongThucHanh IN (SELECT MaPhongThucHanh FROM phongthuchanh WHERE LOWER(TenPhong) LIKE LOWER(?))";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + tenPhongThucHanh + "%");
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            ThietBi thietBi = new ThietBi(
+                    rs.getInt("MaThietBi"),
+                    rs.getString("TenThietBi"),
+                    rs.getString("LoaiThietBi"),
+                    rs.getString("NgaySuDung"),
+                    rs.getString("MoTa"),
+                    rs.getString("TinhTrang"),
+                    rs.getInt("MaPhongThucHanh"),
+                    rs.getInt("SoMay")
+            );
+            dsThietBi.add(thietBi);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return dsThietBi;
+}
+
+
 }
