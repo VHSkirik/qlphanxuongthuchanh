@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import models.DatPhong;
 
 public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
     private static final LichThucHanhDAO2 lthDAO = new LichThucHanhDAO2();
@@ -36,8 +37,9 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getInt("MaLichThucHanh"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("TietBatDau"),
-                        rs.getString("TietKetTHuc"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetTHuc"),
                         rs.getString("Mon")
                 );
             }
@@ -55,12 +57,13 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO lichthuchanh2 (MaNguoiDung, MaPhongThucHanh, TietBatDau, TietKetTHuc, Mon) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO lichthuchanh2 (MaNguoiDung, MaPhongThucHanh,NgayThucHanh, TietBatDau, TietKetTHuc, Mon) VALUES (?,?, ?, ?, ?, ?)";
             PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, lichThucHanh.getMaNguoiDung());
             stm.setInt(2, lichThucHanh.getMaPhongThucHanh());
-            stm.setString(3, lichThucHanh.getTietBatDau());
-            stm.setString(4, lichThucHanh.getTietKetTHuc());
+            stm.setString(3, lichThucHanh.getNgayThucHanh());
+            stm.setInt(3, lichThucHanh.getTietBatDau());
+            stm.setInt(4, lichThucHanh.getTietKetTHuc());
             stm.setString(5, lichThucHanh.getMon());
             rs = stm.executeUpdate();
             if (rs != -1) {
@@ -82,14 +85,15 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE lichthuchanh2 SET MaNguoiDung = ?, MaPhongThucHanh = ?, TietBatDau = ?, TietKetTHuc = ?, Mon = ? WHERE MaLichThucHanh = ?";
+            String query = "UPDATE lichthuchanh2 SET MaNguoiDung = ?, MaPhongThucHanh = ?,NgayThucHanh = ?, TietBatDau = ?, TietKetTHuc = ?, Mon = ? WHERE MaLichThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, lichThucHanh.getMaNguoiDung());
             stm.setInt(2, lichThucHanh.getMaPhongThucHanh());
-            stm.setString(3, lichThucHanh.getTietBatDau());
-            stm.setString(4, lichThucHanh.getTietKetTHuc());
-            stm.setString(5, lichThucHanh.getMon());
-            stm.setInt(6, id);
+            stm.setString(3, lichThucHanh.getNgayThucHanh());
+            stm.setInt(4, lichThucHanh.getTietBatDau());
+            stm.setInt(5, lichThucHanh.getTietKetTHuc());
+            stm.setString(6, lichThucHanh.getMon());
+            stm.setInt(7, id);
             rs = stm.executeUpdate();
             Jdbc.closeConnection(c);
         } catch (SQLException var7) {
@@ -130,8 +134,9 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getInt("MaLichThucHanh"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("TietBatDau"),
-                        rs.getString("TietKetTHuc"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
                         rs.getString("Mon")
                 );
                 dsLichThucHanh.add(lichThucHanh);
@@ -160,8 +165,9 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getInt("MaLichThucHanh"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
-                        rs.getString("TietBatDau"),
-                        rs.getString("TietKetTHuc"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
                         rs.getString("Mon")
                 );
                 dsLichThucHanh.add(lichThucHanh);
@@ -174,4 +180,43 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         return dsLichThucHanh;
     }
+    
+    public List<LichThucHanh2> getOverlappingLichThucHanh(DatPhong datPhong) {
+        List<LichThucHanh2> overlappingLichThucHanhList = new ArrayList<>();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM lichthuchanh2 lth " +
+                           "JOIN datphong dp ON lth.MaPhongThucHanh = dp.MaPhongThucHanh " +
+                           "AND lth.NgayThucHanh = dp.NgayThucHanh " +
+                           "AND lth.TietBatDau <= dp.TietKetThuc " +
+                           "AND lth.TietKetThuc >= dp.TietBatDau " +
+                           "WHERE dp.MaYeuCau = ?";
+            
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setInt(1, datPhong.getMaYeuCau());
+            
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                LichThucHanh2 lichThucHanh = new LichThucHanh2(
+                        rs.getInt("MaLichThucHanh"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("Mon")
+                );
+                overlappingLichThucHanhList.add(lichThucHanh);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return overlappingLichThucHanhList;
+    }
+
 }

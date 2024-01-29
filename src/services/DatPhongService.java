@@ -1,12 +1,15 @@
 package services;
 
 import dao.impl.DatPhongDAO;
+import dao.impl.LichThucHanhDAO2;
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhongThucHanhDAO;
 import java.util.Date;
 import java.util.List;
 import models.DatPhong;
+import models.LichThucHanh2;
 import models.OperationResult;
+import models.ResultReason;
 
 public class DatPhongService {
 
@@ -62,5 +65,21 @@ public class DatPhongService {
      
        public List<DatPhong>  get(String fieldName, String value){
             return DatPhongDAO.getIns().findAllByField(fieldName, value);
+    }
+       
+        public ResultReason acceptDatPhong(DatPhong datPhong) {
+        // Kiểm tra trùng lịch
+        List<LichThucHanh2> lichThucHanhList = LichThucHanhDAO2.getIns().getOverlappingLichThucHanh(datPhong);
+        if (!lichThucHanhList.isEmpty()) {
+            // Có trùng lịch, không thêm và trả về lỗi
+            return new ResultReason(OperationResult.ADD_FAILURE, "Trùng lịch thực hành.");
+        }
+
+        // Không có trùng lịch, thêm vào bảng Lịch Thực Hành
+        LichThucHanh2 lichThucHanh = new LichThucHanh2(null , datPhong.getMaNguoiDung(), datPhong.getMaPhongThucHanh(),datPhong.getNgayThucHanh(), datPhong.getTietBatDau(), datPhong.getTietKetThuc(), datPhong.getMonHoc());
+        int result = LichThucHanhDAO2.getIns().create(lichThucHanh);
+
+        return (result == -1) ? new ResultReason(OperationResult.ADD_FAILURE, "Không thể thêm vào lịch thực hành.") :
+                               new ResultReason(OperationResult.ADD_SUCCESS, "");
     }
 }
