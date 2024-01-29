@@ -11,7 +11,7 @@ public class AdminYeuCau extends javax.swing.JPanel {
     private List<DatPhong> dsDatPhong;
     private DefaultTableModel dtmDatPhong;
     private DatPhongService datPhongService;
-    
+
     public AdminYeuCau() {
         initComponents();
         dtmDatPhong = (DefaultTableModel) tbYeuCau.getModel();
@@ -20,25 +20,29 @@ public class AdminYeuCau extends javax.swing.JPanel {
         tbYeuCau.setAutoCreateRowSorter(true);
         myInit();
     }
-    
-    private void myInit(){
+
+    private void myInit() {
         initImage();
         initData();
     }
-    
-    private void initImage(){
-        btChapNhan.setIcon(new FlatSVGIcon("./views/icon/svg/Checkmark.svg",45,45));
-        btTuChoi.setIcon(new FlatSVGIcon("./views/icon/svg/Cancel_2.svg",45,45));
+
+    private void initImage() {
+        btChapNhan.setIcon(new FlatSVGIcon("./views/icon/svg/Checkmark.svg", 45, 45));
+        btTuChoi.setIcon(new FlatSVGIcon("./views/icon/svg/Cancel_2.svg", 45, 45));
     }
-    
-    private void initData(){
+
+    private void initData() {
         initTable();
     }
-    
-    private void initTable(){
+
+    private void initTable() {
         dsDatPhong = datPhongService.getAll();
+        initTableFromList(dsDatPhong);
+    }
+
+    private void initTableFromList(List<DatPhong> dsDatPhongHienTai) {
         dtmDatPhong.setRowCount(0);
-        for (DatPhong datPhong : dsDatPhong){
+        for (DatPhong datPhong : dsDatPhongHienTai) {
             dtmDatPhong.addRow(new Object[]{
                 datPhong.getMaYeuCau(),
                 datPhong.getMaNguoiDung(),
@@ -110,6 +114,11 @@ public class AdminYeuCau extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tbYeuCau);
 
         cbTuyChon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Đang Chờ", "Đã Duyệt", "Từ Chối" }));
+        cbTuyChon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTuyChonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -324,19 +333,31 @@ public class AdminYeuCau extends javax.swing.JPanel {
 
     private void tbYeuCauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbYeuCauMouseClicked
         int currentRow = tbYeuCau.getSelectedRow();
-        if (currentRow != -1){
+        if (currentRow != -1) {
             DatPhong datPhong = datPhongService.get("MaYeuCau", tbYeuCau.getValueAt(currentRow, 0).toString()).get(0);
-            if (datPhong != null){
-                lbMaYeuCau.setText(datPhong.getMaYeuCau()+"");
-                lbMaGiaoVien.setText(datPhong.getMaNguoiDung()+"");
-                lbMaPhong.setText(datPhong.getMaPhongThucHanh()+"");
+            if (datPhong != null) {
+                lbMaYeuCau.setText(datPhong.getMaYeuCau() + "");
+                lbMaGiaoVien.setText(datPhong.getMaNguoiDung() + "");
+                lbMaPhong.setText(datPhong.getMaPhongThucHanh() + "");
                 lbThoiGian.setText(datPhong.getNgayThucHanh());
                 lbMucDich.setText(datPhong.getMonHoc());
-                lbTietBatDau.setText(datPhong.getTietBatDau()+"");
-                lbTietKetThuc.setText(datPhong.getTietKetThuc()+"");
+                lbTietBatDau.setText(datPhong.getTietBatDau() + "");
+                lbTietKetThuc.setText(datPhong.getTietKetThuc() + "");
             }
         }
     }//GEN-LAST:event_tbYeuCauMouseClicked
+
+    private void cbTuyChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTuyChonActionPerformed
+        if (cbTuyChon.getSelectedIndex() == 0) {
+            initTableFromList(dsDatPhong);
+        } else if (cbTuyChon.getSelectedIndex() == 1){
+            initTableFromList(datPhongService.get("TrangThai", "DangCho"));
+        }  else if (cbTuyChon.getSelectedIndex() == 2){
+            initTableFromList(datPhongService.get("TrangThai", "DaPheDuyet"));
+        }  else {
+            initTableFromList(datPhongService.get("TrangThai", "TuCHoi"));
+        }
+    }//GEN-LAST:event_cbTuyChonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -3,6 +3,7 @@ package views;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
@@ -30,7 +31,10 @@ public class AdminMain extends javax.swing.JFrame {
         setBackground(new Color(0, 0, 0, 0));
         JButton button = pnUserTitle.getButtonThongBao();
         button.addMouseListener(new MouseAdapter(){
-        
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                setMainPanel(new AdminYeuCau());
+            }          
         });
         menu.initMoving(AdminMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
