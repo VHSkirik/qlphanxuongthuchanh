@@ -18,7 +18,7 @@ import models.ThongTinNguoiDung;
 import services.NguoiDungService;
 import views.UserFormInterface;
 
-public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterface{
+public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterface {
 
     private List<NguoiDung> dsNguoiDung;
     private List<ThongTinNguoiDung> dsThongTin;
@@ -63,18 +63,22 @@ public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterf
                 nd.getTenDangNhap(),
                 nd.getMatKhau(),
                 nd.getEmail(),
-                nd.getLoaiNguoiDung()
-            });
+                nd.getLoaiNguoiDung(),
+                nd.getCoSo()
+            }
+            );
         }
         //thongtinchitiet
         dsThongTin = ThongTinNguoiDungDAO.getIns().findALl();
-        dtmThongTin.setRowCount(0);
+
+        dtmThongTin.setRowCount(
+                0);
         for (ThongTinNguoiDung ttnd : dsThongTin) {
             dtmThongTin.addRow(new Object[]{
                 ttnd.getMaNguoiDung(),
                 ttnd.getHoten(),
-                "",
-                "",
+                ttnd.getGioiTinh(),
+                ttnd.getNgaySinh(),
                 ttnd.getDiaChi(),
                 ttnd.getChuyenMon(),
                 ttnd.getSoDienThoai()
@@ -104,7 +108,8 @@ public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterf
                             nd.getTenDangNhap(),
                             nd.getMatKhau(),
                             nd.getEmail(),
-                            nd.getLoaiNguoiDung()
+                            nd.getLoaiNguoiDung(),
+                            nd.getCoSo()
                         });
                     }
                 } else {
@@ -159,17 +164,17 @@ public class AdminNguoiDung extends javax.swing.JPanel implements UserFormInterf
         tbNguoiDung.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         tbNguoiDung.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Người Dùng", "Tên Đăng Nhập", "Mật Khẩu", "Email", "Loại Người Dùng"
+                "Mã Người Dùng", "Tên Đăng Nhập", "Mật Khẩu", "Email", "Loại Người Dùng", "Cơ Sở"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

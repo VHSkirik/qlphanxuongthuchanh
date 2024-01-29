@@ -30,13 +30,11 @@ public class ThietBiDialog extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtNgaySuDung = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         cbTenPhong = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMoTa = new javax.swing.JTextArea();
         txtSoMay = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        cbToa = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -87,7 +85,7 @@ public class ThietBiDialog extends javax.swing.JDialog {
                 btHuyActionPerformed(evt);
             }
         });
-        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 460, 140, 40));
+        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 390, 140, 40));
 
         btSubmit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btSubmit.setForeground(new java.awt.Color(25, 118, 211));
@@ -99,7 +97,7 @@ public class ThietBiDialog extends javax.swing.JDialog {
                 btSubmitActionPerformed(evt);
             }
         });
-        pnMain.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 460, 140, 40));
+        pnMain.add(btSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 390, 140, 40));
 
         panelBorderHalf1.setBackground(new java.awt.Color(25, 118, 211));
 
@@ -130,24 +128,19 @@ public class ThietBiDialog extends javax.swing.JDialog {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Ngày sử dụng (mm/dd/yyyy)");
-        pnMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 240, 20));
+        pnMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 240, 20));
 
         txtNgaySuDung.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
-        pnMain.add(txtNgaySuDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 390, 330, 40));
+        pnMain.add(txtNgaySuDung, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 40));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setText("Mô tả");
         pnMain.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 140, 20));
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel8.setText("Tòa");
-        pnMain.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 140, 20));
-
         cbTenPhong.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 14)); // NOI18N
         cbTenPhong.setEnabled(false);
-        pnMain.add(cbTenPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 330, 40));
+        pnMain.add(cbTenPhong, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
 
         txtMoTa.setColumns(20);
         txtMoTa.setRows(5);
@@ -164,14 +157,10 @@ public class ThietBiDialog extends javax.swing.JDialog {
         jLabel10.setText("Số Máy");
         pnMain.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 200, 20));
 
-        cbToa.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 14)); // NOI18N
-        cbToa.setEnabled(false);
-        pnMain.add(cbToa, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 330, 40));
-
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel11.setText("Tên Phòng");
-        pnMain.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 140, 20));
+        jLabel11.setText("Mã Phòng");
+        pnMain.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 140, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,7 +170,7 @@ public class ThietBiDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
         );
 
         pack();
@@ -240,7 +229,6 @@ public class ThietBiDialog extends javax.swing.JDialog {
     private javax.swing.JButton btSubmit;
     private javax.swing.JComboBox<String> cbTenPhong;
     private javax.swing.JComboBox<String> cbTinhTrang;
-    private javax.swing.JComboBox<String> cbToa;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -249,7 +237,6 @@ public class ThietBiDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorderHalf panelBorderHalf1;

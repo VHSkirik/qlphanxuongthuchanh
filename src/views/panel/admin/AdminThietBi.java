@@ -2,29 +2,32 @@ package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.PhongThucHanhDAO;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.util.HashMap;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
+import models.PhongThucHanh;
 import models.ThietBi;
+import services.PhongThucHanhService;
 import services.ThietBiService;
 import views.UserFormInterface;
 import views.models.CurrentUser;
 
 public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
 
-    private List<ThietBi> dsThietBi, dsHieTai;
+    private List<ThietBi> dsThietBi, dsHienTai;
     private DefaultTableModel dtm;
     private ThietBiService thietBiService;
     private NguoiDung nguoiDung;
+    private HashMap<Integer, String> hmPhongThucHanh;
 
     public AdminThietBi() {
         this.nguoiDung = CurrentUser.getNguoiDung();
+        hmPhongThucHanh = new HashMap<>();
         initComponents();
         dtm = (DefaultTableModel) tbThietBi.getModel();
+        tbThietBi.setAutoCreateRowSorter(true);
         thietBiService = new ThietBiService();
         myInit();
     }
@@ -47,7 +50,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     @Override
     public void initTable() {
         dsThietBi = thietBiService.getAll();
-        dsHieTai = dsThietBi;
+        dsHienTai = dsThietBi;
         initDataThietBi(dsThietBi);
     }
 
@@ -86,7 +89,6 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         cbToaNha.setSelectedIndex(0);
         if (cbDiaDiem.getSelectedIndex() != 0) {
             List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem() + "");
-            System.out.println(dsToa);
             for (String toa : dsToa) {
                 cbToaNha.addItem(toa);
             }
@@ -97,9 +99,24 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         cbPhong.removeAllItems();
         cbPhong.addItem("Tất Cả");
         cbPhong.setSelectedIndex(0);
-        if (cbToaNha.getSelectedIndex() != 0){
-            
+        if (cbToaNha.getSelectedIndex() != 0 && cbToaNha.getSelectedItem() != null) {
+            List<PhongThucHanh> dsPhong = new PhongThucHanhService().getByDiaDiemAndToa(cbDiaDiem.getSelectedItem().toString(), cbToaNha.getSelectedItem().toString());
+            for (PhongThucHanh pth : dsPhong) {
+                hmPhongThucHanh.put(pth.getMaPhongThucHanh(), pth.getTenPhong());
+                cbPhong.addItem(pth.getTenPhong());
+            }
         }
+    }
+
+    private int getIdPhong() {
+        int id = -1;
+        for (int key : hmPhongThucHanh.keySet()) {
+            if (hmPhongThucHanh.get(key).equals(cbPhong.getSelectedItem().toString())) {
+                id = key;
+                break;
+            }
+        }
+        return id;
     }
 
     @SuppressWarnings("unchecked")
@@ -204,11 +221,16 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
         cbPhong.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         cbPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        cbPhong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbPhongActionPerformed(evt);
+            }
+        });
         jToolBar2.add(cbPhong);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Hiển Thị:");
+        jLabel1.setText("Vị trí:");
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -313,8 +335,10 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     }// </editor-fold>//GEN-END:initComponents
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
-        if (cbPhong.getSelectedIndex() != 0 && cbPhong.getSelectedItem() != null) {
+        if (cbPhong.getSelectedIndex() != 0) {
 
+        } else {
+            JOptionPane.showMessageDialog(this, "Chọn Phòng Cần Thêm trước.");
         }
     }//GEN-LAST:event_btThemActionPerformed
 
@@ -326,6 +350,19 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         if (cbDiaDiem.getSelectedItem() != null)
             initDataPhong();
     }//GEN-LAST:event_cbToaNhaItemStateChanged
+
+    private void cbPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPhongActionPerformed
+        if (cbPhong.getSelectedItem() == null) {
+            return;
+        }
+        if (cbPhong.getSelectedIndex() != 0) {
+            int id = getIdPhong();
+            dsHienTai = thietBiService.get("MaPhongThucHanh", id + "");
+            initDataThietBi(dsHienTai);
+        } else {
+            initDataThietBi(dsThietBi);
+        }
+    }//GEN-LAST:event_cbPhongActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

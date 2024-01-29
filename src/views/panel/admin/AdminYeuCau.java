@@ -1,9 +1,12 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.DatPhongDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.DatPhong;
+import models.ResultReason;
 import services.DatPhongService;
 
 public class AdminYeuCau extends javax.swing.JPanel {
@@ -109,6 +112,9 @@ public class AdminYeuCau extends javax.swing.JPanel {
         tbYeuCau.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbYeuCauMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbYeuCauMousePressed(evt);
             }
         });
         jScrollPane2.setViewportView(tbYeuCau);
@@ -263,6 +269,11 @@ public class AdminYeuCau extends javax.swing.JPanel {
         btChapNhan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btChapNhan.setIconTextGap(0);
         btChapNhan.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btChapNhan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btChapNhanActionPerformed(evt);
+            }
+        });
 
         btTuChoi.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btTuChoi.setForeground(new java.awt.Color(0, 0, 0));
@@ -271,6 +282,11 @@ public class AdminYeuCau extends javax.swing.JPanel {
         btTuChoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btTuChoi.setIconTextGap(0);
         btTuChoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btTuChoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btTuChoiActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -350,14 +366,63 @@ public class AdminYeuCau extends javax.swing.JPanel {
     private void cbTuyChonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTuyChonActionPerformed
         if (cbTuyChon.getSelectedIndex() == 0) {
             initTableFromList(dsDatPhong);
-        } else if (cbTuyChon.getSelectedIndex() == 1){
+        } else if (cbTuyChon.getSelectedIndex() == 1) {
             initTableFromList(datPhongService.get("TrangThai", "DangCho"));
-        }  else if (cbTuyChon.getSelectedIndex() == 2){
+        } else if (cbTuyChon.getSelectedIndex() == 2) {
             initTableFromList(datPhongService.get("TrangThai", "DaPheDuyet"));
-        }  else {
+        } else {
             initTableFromList(datPhongService.get("TrangThai", "TuCHoi"));
         }
     }//GEN-LAST:event_cbTuyChonActionPerformed
+
+    private void btChapNhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChapNhanActionPerformed
+        int currentRow = tbYeuCau.getSelectedRow();
+        if (currentRow != -1) {
+            int id = Integer.parseInt(tbYeuCau.getValueAt(currentRow, 0).toString());
+            DatPhong datPhong = DatPhongDAO.getIns().findOne(id);
+            if (datPhong.getTrangThai().equals("DangCho")) {
+                ResultReason rs = datPhongService.acceptDatPhong(datPhong);
+                if (rs.ketQua().isSuccess()) {
+                    if (datPhongService.updateDatPhong(datPhong.getMaYeuCau(), datPhong.getMaNguoiDung(), datPhong.getMaPhongThucHanh(), datPhong.getNgayThucHanh(), datPhong.getTietBatDau(), datPhong.getTietKetThuc(), datPhong.getMonHoc(), "DaPheDuyet", datPhong.getNgayTao()).isSuccess()) {
+                        JOptionPane.showMessageDialog(this, "Cập Nhật Lịch Học Thành Công");
+                        initTable();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Thêm Lịch Thành Công.\nCập nhật thất bại");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, rs.lyDo());
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Chỉ có thể xử lý các yêu cầu Đang Chờ.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Hãy Chọn Yêu Cầu Muốn Chấp Nhận.");
+        }
+    }//GEN-LAST:event_btChapNhanActionPerformed
+
+    private void tbYeuCauMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbYeuCauMousePressed
+        tbYeuCauMouseClicked(evt);
+    }//GEN-LAST:event_tbYeuCauMousePressed
+
+    private void btTuChoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btTuChoiActionPerformed
+        int currentRow = tbYeuCau.getSelectedRow();
+        if (currentRow != -1) {
+            int id = Integer.parseInt(tbYeuCau.getValueAt(currentRow, 0).toString());
+            DatPhong datPhong = DatPhongDAO.getIns().findOne(id);
+            if (datPhong.getTrangThai().equals("DangCho")) {
+                if (datPhongService.updateDatPhong(datPhong.getMaYeuCau(), datPhong.getMaNguoiDung(), datPhong.getMaPhongThucHanh(), datPhong.getNgayThucHanh(), datPhong.getTietBatDau(), datPhong.getTietKetThuc(), datPhong.getMonHoc(), "TuChoi", datPhong.getNgayTao()).isSuccess()) {
+                    JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công");
+                    initTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Chỉ có thể xử lý các yêu cầu Đang Chờ.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Hãy Chọn Yêu Cầu Muốn Từ Chối.");
+        }
+    }//GEN-LAST:event_btTuChoiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
