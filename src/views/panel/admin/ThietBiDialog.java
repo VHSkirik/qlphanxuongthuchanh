@@ -3,6 +3,7 @@ package views.panel.admin;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import models.OperationResult;
 import models.ResultReason;
 import models.ThietBi;
 import services.ThietBiService;
@@ -21,6 +22,26 @@ public class ThietBiDialog extends javax.swing.JDialog {
         txtMaPhong.setText(idPhong + "");
         String today = new SimpleDateFormat("yyyy/MM/dd").format(new Date());
         txtNgaySuDung.setText(today);
+    }
+    //update
+    public ThietBiDialog(UserFormInterface main, java.awt.Frame parent, boolean modal, ThietBi thietBi) {
+        super(parent, modal);
+        this.main = main;
+        initComponents();
+        this.thietBi = thietBi;
+        initData();
+    }
+    
+    private void initData(){
+        lbTitle.setText("UPDATE THIẾT BỊ");
+        txtTenThietBi.setText(thietBi.getTenThietBi());
+        txtLoaiThietBi.setText(thietBi.getLoaiThietBi());
+        txtMaPhong.setText(thietBi.getMaPhongThucHanh()+"");
+        txtSoMay.setText(thietBi.getSoMay()+"");
+        txtMoTa.setText(thietBi.getMoTa());
+        txtNgaySuDung.setText(thietBi.getNgaySuDung());
+        cbTinhTrang.setEnabled(true);
+        cbTinhTrang.setSelectedItem(thietBi.getTinhTrang());
     }
 
     @SuppressWarnings("unchecked")
@@ -215,7 +236,14 @@ public class ThietBiDialog extends javax.swing.JDialog {
                 }
             } else {
                 //update
-                
+                OperationResult os = thietBiService.updateThietBi(thietBi.getMaThietBi(), tenThietBi, loaiThietBi, ngaySuDung, moTa, tinhTrang, Integer.parseInt(maPhong), Integer.parseInt(soMay));
+                if (os.isSuccess()){
+                    JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công.");
+                    this.dispose();
+                    main.initTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập Nhật Thất Bại.");
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ.");
