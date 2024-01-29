@@ -29,8 +29,8 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         phongThucHanhService = new PhongThucHanhService();
         initComponents();
         dtmPhong = (DefaultTableModel) tbPhong.getModel();
-        tbPhong.getColumnModel().getColumn(0).setPreferredWidth(5);
-        tbPhong.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tbPhong.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tbPhong.getColumnModel().getColumn(1).setPreferredWidth(100);
         tbPhong.getColumnModel().getColumn(2).setPreferredWidth(250);
         tbPhong.getColumnModel().getColumn(4).setPreferredWidth(5);
         tbPhong.getColumnModel().getColumn(5).setPreferredWidth(5);
@@ -58,7 +58,7 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
 
     @Override
     public void initTable() {
-        dsPhong = PhongThucHanhDAO.getIns().findALl();
+        dsPhong = phongThucHanhService.getAll();
         dsHienTai = dsPhong;
         initDataPhongThucHanh(dsPhong);
     }

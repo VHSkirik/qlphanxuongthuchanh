@@ -1,22 +1,59 @@
-
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.ThietBi;
+import services.ThietBiService;
+import views.UserFormInterface;
 
-public class AdminThietBi extends javax.swing.JPanel {
+public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
+
+    private List<ThietBi> dsThietBi, dsHieTai;
+    private DefaultTableModel dtm;
+    private ThietBiService thietBiService;
 
     public AdminThietBi() {
         initComponents();
-        
+        dtm = (DefaultTableModel) tbThietBi.getModel();
+        thietBiService = new ThietBiService();
         myInit();
     }
-    
-        private void myInit(){
-        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg",45, 45));
-        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg",45, 45));
-        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg",45, 45));
-        btExcel.setIcon(new FlatSVGIcon("./views/icon/svg/excel.svg",45, 45));
+
+    private void myInit() {
+        initImage();
+        initTable();
+    }
+
+    private void initImage() {
+        btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg", 45, 45));
+        btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg", 45, 45));
+        btXoa.setIcon(new FlatSVGIcon("./views/icon/svg/delete.svg", 45, 45));
+        btBaoCao.setIcon(new FlatSVGIcon("./views/icon/svg/report.svg", 45, 45));
         lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/devices_black.svg", 40, 40));
+    }
+
+    @Override
+    public void initTable() {
+        dsThietBi = thietBiService.getAll();
+        dsHieTai = dsThietBi;
+        initDataThietBi(dsThietBi);
+    }
+
+    private void initDataThietBi(List<ThietBi> dsThietBiHienTai) {
+        dtm.setRowCount(0);
+        for (ThietBi thietBi : dsThietBiHienTai) {
+            dtm.addRow(new Object[]{
+                thietBi.getMaThietBi(),
+                thietBi.getTenThietBi(),
+                thietBi.getLoaiThietBi(),
+                thietBi.getMaPhongThucHanh(),
+                thietBi.getSoMay(),
+                thietBi.getNgaySuDung(),
+                thietBi.getMoTa(),
+                thietBi.getTinhTrang()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -31,13 +68,14 @@ public class AdminThietBi extends javax.swing.JPanel {
         btSua = new javax.swing.JButton();
         btXoa = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        btExcel = new javax.swing.JButton();
+        btBaoCao = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
         jComboBox1 = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         jComboBox2 = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbThietBi = new javax.swing.JTable();
 
@@ -82,27 +120,31 @@ public class AdminThietBi extends javax.swing.JPanel {
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
-        btExcel.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
-        btExcel.setForeground(new java.awt.Color(0, 0, 0));
-        btExcel.setText("Xuất Excel");
-        btExcel.setFocusable(false);
-        btExcel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btExcel.setIconTextGap(0);
-        btExcel.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(btExcel);
+        btBaoCao.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
+        btBaoCao.setForeground(new java.awt.Color(0, 0, 0));
+        btBaoCao.setText("Báo Cáo");
+        btBaoCao.setFocusable(false);
+        btBaoCao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btBaoCao.setIconTextGap(0);
+        btBaoCao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar1.add(btBaoCao);
 
         jToolBar2.setRollover(true);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         jToolBar2.add(jComboBox1);
         jToolBar2.add(jSeparator2);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         jToolBar2.add(jComboBox2);
         jToolBar2.add(jSeparator3);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
         jToolBar2.add(jComboBox3);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Hiển Thị:");
 
         javax.swing.GroupLayout panelBorder2Layout = new javax.swing.GroupLayout(panelBorder2);
         panelBorder2.setLayout(panelBorder2Layout);
@@ -110,35 +152,54 @@ public class AdminThietBi extends javax.swing.JPanel {
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(25, 25, 25))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder2Layout.createSequentialGroup()
-                        .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)))
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBorder2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
+        tbThietBi.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         tbThietBi.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Thiết Bị", "Tên Thiết Bị", "Loại THiết Bị", "Ngày Sử Dụng", "Mô Tả", "Tình Trạng", "Mã Phòng"
+                "ID", "Tên", "Loại", "Mã Phòng", "Số Máy", "Ngày Sử Dụng", "Mô Tả", "Tình Trạng"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbThietBi);
+        if (tbThietBi.getColumnModel().getColumnCount() > 0) {
+            tbThietBi.getColumnModel().getColumn(0).setPreferredWidth(1);
+            tbThietBi.getColumnModel().getColumn(3).setPreferredWidth(1);
+            tbThietBi.getColumnModel().getColumn(4).setPreferredWidth(1);
+        }
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -189,13 +250,14 @@ public class AdminThietBi extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btExcel;
+    private javax.swing.JButton btBaoCao;
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
