@@ -3,17 +3,21 @@ package views.panel.admin;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import models.NguoiDung;
 import models.ThietBi;
 import services.ThietBiService;
 import views.UserFormInterface;
+import views.models.CurrentUser;
 
 public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
 
     private List<ThietBi> dsThietBi, dsHieTai;
     private DefaultTableModel dtm;
     private ThietBiService thietBiService;
+    private NguoiDung nguoiDung;
 
     public AdminThietBi() {
+        this.nguoiDung = CurrentUser.getNguoiDung();
         initComponents();
         dtm = (DefaultTableModel) tbThietBi.getModel();
         thietBiService = new ThietBiService();
@@ -23,6 +27,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     private void myInit() {
         initImage();
         initTable();
+        initComboBox();
     }
 
     private void initImage() {
@@ -55,6 +60,12 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             });
         }
     }
+    
+    private void initComboBox(){
+        if (!nguoiDung.getLoaiNguoiDung().equals("Admin")){
+            cbDiaDiem.setEnabled(false);
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -70,11 +81,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         jSeparator1 = new javax.swing.JToolBar.Separator();
         btBaoCao = new javax.swing.JButton();
         jToolBar2 = new javax.swing.JToolBar();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbDiaDiem = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbToa = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JToolBar.Separator();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbPhong = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbThietBi = new javax.swing.JTable();
@@ -131,19 +142,19 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
         jToolBar2.setRollover(true);
 
-        jComboBox1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        jToolBar2.add(jComboBox1);
+        cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        jToolBar2.add(cbDiaDiem);
         jToolBar2.add(jSeparator2);
 
-        jComboBox2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        jToolBar2.add(jComboBox2);
+        cbToa.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbToa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        jToolBar2.add(cbToa);
         jToolBar2.add(jSeparator3);
 
-        jComboBox3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
-        jToolBar2.add(jComboBox3);
+        cbPhong.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbPhong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        jToolBar2.add(cbPhong);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -257,9 +268,9 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     private javax.swing.JButton btSua;
     private javax.swing.JButton btThem;
     private javax.swing.JButton btXoa;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> cbDiaDiem;
+    private javax.swing.JComboBox<String> cbPhong;
+    private javax.swing.JComboBox<String> cbToa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;

@@ -6,6 +6,7 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import models.NguoiDung;
+import views.models.CurrentUser;
 import views.models.EventMenuSelected;
 import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;
@@ -13,19 +14,19 @@ import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.AdminTaiKhoan;
+import views.panel.admin.FormTaiKhoan2;
 
 public class AdminMain extends javax.swing.JFrame {
 
-    private static NguoiDung user;
     private final AdminDashBroad dashBroad;
     private final AdminPhong adminPhong;
     private final AdminThietBi adminThietBi;
     private final AdminYeuCau adminYeuCau;
     private final AdminNguoiDung adminNguoiDung;
-    private final AdminTaiKhoan adminTaiKhoan;
+    private final FormTaiKhoan2 adminTaiKhoan;
 
     public AdminMain(NguoiDung user) {
-        AdminMain.user = user;
+        CurrentUser.setNguoiDung(user);
         initComponents();
         pnUserTitle.setNguoiDung(user);
         dashBroad = new AdminDashBroad();
@@ -33,7 +34,7 @@ public class AdminMain extends javax.swing.JFrame {
         adminThietBi = new AdminThietBi();
         adminYeuCau = new AdminYeuCau();
         adminNguoiDung = new AdminNguoiDung();
-        adminTaiKhoan = new AdminTaiKhoan();
+        adminTaiKhoan = new FormTaiKhoan2(CurrentUser.getNguoiDung());
         myInit();
     }
 
@@ -86,10 +87,6 @@ public class AdminMain extends javax.swing.JFrame {
         mainPanel.add(component);
         mainPanel.repaint();
         mainPanel.revalidate();
-    }
-
-    public static NguoiDung getUser() {
-        return AdminMain.user;
     }
 
     @SuppressWarnings("unchecked")
