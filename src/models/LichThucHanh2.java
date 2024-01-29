@@ -9,17 +9,19 @@ public class LichThucHanh2 {
     private Integer MaLichThucHanh;
     private Integer MaNguoiDung;
     private Integer MaPhongThucHanh;
-    private String TietBatDau;
-    private String TietKetTHuc;
+    private String NgayThucHanh;
+    private Integer TietBatDau;
+    private Integer TietKetTHuc;
     private String Mon;
 
     public LichThucHanh2() {
     }
 
-    public LichThucHanh2(Integer MaLichThucHanh, Integer MaNguoiDung, Integer MaPhongThucHanh, String TietBatDau, String TietKetTHuc, String Mon) {
+    public LichThucHanh2(Integer MaLichThucHanh, Integer MaNguoiDung, Integer MaPhongThucHanh, String NgayThucHanh, Integer TietBatDau, Integer TietKetTHuc, String Mon) {
         this.MaLichThucHanh = MaLichThucHanh;
         this.MaNguoiDung = MaNguoiDung;
         this.MaPhongThucHanh = MaPhongThucHanh;
+        this.NgayThucHanh = NgayThucHanh;
         this.TietBatDau = TietBatDau;
         this.TietKetTHuc = TietKetTHuc;
         this.Mon = Mon;
@@ -49,19 +51,27 @@ public class LichThucHanh2 {
         this.MaPhongThucHanh = MaPhongThucHanh;
     }
 
-    public String getTietBatDau() {
+    public String getNgayThucHanh() {
+        return NgayThucHanh;
+    }
+
+    public void setNgayThucHanh(String NgayThucHanh) {
+        this.NgayThucHanh = NgayThucHanh;
+    }
+
+    public Integer getTietBatDau() {
         return TietBatDau;
     }
 
-    public void setTietBatDau(String TietBatDau) {
+    public void setTietBatDau(Integer TietBatDau) {
         this.TietBatDau = TietBatDau;
     }
 
-    public String getTietKetTHuc() {
+    public Integer getTietKetTHuc() {
         return TietKetTHuc;
     }
 
-    public void setTietKetTHuc(String TietKetTHuc) {
+    public void setTietKetTHuc(Integer TietKetTHuc) {
         this.TietKetTHuc = TietKetTHuc;
     }
 
@@ -73,6 +83,5 @@ public class LichThucHanh2 {
         this.Mon = Mon;
     }
 
-    
 
 }
