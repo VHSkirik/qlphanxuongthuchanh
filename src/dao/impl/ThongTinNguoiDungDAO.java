@@ -35,6 +35,8 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
                         rs.getInt("MaThongTin"),
                         rs.getInt("MaNguoiDung"),
                         rs.getString("Hoten"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("NgaySinh"),
                         rs.getString("SoDienThoai"),
                         rs.getString("ChuyenMon"),
                         rs.getString("DiaChi")
@@ -54,13 +56,16 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
 
     try {
         Connection c = Jdbc.getConnection();
-        String query = "INSERT INTO thongtinnguoidung (MaNguoiDung, Hoten, SoDienThoai, ChuyenMon, DiaChi) VALUES (?, ?, ?, ?, ?)";
+        String query = "INSERT INTO thongtinnguoidung (MaNguoiDung, Hoten, GioiTinh, NgaySinh,  SoDienThoai, ChuyenMon, DiaChi) VALUES (?, ?, ?, ?, ?,?,?)";
         PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         stm.setInt(1, thongTinNguoiDung.getMaNguoiDung());
         stm.setString(2, thongTinNguoiDung.getHoten());
-        stm.setString(3, thongTinNguoiDung.getSoDienThoai());
-        stm.setString(4, thongTinNguoiDung.getChuyenMon());
-        stm.setString(5, thongTinNguoiDung.getDiaChi());
+        stm.setString(3, thongTinNguoiDung.getGioiTinh());
+        stm.setString(4, thongTinNguoiDung.getNgaySinh());
+
+        stm.setString(5, thongTinNguoiDung.getSoDienThoai());
+        stm.setString(6, thongTinNguoiDung.getChuyenMon());
+        stm.setString(7, thongTinNguoiDung.getDiaChi());
         rs = stm.executeUpdate();
 
         if (rs != -1) {
@@ -84,14 +89,16 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE thongtinnguoidung SET MaNguoiDung = ?, Hoten = ?, SoDienThoai = ?, ChuyenMon = ?, DiaChi = ? WHERE MaThongTin = ?";
+            String query = "UPDATE thongtinnguoidung SET MaNguoiDung = ?, Hoten = ?,GioiTinh = ?, NgaySinh = ?, SoDienThoai = ?, ChuyenMon = ?, DiaChi = ? WHERE MaThongTin = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, thongTinNguoiDung.getMaNguoiDung());
             stm.setString(2, thongTinNguoiDung.getHoten());
-            stm.setString(3, thongTinNguoiDung.getSoDienThoai());
-            stm.setString(4, thongTinNguoiDung.getChuyenMon());
-            stm.setString(5, thongTinNguoiDung.getDiaChi());
-            stm.setInt(6, id);
+            stm.setString(3, thongTinNguoiDung.getGioiTinh());
+            stm.setString(4, thongTinNguoiDung.getNgaySinh());
+            stm.setString(5, thongTinNguoiDung.getSoDienThoai());
+            stm.setString(6, thongTinNguoiDung.getChuyenMon());
+            stm.setString(7, thongTinNguoiDung.getDiaChi());
+            stm.setInt(8, id);
             rs = stm.executeUpdate();
             Jdbc.closeConnection(c);
         } catch (SQLException var7) {
@@ -132,6 +139,8 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
                         rs.getInt("MaThongTin"),
                         rs.getInt("MaNguoiDung"),
                         rs.getString("Hoten"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("NgaySinh"),
                         rs.getString("SoDienThoai"),
                         rs.getString("ChuyenMon"),
                         rs.getString("DiaChi")
@@ -162,6 +171,9 @@ public class ThongTinNguoiDungDAO implements DAOInterface<ThongTinNguoiDung> {
                         rs.getInt("MaThongTin"),
                         rs.getInt("MaNguoiDung"),
                         rs.getString("Hoten"),
+                        rs.getString("GioiTinh"),
+                        rs.getString("NgaySinh"),
+
                         rs.getString("SoDienThoai"),
                         rs.getString("ChuyenMon"),
                         rs.getString("DiaChi")

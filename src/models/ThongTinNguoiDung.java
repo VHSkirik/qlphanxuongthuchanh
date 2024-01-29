@@ -6,6 +6,8 @@ public class ThongTinNguoiDung {
     private Integer MaNguoiDung;
     private String Hoten;
     //gioi tinh
+    private String GioiTinh;
+    private String NgaySinh;
     //ngay sinh
     private String SoDienThoai;
     private String ChuyenMon;
@@ -14,10 +16,12 @@ public class ThongTinNguoiDung {
     public ThongTinNguoiDung() {
     }
 
-    public ThongTinNguoiDung(Integer MaThongTin, Integer MaNguoiDung, String Hoten, String SoDienThoai, String ChuyenMon, String DiaChi) {
+    public ThongTinNguoiDung(Integer MaThongTin, Integer MaNguoiDung, String Hoten, String GioiTinh, String NgaySinh, String SoDienThoai, String ChuyenMon, String DiaChi) {
         this.MaThongTin = MaThongTin;
         this.MaNguoiDung = MaNguoiDung;
         this.Hoten = Hoten;
+        this.GioiTinh = GioiTinh;
+        this.NgaySinh = NgaySinh;
         this.SoDienThoai = SoDienThoai;
         this.ChuyenMon = ChuyenMon;
         this.DiaChi = DiaChi;
@@ -47,6 +51,22 @@ public class ThongTinNguoiDung {
         this.Hoten = Hoten;
     }
 
+    public String getGioiTinh() {
+        return GioiTinh;
+    }
+
+    public void setGioiTinh(String GioiTinh) {
+        this.GioiTinh = GioiTinh;
+    }
+
+    public String getNgaySinh() {
+        return NgaySinh;
+    }
+
+    public void setNgaySinh(String NgaySinh) {
+        this.NgaySinh = NgaySinh;
+    }
+
     public String getSoDienThoai() {
         return SoDienThoai;
     }
@@ -70,5 +90,7 @@ public class ThongTinNguoiDung {
     public void setDiaChi(String DiaChi) {
         this.DiaChi = DiaChi;
     }
+
+   
 
 }

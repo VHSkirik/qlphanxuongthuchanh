@@ -3,18 +3,16 @@ package models;
 public class PhanHoi {
 
     private Integer MaPhanHoi;
-    private Integer MaNguoiDung;
-    private Integer MaPhongThucHanh;
+    private Integer MaLichThucHanh;
     private String NoiDung;
     private Integer DiemDanhGia;
 
     public PhanHoi() {
     }
 
-    public PhanHoi(Integer MaPhanHoi, Integer MaNguoiDung, Integer MaPhongThucHanh, String NoiDung, Integer DiemDanhGia) {
+    public PhanHoi(Integer MaPhanHoi, Integer MaLichThucHanh, String NoiDung, Integer DiemDanhGia) {
         this.MaPhanHoi = MaPhanHoi;
-        this.MaNguoiDung = MaNguoiDung;
-        this.MaPhongThucHanh = MaPhongThucHanh;
+        this.MaLichThucHanh = MaLichThucHanh;
         this.NoiDung = NoiDung;
         this.DiemDanhGia = DiemDanhGia;
     }
@@ -27,20 +25,12 @@ public class PhanHoi {
         this.MaPhanHoi = MaPhanHoi;
     }
 
-    public Integer getMaNguoiDung() {
-        return MaNguoiDung;
+    public Integer getMaLichThucHanh() {
+        return MaLichThucHanh;
     }
 
-    public void setMaNguoiDung(Integer MaNguoiDung) {
-        this.MaNguoiDung = MaNguoiDung;
-    }
-
-    public Integer getMaPhongThucHanh() {
-        return MaPhongThucHanh;
-    }
-
-    public void setMaPhongThucHanh(Integer MaPhongThucHanh) {
-        this.MaPhongThucHanh = MaPhongThucHanh;
+    public void setMaLichThucHanh(Integer MaLichThucHanh) {
+        this.MaLichThucHanh = MaLichThucHanh;
     }
 
     public String getNoiDung() {
@@ -58,5 +48,7 @@ public class PhanHoi {
     public void setDiemDanhGia(Integer DiemDanhGia) {
         this.DiemDanhGia = DiemDanhGia;
     }
+    
+    
 
 }

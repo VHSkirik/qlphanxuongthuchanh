@@ -7,7 +7,7 @@ import java.util.List;
 
     public class NguoiDungService {
 
-        public OperationResult createNguoiDung(Integer MaNguoiDung, String TenDangNhap, String MatKhau, String Email, String LoaiNguoiDung) {
+        public OperationResult createNguoiDung(Integer MaNguoiDung, String TenDangNhap, String MatKhau, String Email, String LoaiNguoiDung, String CoSo) {
             // Kiểm tra trống
             if (TenDangNhap.isBlank() || MatKhau.isBlank() || Email.isBlank() || LoaiNguoiDung.isBlank()) {
                 return OperationResult.ADD_FAILURE;
@@ -15,14 +15,14 @@ import java.util.List;
                 if (NguoiDungDAO.getIns().findOne(MaNguoiDung) != null) {
                     return OperationResult.ADD_FAILURE;
                 } else {
-                    NguoiDung nguoiDung = new NguoiDung(MaNguoiDung, TenDangNhap, MatKhau, Email, LoaiNguoiDung);
+                    NguoiDung nguoiDung = new NguoiDung(MaNguoiDung, TenDangNhap, MatKhau, Email, LoaiNguoiDung, CoSo);
                     int result = NguoiDungDAO.getIns().create(nguoiDung);
                     return (result == -1) ? OperationResult.ADD_FAILURE : OperationResult.ADD_SUCCESS;
                 }
             }
         }
 
-        public OperationResult updateNguoiDung(Integer MaNguoiDung, String TenDangNhap, String MatKhau, String Email, String LoaiNguoiDung) {
+        public OperationResult updateNguoiDung(Integer MaNguoiDung, String TenDangNhap, String MatKhau, String Email, String LoaiNguoiDung, String CoSo) {
             // Kiểm tra trống
             if (TenDangNhap.isBlank() || MatKhau.isBlank() || Email.isBlank() || LoaiNguoiDung.isBlank()) {
                 return OperationResult.EDIT_FAILURE;
@@ -30,7 +30,7 @@ import java.util.List;
                 if (NguoiDungDAO.getIns().findOne(MaNguoiDung) == null) {
                     return OperationResult.EDIT_FAILURE;
                 } else {
-                    NguoiDung nguoiDung = new NguoiDung(MaNguoiDung, TenDangNhap, MatKhau, Email, LoaiNguoiDung);
+                    NguoiDung nguoiDung = new NguoiDung(MaNguoiDung, TenDangNhap, MatKhau, Email, LoaiNguoiDung,CoSo);
                     int result = NguoiDungDAO.getIns().update(nguoiDung, MaNguoiDung);
                     return (result == -1) ? OperationResult.EDIT_FAILURE : OperationResult.EDIT_SUCCESS;
                 }
