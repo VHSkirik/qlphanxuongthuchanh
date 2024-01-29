@@ -32,12 +32,14 @@ public class FormTaiKhoan extends javax.swing.JPanel {
             txtTaiKhoan.setText(nguoiDung.getTenDangNhap());
             txtMatKhau.setText(nguoiDung.getMatKhau());
             txtEmail.setText(nguoiDung.getEmail());
+            txtCoSo.setText(nguoiDung.getCoSo());
             txtVaiTro.setText(nguoiDung.getLoaiNguoiDung());
         }
 
         if (thongTinNguoiDung != null) {
             txtHoTen.setText(thongTinNguoiDung.getHoten());
-            txtNgaySinh.setText("");
+            txtNgaySinh.setText(thongTinNguoiDung.getNgaySinh());
+            cbGioiTinh.setSelectedItem(thongTinNguoiDung.getGioiTinh());
             txtSoDienThoai.setText(thongTinNguoiDung.getSoDienThoai());
             txtChuyenMon.setText(thongTinNguoiDung.getChuyenMon());
             txtDiaChi.setText(thongTinNguoiDung.getDiaChi());
@@ -45,6 +47,7 @@ public class FormTaiKhoan extends javax.swing.JPanel {
     }
 
     private void setState(Boolean state) {
+        cbGioiTinh.setEnabled(state);
         txtEmail.setEnabled(state);
         txtMatKhau.setEnabled(state);
         txtHoTen.setEnabled(state);
@@ -67,8 +70,7 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        txtVaiTro = new javax.swing.JTextField();
+        txtCoSo = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -85,6 +87,8 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         txtDiaChi = new javax.swing.JTextField();
         btCapNhat = new javax.swing.JButton();
         btHuy = new javax.swing.JButton();
+        txtVaiTro = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
 
         panelBorder1.setBackground(new java.awt.Color(234, 234, 234));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,21 +139,15 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel4.setText("Email");
-        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 123, -1));
+        jLabel4.setText("Cơ Sở");
+        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 123, -1));
 
-        jLabel5.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel5.setText("Vai Trò");
-        panelBorder1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 123, -1));
-
-        txtVaiTro.setBackground(new java.awt.Color(255, 255, 255));
-        txtVaiTro.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
-        txtVaiTro.setForeground(new java.awt.Color(0, 0, 0));
-        txtVaiTro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtVaiTro.setEnabled(false);
-        panelBorder1.add(txtVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 148, 35));
+        txtCoSo.setBackground(new java.awt.Color(255, 255, 255));
+        txtCoSo.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
+        txtCoSo.setForeground(new java.awt.Color(0, 0, 0));
+        txtCoSo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtCoSo.setEnabled(false);
+        panelBorder1.add(txtCoSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 130, 35));
         panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 270, 746, 8));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -202,7 +200,7 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         txtSoDienThoai.setEnabled(false);
         panelBorder1.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 296, 35));
 
-        cbGioiTinh.setBackground(new java.awt.Color(60, 63, 65));
+        cbGioiTinh.setBackground(new java.awt.Color(255, 255, 255));
         cbGioiTinh.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         cbGioiTinh.setForeground(new java.awt.Color(0, 0, 0));
         cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
@@ -252,6 +250,19 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         });
         panelBorder1.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, 130, 35));
 
+        txtVaiTro.setBackground(new java.awt.Color(255, 255, 255));
+        txtVaiTro.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
+        txtVaiTro.setForeground(new java.awt.Color(0, 0, 0));
+        txtVaiTro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtVaiTro.setEnabled(false);
+        panelBorder1.add(txtVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 220, 130, 35));
+
+        jLabel13.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel13.setText("Email");
+        panelBorder1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 123, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -273,25 +284,26 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         String matKhau = txtMatKhau.getText();
         String email = txtEmail.getText();
         String HoTen = txtHoTen.getText();
-//        String ngaySinh = txtNgaySinh.getText();
+        String ngaySinh = txtNgaySinh.getText();
+        String gioiTinh = cbGioiTinh.getSelectedItem().toString();
         String soDienThoai = txtSoDienThoai.getText();
         String chuyenMon = txtChuyenMon.getText();
         String diaChi = txtDiaChi.getText();
-        
-        if (matKhau.isBlank() || email.isBlank() || HoTen.isBlank() || soDienThoai.isBlank() || chuyenMon.isBlank() || diaChi.isBlank()){
-            JOptionPane.showMessageDialog(this, "Chưa Nhập Đủ Thông Tin.");
-            return;
-        }
-        
+
         if (btCapNhat.getText().equals("Xác Nhận")) {
+            if (matKhau.isBlank() || email.isBlank() || HoTen.isBlank() || ngaySinh.isBlank() || soDienThoai.isBlank() || chuyenMon.isBlank() || diaChi.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Chưa Nhập Đủ Thông Tin.");
+                return;
+            }
+
             int rs = JOptionPane.showConfirmDialog(this, "Xác Nhận Thay Đổi?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
             if (rs == JOptionPane.YES_OPTION) {
                 NguoiDungService nguoiDungService = new NguoiDungService();
                 ThongTinNguoiDungService thongTinNguoiDungService = new ThongTinNguoiDungService();
-                
-                OperationResult os1 = nguoiDungService.updateNguoiDung(nguoiDung.getMaNguoiDung(), txtTaiKhoan.getText(), matKhau, email, txtVaiTro.getText());
-                OperationResult os2 = thongTinNguoiDungService.updateThongTinNguoiDung(thongTinNguoiDung.getMaThongTin(), thongTinNguoiDung.getMaNguoiDung(), HoTen, soDienThoai, chuyenMon, diaChi);
-                
+
+                OperationResult os1 = nguoiDungService.updateNguoiDung(nguoiDung.getMaNguoiDung(), txtTaiKhoan.getText(), matKhau, email, txtVaiTro.getText(), txtCoSo.getText());
+                OperationResult os2 = thongTinNguoiDungService.updateThongTinNguoiDung(thongTinNguoiDung.getMaThongTin(), thongTinNguoiDung.getMaNguoiDung(), HoTen, gioiTinh, ngaySinh, soDienThoai, chuyenMon, diaChi);
+
                 if (os1.isSuccess() && os2.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Cập Nhật Thành Công.");
                     CurrentUser.setNguoiDung(nguoiDungService.get("MaNguoiDung", nguoiDung.getMaNguoiDung() + "").get(0));
@@ -324,10 +336,10 @@ public class FormTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -336,6 +348,7 @@ public class FormTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JTextField txtChuyenMon;
+    private javax.swing.JTextField txtCoSo;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtHoTen;
