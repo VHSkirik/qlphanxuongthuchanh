@@ -96,7 +96,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
     int rs = -1;
 
     try {Connection c = Jdbc.getConnection();
-        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, NgayThucHanh = ?,TietBatDau = ?, TietKetThuc = ?,  MonHoc = ?, TrangThai = ?, NgayTao = CURRENT_TIMESTAMP WHERE MaYeuCau = ?";
+        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, NgayThucHanh = ?,TietBatDau = ?, TietKetThuc = ?,  MonHoc = ?, TrangThai = ?, NgayTao = ? WHERE MaYeuCau = ?";
         PreparedStatement stm = c.prepareStatement(query);
         stm.setInt(1, datPhong.getMaNguoiDung());
         stm.setInt(2, datPhong.getMaPhongThucHanh());
@@ -105,7 +105,8 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
         stm.setInt(5, datPhong.getTietKetThuc());
         stm.setString(6, datPhong.getMonHoc());
         stm.setString(7, datPhong.getTrangThai());
-        stm.setInt(8, id);
+        stm.setString(8, datPhong.getNgayTao());
+        stm.setInt(9, id);
         rs = stm.executeUpdate();
         Jdbc.closeConnection(c);
     } catch (SQLException var7) {

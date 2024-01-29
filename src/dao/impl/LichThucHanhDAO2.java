@@ -57,14 +57,14 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "INSERT INTO lichthuchanh2 (MaNguoiDung, MaPhongThucHanh,NgayThucHanh, TietBatDau, TietKetTHuc, Mon) VALUES (?,?, ?, ?, ?, ?)";
+            String query = "INSERT INTO lichthuchanh (MaNguoiDung, MaPhongThucHanh,NgayThucHanh, TietBatDau, TietKetTHuc, MonHoc) VALUES (?,?, ?, ?, ?, ?)";
             PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setInt(1, lichThucHanh.getMaNguoiDung());
             stm.setInt(2, lichThucHanh.getMaPhongThucHanh());
             stm.setString(3, lichThucHanh.getNgayThucHanh());
-            stm.setInt(3, lichThucHanh.getTietBatDau());
-            stm.setInt(4, lichThucHanh.getTietKetTHuc());
-            stm.setString(5, lichThucHanh.getMon());
+            stm.setInt(4, lichThucHanh.getTietBatDau());
+            stm.setInt(5, lichThucHanh.getTietKetTHuc());
+            stm.setString(6, lichThucHanh.getMon());
             rs = stm.executeUpdate();
             if (rs != -1) {
                 ResultSet generatedKeys = stm.getGeneratedKeys();
@@ -186,7 +186,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh2 lth " +
+            String query = "SELECT * FROM lichthuchanh lth " +
                            "JOIN datphong dp ON lth.MaPhongThucHanh = dp.MaPhongThucHanh " +
                            "AND lth.NgayThucHanh = dp.NgayThucHanh " +
                            "AND lth.TietBatDau <= dp.TietKetThuc " +
@@ -206,7 +206,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getString("NgayThucHanh"),
                         rs.getInt("TietBatDau"),
                         rs.getInt("TietKetThuc"),
-                        rs.getString("Mon")
+                        rs.getString("MonHoc")
                 );
                 overlappingLichThucHanhList.add(lichThucHanh);
             }
