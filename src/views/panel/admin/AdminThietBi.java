@@ -131,14 +131,17 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
         jToolBar2.setRollover(true);
 
+        jComboBox1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         jToolBar2.add(jComboBox1);
         jToolBar2.add(jSeparator2);
 
+        jComboBox2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
         jToolBar2.add(jComboBox2);
         jToolBar2.add(jSeparator3);
 
+        jComboBox3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
         jToolBar2.add(jComboBox3);
 
@@ -155,9 +158,9 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(31, 31, 31))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
