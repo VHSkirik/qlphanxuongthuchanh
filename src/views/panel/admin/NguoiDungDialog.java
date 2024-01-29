@@ -56,6 +56,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
         lbMatKhau.setText(nguoiDung.getMatKhau());
         lbEmail.setText(nguoiDung.getEmail());
         cbLoaiND.setSelectedItem(nguoiDung.getLoaiNguoiDung());
+        cbCoSo.setSelectedItem(nguoiDung.getCoSo());
     }
 
     @SuppressWarnings("unchecked")
@@ -75,6 +76,8 @@ public class NguoiDungDialog extends javax.swing.JDialog {
         cbLoaiND = new javax.swing.JComboBox<>();
         btHuy = new javax.swing.JButton();
         btThem = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cbCoSo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -148,7 +151,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
                 btHuyActionPerformed(evt);
             }
         });
-        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 400, 150, 40));
+        pnMain.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 150, 40));
 
         btThem.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btThem.setForeground(new java.awt.Color(25, 118, 211));
@@ -160,7 +163,16 @@ public class NguoiDungDialog extends javax.swing.JDialog {
                 btThemActionPerformed(evt);
             }
         });
-        pnMain.add(btThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 150, 40));
+        pnMain.add(btThem, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 150, 40));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel6.setText("Cơ sở");
+        pnMain.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 140, 20));
+
+        cbCoSo.setFont(new java.awt.Font("JetBrains Mono NL Light", 0, 14)); // NOI18N
+        cbCoSo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minh Khai", "Lĩnh Nam", "Mỹ Xá" }));
+        pnMain.add(cbCoSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 330, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,7 +182,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnMain, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnMain, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
         );
 
         pack();
@@ -189,6 +201,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
             String matKhau = lbMatKhau.getText().trim();
             String email = lbEmail.getText().trim();
             String loaiND = cbLoaiND.getSelectedItem().toString();
+            String coSo = cbCoSo.getSelectedItem().toString();
 
             if (tenDangNhap.isBlank() || matKhau.isBlank() || email.isBlank() || loaiND.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
@@ -198,7 +211,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
             NguoiDungService nguoiDungService = new NguoiDungService();
 
             if (function.equals("CREATE")) {
-                OperationResult rs = nguoiDungService.createNguoiDung(-1, tenDangNhap, matKhau, email, loaiND);
+                OperationResult rs = nguoiDungService.createNguoiDung(-1, tenDangNhap, matKhau, email, loaiND, coSo);
                 if (rs.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Thêm Thành Công.");
                     this.dispose();
@@ -208,7 +221,7 @@ public class NguoiDungDialog extends javax.swing.JDialog {
                 }
             } else {
                 //edit
-                OperationResult rs = nguoiDungService.updateNguoiDung(nguoiDung.getMaNguoiDung(), tenDangNhap, matKhau, email, loaiND);
+                OperationResult rs = nguoiDungService.updateNguoiDung(nguoiDung.getMaNguoiDung(), tenDangNhap, matKhau, email, loaiND, coSo);
                 if (rs.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Sửa Thành Công.");
                     this.dispose();
@@ -224,11 +237,13 @@ public class NguoiDungDialog extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btHuy;
     private javax.swing.JButton btThem;
+    private javax.swing.JComboBox<String> cbCoSo;
     private javax.swing.JComboBox<String> cbLoaiND;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField lbEmail;
     private javax.swing.JTextField lbMatKhau;
     private javax.swing.JTextField lbTenDangNhap;
