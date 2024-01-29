@@ -13,28 +13,14 @@ import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
-import views.panel.admin.AdminTaiKhoan;
 import views.panel.admin.FormTaiKhoan2;
 
 public class AdminMain extends javax.swing.JFrame {
-
-    private final AdminDashBroad dashBroad;
-    private final AdminPhong adminPhong;
-    private final AdminThietBi adminThietBi;
-    private final AdminYeuCau adminYeuCau;
-    private final AdminNguoiDung adminNguoiDung;
-    private final FormTaiKhoan2 adminTaiKhoan;
 
     public AdminMain(NguoiDung user) {
         CurrentUser.setNguoiDung(user);
         initComponents();
         pnUserTitle.setNguoiDung(user);
-        dashBroad = new AdminDashBroad();
-        adminPhong = new AdminPhong();
-        adminThietBi = new AdminThietBi();
-        adminYeuCau = new AdminYeuCau();
-        adminNguoiDung = new AdminNguoiDung();
-        adminTaiKhoan = new FormTaiKhoan2(CurrentUser.getNguoiDung());
         myInit();
     }
 
@@ -46,22 +32,22 @@ public class AdminMain extends javax.swing.JFrame {
             public void selected(int index) {
                 switch (index) {
                     case 1:
-                        setMainPanel(dashBroad);
+                        setMainPanel(new AdminDashBroad());
                         break;
                     case 2:
-                        setMainPanel(adminPhong);
+                        setMainPanel(new AdminPhong());
                         break;
                     case 3:
-                        setMainPanel(adminThietBi);
+                        setMainPanel(new AdminThietBi());
                         break;
                     case 4:
-                        setMainPanel(adminNguoiDung);
+                        setMainPanel(new AdminNguoiDung());
                         break;
                     case 5:
-                        setMainPanel(adminYeuCau);
+                        setMainPanel(new AdminYeuCau());
                         break;
                     case 9:
-                        setMainPanel(adminTaiKhoan);
+                        setMainPanel(new FormTaiKhoan2(CurrentUser.getNguoiDung()));
                         break;
                     case 10:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
@@ -79,7 +65,7 @@ public class AdminMain extends javax.swing.JFrame {
                 }
             }
         });
-        setMainPanel(dashBroad);
+        setMainPanel(new AdminDashBroad());
     }
 
     private void setMainPanel(JComponent component) {
