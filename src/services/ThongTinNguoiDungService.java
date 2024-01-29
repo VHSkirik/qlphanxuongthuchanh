@@ -8,7 +8,7 @@ import models.ThongTinNguoiDung;
 
 public class ThongTinNguoiDungService {
     
-    public OperationResult createThongTinNguoiDung(int maNguoiDung, String hoTen, String soDienThoai, String chuyenMon, String diaChi) {
+    public OperationResult createThongTinNguoiDung(int maNguoiDung, String hoTen,String gioiTinh, String ngaySinh, String soDienThoai, String chuyenMon, String diaChi) {
     // Kiểm tra trống
     if (hoTen.isBlank() || soDienThoai.isBlank() || chuyenMon.isBlank() || diaChi.isBlank()) {
         return OperationResult.ADD_FAILURE;
@@ -16,7 +16,7 @@ public class ThongTinNguoiDungService {
         if (NguoiDungDAO.getIns().findOne(maNguoiDung) == null) 
                     return OperationResult.ADD_FAILURE;
         else {
-        ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung(null, maNguoiDung, hoTen, soDienThoai, chuyenMon, diaChi);
+        ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung(null, maNguoiDung, hoTen,gioiTinh, ngaySinh, soDienThoai, chuyenMon, diaChi);
         int result = ThongTinNguoiDungDAO.getIns().create(thongTinNguoiDung);
 
         return (result == -1) ? OperationResult.ADD_FAILURE : OperationResult.ADD_SUCCESS;
@@ -25,7 +25,7 @@ public class ThongTinNguoiDungService {
 }
 
 
-    public OperationResult updateThongTinNguoiDung(int maThongTin, int maNguoiDung, String hoTen, String soDienThoai, String chuyenMon, String diaChi) {
+    public OperationResult updateThongTinNguoiDung(int maThongTin, int maNguoiDung, String hoTen,String gioiTinh, String ngaySinh, String soDienThoai, String chuyenMon, String diaChi) {
         // Kiểm tra trống
         if (hoTen.isBlank() || soDienThoai.isBlank() || chuyenMon.isBlank() || diaChi.isBlank()) {
             return OperationResult.EDIT_FAILURE;
@@ -36,7 +36,7 @@ public class ThongTinNguoiDungService {
                     return OperationResult.ADD_FAILURE;
             
         else {
-            ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung(maThongTin, maNguoiDung, hoTen, soDienThoai, chuyenMon, diaChi);
+            ThongTinNguoiDung thongTinNguoiDung = new ThongTinNguoiDung(maThongTin, maNguoiDung, hoTen,gioiTinh, ngaySinh, soDienThoai, chuyenMon, diaChi);
             int result = ThongTinNguoiDungDAO.getIns().update(thongTinNguoiDung, maThongTin);
             return (result == -1) ? OperationResult.EDIT_FAILURE : OperationResult.EDIT_SUCCESS;
         }

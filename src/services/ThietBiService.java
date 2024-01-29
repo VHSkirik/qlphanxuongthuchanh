@@ -43,7 +43,7 @@ public class ThietBiService {
             if (ThietBiDAO.getIns().findOne(MaThietBi) == null) {
                 return OperationResult.EDIT_FAILURE;
             } 
-            else if(ThietBiDAO.getIns().findOneBySoMay(MaThietBi) != null) {
+            else if(ThietBiDAO.getIns().findOneBySoMay(SoMay) != null) {
                 return OperationResult.EDIT_FAILURE;
             }
             else {
