@@ -1,6 +1,11 @@
 package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import dao.impl.PhongThucHanhDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
@@ -28,6 +33,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         initImage();
         initTable();
         initComboBox();
+        initEvent();
     }
 
     private void initImage() {
@@ -60,10 +66,39 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             });
         }
     }
-    
-    private void initComboBox(){
-        if (!nguoiDung.getLoaiNguoiDung().equals("Admin")){
+
+    private void initComboBox() {
+        cbDiaDiem.addItem("Lĩnh Nam");
+        cbDiaDiem.addItem("Minh Khai");
+        cbDiaDiem.addItem("Mỹ Xá");
+        if (!nguoiDung.getLoaiNguoiDung().equals("Admin")) {
             cbDiaDiem.setEnabled(false);
+        }
+    }
+
+    private void initEvent() {
+
+    }
+
+    private void initDataToaNha() {
+        cbToaNha.removeAllItems();
+        cbToaNha.addItem("Tất Cả");
+        cbToaNha.setSelectedIndex(0);
+        if (cbDiaDiem.getSelectedIndex() != 0) {
+            List<String> dsToa = PhongThucHanhDAO.getIns().findToaByDiaDiem(cbDiaDiem.getSelectedItem() + "");
+            System.out.println(dsToa);
+            for (String toa : dsToa) {
+                cbToaNha.addItem(toa);
+            }
+        }
+    }
+
+    private void initDataPhong() {
+        cbPhong.removeAllItems();
+        cbPhong.addItem("Tất Cả");
+        cbPhong.setSelectedIndex(0);
+        if (cbToaNha.getSelectedIndex() != 0){
+            
         }
     }
 
@@ -83,7 +118,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         jToolBar2 = new javax.swing.JToolBar();
         cbDiaDiem = new javax.swing.JComboBox<>();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        cbToa = new javax.swing.JComboBox<>();
+        cbToaNha = new javax.swing.JComboBox<>();
         jSeparator3 = new javax.swing.JToolBar.Separator();
         cbPhong = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -110,6 +145,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         btThem.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btThem.setIconTextGap(0);
         btThem.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThemActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btThem);
 
         btSua.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -144,12 +184,22 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
         cbDiaDiem.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         cbDiaDiem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
+        cbDiaDiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDiaDiemActionPerformed(evt);
+            }
+        });
         jToolBar2.add(cbDiaDiem);
         jToolBar2.add(jSeparator2);
 
-        cbToa.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        cbToa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất cả" }));
-        jToolBar2.add(cbToa);
+        cbToaNha.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbToaNha.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        cbToaNha.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbToaNhaItemStateChanged(evt);
+            }
+        });
+        jToolBar2.add(cbToaNha);
         jToolBar2.add(jSeparator3);
 
         cbPhong.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
@@ -262,6 +312,21 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        if (cbPhong.getSelectedIndex() != 0 && cbPhong.getSelectedItem() != null) {
+
+        }
+    }//GEN-LAST:event_btThemActionPerformed
+
+    private void cbDiaDiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDiaDiemActionPerformed
+        initDataToaNha();
+    }//GEN-LAST:event_cbDiaDiemActionPerformed
+
+    private void cbToaNhaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbToaNhaItemStateChanged
+        if (cbDiaDiem.getSelectedItem() != null)
+            initDataPhong();
+    }//GEN-LAST:event_cbToaNhaItemStateChanged
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBaoCao;
@@ -270,7 +335,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     private javax.swing.JButton btXoa;
     private javax.swing.JComboBox<String> cbDiaDiem;
     private javax.swing.JComboBox<String> cbPhong;
-    private javax.swing.JComboBox<String> cbToa;
+    private javax.swing.JComboBox<String> cbToaNha;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
