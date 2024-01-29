@@ -2,6 +2,8 @@ package views;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -13,7 +15,7 @@ import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
-import views.panel.admin.FormTaiKhoan2;
+import views.panel.admin.FormTaiKhoan;
 
 public class AdminMain extends javax.swing.JFrame {
 
@@ -26,6 +28,10 @@ public class AdminMain extends javax.swing.JFrame {
 
     private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
+        JButton button = pnUserTitle.getButtonThongBao();
+        button.addMouseListener(new MouseAdapter(){
+        
+        });
         menu.initMoving(AdminMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
@@ -47,7 +53,7 @@ public class AdminMain extends javax.swing.JFrame {
                         setMainPanel(new AdminYeuCau());
                         break;
                     case 9:
-                        setMainPanel(new FormTaiKhoan2(CurrentUser.getNguoiDung()));
+                        setMainPanel(new FormTaiKhoan());
                         break;
                     case 10:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
