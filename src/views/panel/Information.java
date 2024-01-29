@@ -1,11 +1,6 @@
 package views.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import models.NguoiDung;
 import models.ThongTinNguoiDung;
 import services.ThongTinNguoiDungService;
