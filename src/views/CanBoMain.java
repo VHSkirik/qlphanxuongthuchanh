@@ -16,12 +16,14 @@ public class CanBoMain extends javax.swing.JFrame {
     public CanBoMain(NguoiDung user) {
         CurrentUser.setNguoiDung(user);
         initComponents();
+        pnInfor.setNguoiDung(user);
         myInit();
     }
 
     private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(CanBoMain.this);
+        pnInfor.getButtonThongBao().setVisible(false);
         menu.addEventMenuSelected(new EventMenuSelected() {
             @Override
             public void selected(int index) {
@@ -73,7 +75,7 @@ public class CanBoMain extends javax.swing.JFrame {
 
         panelBorder1 = new views.panel.PanelBorder();
         menu = new views.panel.CanBoMenu();
-        information1 = new views.panel.Information();
+        pnInfor = new views.panel.Information();
         mainPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,7 +83,7 @@ public class CanBoMain extends javax.swing.JFrame {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        information1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pnInfor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         mainPanel.setLayout(new java.awt.BorderLayout());
 
@@ -94,7 +96,7 @@ public class CanBoMain extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(information1, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
+                        .addComponent(pnInfor, javax.swing.GroupLayout.DEFAULT_SIZE, 963, Short.MAX_VALUE)
                         .addGap(16, 16, 16))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -105,7 +107,7 @@ public class CanBoMain extends javax.swing.JFrame {
             .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 701, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(information1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnInfor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -128,9 +130,9 @@ public class CanBoMain extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private views.panel.Information information1;
     private javax.swing.JPanel mainPanel;
     private views.panel.CanBoMenu menu;
     private views.panel.PanelBorder panelBorder1;
+    private views.panel.Information pnInfor;
     // End of variables declaration//GEN-END:variables
 }

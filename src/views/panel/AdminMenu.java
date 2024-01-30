@@ -37,6 +37,7 @@ public class AdminMenu extends javax.swing.JPanel {
         listMenu.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("error", "Báo Cáo Lỗi", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("feedback", "Phản Hồi", Model_Menu.MenuType.MENU));
+                listMenu.addItem(new Model_Menu("5", "Thống Kê", Model_Menu.MenuType.MENU));
 
         listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));

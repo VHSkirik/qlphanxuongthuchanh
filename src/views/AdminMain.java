@@ -17,6 +17,7 @@ import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.FormTaiKhoan;
+import views.panel.canbo.FormThongKe;
 
 public class AdminMain extends javax.swing.JFrame {
 
@@ -56,17 +57,20 @@ public class AdminMain extends javax.swing.JFrame {
                     case 5:
                         setMainPanel(new AdminYeuCau());
                         break;
-                    case 10:
-                        setMainPanel(new FormTaiKhoan());
+                    case 8:
+                        setMainPanel(new FormThongKe());
                         break;
                     case 11:
+                        setMainPanel(new FormTaiKhoan());
+                        break;
+                    case 12:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             AdminMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 14:
+                    case 15:
                         int checkExit = JOptionPane.showConfirmDialog(AdminMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
