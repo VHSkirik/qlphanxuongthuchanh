@@ -25,7 +25,6 @@ public class GiaoVienMenu extends javax.swing.JPanel {
 
     private void myInit() {
         listMenu1.addItem(new Model_Menu("", "Giáo Viên", Model_Menu.MenuType.TITLE));
-        listMenu1.addItem(new Model_Menu("1", "DashBroad", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("gv2", "Lịch Trình", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("gv4", "Đánh Giá", Model_Menu.MenuType.MENU));
@@ -33,7 +32,6 @@ public class GiaoVienMenu extends javax.swing.JPanel {
 
         listMenu1.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));
         listMenu1.addItem(new Model_Menu("20", "Tài Khoản", Model_Menu.MenuType.MENU));
-        listMenu1.addItem(new Model_Menu("21", "Thông Tin", Model_Menu.MenuType.MENU));
         listMenu1.addItem(new Model_Menu("22", "Đăng Xuất", Model_Menu.MenuType.MENU));
 
         listMenu1.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -76,7 +74,7 @@ public class GiaoVienMenu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        sVGImage1.setSVGImage("./views/icon/svg/0.svg");
+        sVGImage1.setSVGImage("./views/icon/svg/uneti_2.svg");
     }
 
     @SuppressWarnings("unchecked")

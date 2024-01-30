@@ -1,21 +1,30 @@
 package views.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.time.LocalTime;
 import javax.swing.JButton;
+import javax.swing.Timer;
 import models.NguoiDung;
 import models.ThongTinNguoiDung;
 import services.ThongTinNguoiDungService;
 
 public class Information extends PanelBorderHalf {
-    
+
     private NguoiDung nguoiDung;
     private ThongTinNguoiDung thongTinNguoiDung;
-    
+    private Timer timer;
+
     public Information() {
         initComponents();
         lbUserIcon.setIcon(new FlatSVGIcon("./views/icon/svg/admin_2.svg", 63, 63));
+        timer = new Timer(1000, (e) -> {
+            LocalTime currentTime = LocalTime.now();
+            String time = String.format("%02d:%02d:%02d", currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
+            txtTime.setText(time);
+        });
+        timer.start();
     }
-    
+
     private void setUserData() {
         if (nguoiDung == null) {
             return;
@@ -28,17 +37,17 @@ public class Information extends PanelBorderHalf {
         lbHoTen.setText(thongTinNguoiDung.getHoten());
         lbEmail.setText(nguoiDung.getEmail());
     }
-    
+
     public void setNguoiDung(NguoiDung nguoiDung) {
         this.nguoiDung = nguoiDung;
         this.thongTinNguoiDung = new ThongTinNguoiDungService().get("MaNguoiDung", this.nguoiDung.getMaNguoiDung() + "").get(0);
         setUserData();
     }
-    
-    public JButton getButtonThongBao(){
+
+    public JButton getButtonThongBao() {
         return this.btThongBao;
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -50,6 +59,8 @@ public class Information extends PanelBorderHalf {
         lbEmail = new javax.swing.JLabel();
         lbHoTen = new javax.swing.JLabel();
         btThongBao = new views.label.ThongBaoButton();
+        jLabel2 = new javax.swing.JLabel();
+        txtTime = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -75,6 +86,14 @@ public class Information extends PanelBorderHalf {
         btThongBao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/notification.png"))); // NOI18N
         btThongBao.setText("5");
 
+        jLabel2.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel2.setOpaque(true);
+
+        txtTime.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        txtTime.setForeground(new java.awt.Color(0, 0, 0));
+        txtTime.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTime.setText("00:00:00");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,13 +106,17 @@ public class Information extends PanelBorderHalf {
                     .addComponent(lbRole)
                     .addComponent(lbUserName))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 253, Short.MAX_VALUE)
                 .addComponent(btThongBao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
@@ -111,8 +134,13 @@ public class Information extends PanelBorderHalf {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lbHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(txtTime, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,10 +148,12 @@ public class Information extends PanelBorderHalf {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private views.label.ThongBaoButton btThongBao;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbEmail;
     private javax.swing.JLabel lbHoTen;
     private javax.swing.JLabel lbRole;
     private javax.swing.JLabel lbUserIcon;
     private javax.swing.JLabel lbUserName;
+    private javax.swing.JLabel txtTime;
     // End of variables declaration//GEN-END:variables
 }
