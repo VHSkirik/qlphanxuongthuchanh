@@ -65,5 +65,9 @@ public class LichThucHanhService {
       public List<LichThucHanh2>  get(String fieldName, String value){
             return LichThucHanhDAO2.getIns().findAllByField(fieldName, value);
     }
+      
+          public List<LichThucHanh2>  getLichThucHanh(int MaNguoiDung, String NgayThucHanh){
+            return LichThucHanhDAO2.getIns().getLichThucHanh(MaNguoiDung, NgayThucHanh);
+    }
 }
 
