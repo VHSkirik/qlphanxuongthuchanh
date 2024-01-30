@@ -1,18 +1,44 @@
 package views.panel.giaovien;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.DatPhong;
+import services.DatPhongService;
+import views.models.CurrentUser;
 
 public class GiaoVienYeuCau extends javax.swing.JPanel {
 
+    private final DatPhongService datPhongService = new DatPhongService();
+    private DefaultTableModel dtm;
+
     public GiaoVienYeuCau() {
         initComponents();
+        dtm = (DefaultTableModel) tbDatPhong.getModel();
         myInit();
     }
-    
-    private void myInit(){
-        lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
+
+    private void myInit() {
+        lbMaGiaoVien.setText(CurrentUser.getNguoiDung().getMaNguoiDung()+"");
+        initImage();
+        initDataTable();
+    }
+
+    private void initImage() {
+        lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg", 40, 40));
         btGui.setIcon(new FlatSVGIcon("./views/icon/svg/Checkmark.svg", 50, 50));
         btReSet.setIcon(new FlatSVGIcon("./views/icon/svg/reset.svg", 50, 50));
+    }
+
+    private void initDataTable() {
+        List<DatPhong> dsDatPhong = datPhongService.get("MaNguoiDung", CurrentUser.getNguoiDung().getMaNguoiDung() + "");
+        for (DatPhong datPhong : dsDatPhong) {
+            dtm.addRow(new Object[]{
+                datPhong.getMaYeuCau(),
+                datPhong.getNgayThucHanh(),
+                datPhong.getTrangThai()
+            });
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -21,7 +47,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
         panelBorder1 = new views.panel.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tbYeuCau = new javax.swing.JTable();
+        tbDatPhong = new javax.swing.JTable();
         pnChiTiet = new views.panel.PanelBorder();
         jLabel2 = new javax.swing.JLabel();
         lbMaYeuCau = new javax.swing.JTextField();
@@ -46,7 +72,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        tbYeuCau.setModel(new javax.swing.table.DefaultTableModel(
+        tbDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -65,7 +91,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tbYeuCau);
+        jScrollPane1.setViewportView(tbDatPhong);
 
         jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
@@ -143,6 +169,11 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
         btReSet.setText("RESET");
         btReSet.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btReSet.setIconTextGap(0);
+        btReSet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReSetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnChiTietLayout = new javax.swing.GroupLayout(pnChiTiet);
         pnChiTiet.setLayout(pnChiTietLayout);
@@ -269,6 +300,16 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btReSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReSetActionPerformed
+        lbMaYeuCau.setText("");
+        lbMaGiaoVien.setText("");
+        lbMaPhong.setText("");
+        lbThoiGian.setText("____/__/__");
+        lbTietBatDau.setText("");
+        lbTietKetThuc.setText("");
+        lbMucDich.setText("");
+    }//GEN-LAST:event_btReSetActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btChonPhong;
@@ -294,6 +335,6 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorder panelBorder1;
     private views.panel.PanelBorder pnChiTiet;
-    private javax.swing.JTable tbYeuCau;
+    private javax.swing.JTable tbDatPhong;
     // End of variables declaration//GEN-END:variables
 }
