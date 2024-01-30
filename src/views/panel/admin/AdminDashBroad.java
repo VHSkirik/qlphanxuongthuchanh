@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.util.List;
 import models.DatPhong;
 import services.PhongThucHanhService;
+import services.ThongKeService;
 import services.ThongTinNguoiDungService;
 import views.models.Model_Card;
 import views.table.StatusType;
@@ -14,18 +15,23 @@ import views.table.StatusType;
 public class AdminDashBroad extends javax.swing.JPanel {
 
     private List<DatPhong> dsDatPhong;
+    private ThongKeService thongKeService;
 
     public AdminDashBroad() {
         initComponents();
+        thongKeService = new ThongKeService();
         spTable.getViewport().setBackground(Color.WHITE);
         myInit();
     }
 
     private void myInit() {
+        int soNguoiDung = thongKeService.getSoNguoiDung();
+        int soThietBi = thongKeService.getSoThietBi();
+        int soDiem = (int) thongKeService.getDiemTrungBinh();
         lbYeuCau.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
-        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_User.svg", 120, 120), "NGƯỜI DÙNG", "100", "Trên tất cả các cơ sở");
-        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Device.svg", 100, 100), "THIẾT BỊ", "1250", "Đang được sử dụng");
-        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Star.svg", 120, 120), "ĐIỂM", "9.6", "Đánh giá từ giáo viên");
+        Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_User.svg", 120, 120), "NGƯỜI DÙNG", soNguoiDung+"", "Trên tất cả các cơ sở");
+        Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Device.svg", 100, 100), "THIẾT BỊ", soThietBi+"", "Đang được sử dụng");
+        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Star.svg", 120, 120), "ĐIỂM", soDiem+"", "Đánh giá từ giáo viên");
         card1.SetData(data1);
         card2.SetData(data2);
         card3.SetData(data3);
