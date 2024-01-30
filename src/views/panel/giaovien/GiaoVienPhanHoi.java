@@ -4,9 +4,11 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.sun.source.tree.BreakTree;
 import dao.impl.PhongThucHanhDAO;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.LichThucHanh2;
 import models.PhanHoi;
+import models.ResultReason;
 import services.LichThucHanhService;
 import services.PhanHoiService;
 import views.models.CurrentUser;
@@ -167,6 +169,11 @@ public class GiaoVienPhanHoi extends javax.swing.JPanel {
         btCapNhat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btCapNhat.setText("Cập Nhật");
         btCapNhat.setIconTextGap(0);
+        btCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCapNhatActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -263,15 +270,18 @@ public class GiaoVienPhanHoi extends javax.swing.JPanel {
         if (currentRow != -1){
             int maLich = Integer.parseInt(tbLich.getValueAt(currentRow, 0).toString());
             txtMaLich.setText(maLich+"");
-            PhanHoi phanHoi = phanHoiService.get("MaLichThucHanh", maLich+"").get(0);
-            if (phanHoi != null) {
+            PhanHoi phanHoi = phanHoiService.get("MaLichThucHanh", maLich+"").isEmpty() ? null : phanHoiService.get("MaLichThucHanh", maLich+"").get(0);
+            if (phanHoi == null) {
                 txtMaPhanHoi.setText("");
                 txtDiem.setText("");
                 txtNoiDung.setText("");
                 changeState(true);
             } else {
+                changeState(false);
                 txtMaPhanHoi.setText(phanHoi.getMaPhanHoi()+"");
                 txtMaLich.setText(phanHoi.getMaLichThucHanh()+"");
+                txtDiem.setText(phanHoi.getDiemDanhGia()+"");
+                txtNoiDung.setText(phanHoi.getNoiDung());
             }
         }
     }//GEN-LAST:event_tbLichMouseClicked
@@ -279,6 +289,36 @@ public class GiaoVienPhanHoi extends javax.swing.JPanel {
     private void tbLichMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbLichMousePressed
         tbLichMouseClicked(evt);
     }//GEN-LAST:event_tbLichMousePressed
+
+    private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
+        if (txtDiem.isEnabled()){
+            try {
+                
+                int maLich = Integer.parseInt(txtMaLich.getText());
+                int diem = Integer.parseInt(txtDiem.getText());
+                String noiDung = txtNoiDung.getText();
+                
+                if (noiDung.isBlank()){
+                    JOptionPane.showMessageDialog(this, "Hãy nhập đủ thông tin.");
+                    return;
+                }
+                
+                ResultReason rr = phanHoiService.createPhanHoi(maLich, noiDung, diem);
+                if (rr.ketQua().isSuccess()){
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công.");
+                    initTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại.\n" + rr.lyDo());
+                }
+                
+            } catch (Exception e){
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Thông tin không hợp lệ.");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Không thể chỉnh đánh giá cũ.");
+        }
+    }//GEN-LAST:event_btCapNhatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
