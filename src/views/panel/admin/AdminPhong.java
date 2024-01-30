@@ -16,6 +16,7 @@ import models.OperationResult;
 import models.PhongThucHanh;
 import services.PhongThucHanhService;
 import views.UserFormInterface;
+import views.models.CurrentUser;
 
 public class AdminPhong extends javax.swing.JPanel implements UserFormInterface {
 
@@ -38,6 +39,10 @@ public class AdminPhong extends javax.swing.JPanel implements UserFormInterface 
         txtTimKiem = header1.getTextFieldTK();
         cbTuyChon = header1.getCbTuyChonTK();
         myInit();
+        if (!CurrentUser.getNguoiDung().getLoaiNguoiDung().equals("Admin")){
+            cbDiaDiem.setEnabled(false);
+            cbDiaDiem.setSelectedItem(CurrentUser.getNguoiDung().getCoSo());
+        }
     }
 
     private void myInit() {
