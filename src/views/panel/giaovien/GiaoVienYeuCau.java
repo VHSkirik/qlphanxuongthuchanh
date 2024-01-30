@@ -39,6 +39,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
     private void initDataTable() {
         List<DatPhong> dsDatPhong = datPhongService.get("MaNguoiDung", CurrentUser.getNguoiDung().getMaNguoiDung() + "");
+        dtm.setRowCount(0);
         for (DatPhong datPhong : dsDatPhong) {
             dtm.addRow(new Object[]{
                 datPhong.getMaYeuCau(),
@@ -353,7 +354,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
             int rs = JOptionPane.showConfirmDialog(this, "Xác nhận yêu cầu?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
             if (rs == JOptionPane.YES_OPTION) {
-                OperationResult os = datPhongService.createDatPhong(null, maGiaoVien, maPhong, thoiGian, tietBatDau, tietKetThuc, monHoc, thoiGian, ngayTao);
+                OperationResult os = datPhongService.createDatPhong(null, maGiaoVien, maPhong, thoiGian, tietBatDau, tietKetThuc, monHoc, "DangCho", ngayTao);
                 if (os.isSuccess()) {
                     JOptionPane.showMessageDialog(this, "Gửi Thành Công.");
                     reset();

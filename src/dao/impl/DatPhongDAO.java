@@ -78,7 +78,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
             // Chuyển đổi thành kiểu java.sql.Date
             Date currentDate = Date.valueOf(now.toLocalDate());
 
-            stm.setDate(6, currentDate);
+            stm.setDate(8, currentDate);
             rs = stm.executeUpdate();
 
             if (rs != -1) {
