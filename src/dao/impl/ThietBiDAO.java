@@ -104,6 +104,24 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return rs;
     }
+    
+    public int updateTT(String tinhTrang, int id) {
+        int rs = -1;
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "UPDATE thietbi SET TinhTrang = ? WHERE MaThietBi = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(5, tinhTrang);
+            stm.setInt(8, id);
+            rs = stm.executeUpdate();
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return rs;
+    }
 
     public int delete(int id) {
         int rs = -1;
