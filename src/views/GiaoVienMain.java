@@ -7,6 +7,7 @@ import models.NguoiDung;
 import views.models.CurrentUser;
 import views.models.EventMenuSelected;
 import views.panel.admin.AdminDashBroad;
+import views.panel.admin.FormTaiKhoan;
 import views.panel.giaovien.FormLichTrinh;
 
 public class GiaoVienMain extends javax.swing.JFrame {
@@ -42,17 +43,17 @@ public class GiaoVienMain extends javax.swing.JFrame {
                     case 5:
                      
                         break;
-                    case 9:
-                     
+                    case 6:
+                        setMainPanel(new FormTaiKhoan());
                         break;
-                    case 10:
+                    case 7:
                         int checkLogout = JOptionPane.showConfirmDialog(GiaoVienMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             GiaoVienMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 13:
+                    case 10:
                         int checkExit = JOptionPane.showConfirmDialog(GiaoVienMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
@@ -102,13 +103,13 @@ public class GiaoVienMain extends javax.swing.JFrame {
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, 666, Short.MAX_VALUE)
+            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnInfor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(mainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -119,7 +120,9 @@ public class GiaoVienMain extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelBorder1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

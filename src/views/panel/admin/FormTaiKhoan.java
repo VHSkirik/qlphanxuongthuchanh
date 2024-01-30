@@ -91,140 +91,117 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
 
         panelBorder1.setBackground(new java.awt.Color(234, 234, 234));
-        panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbTitle.setForeground(new java.awt.Color(51, 51, 51));
         lbTitle.setText("Thông Tin Người Dùng");
-        panelBorder1.add(lbTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 19, 254, 35));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Thông tin đăng nhập");
-        panelBorder1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 60, 174, 26));
 
         txtTaiKhoan.setBackground(new java.awt.Color(255, 255, 255));
         txtTaiKhoan.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtTaiKhoan.setForeground(new java.awt.Color(0, 0, 0));
         txtTaiKhoan.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtTaiKhoan.setEnabled(false);
-        panelBorder1.add(txtTaiKhoan, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 296, 35));
 
         txtEmail.setBackground(new java.awt.Color(255, 255, 255));
         txtEmail.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtEmail.setForeground(new java.awt.Color(0, 0, 0));
         txtEmail.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtEmail.setEnabled(false);
-        panelBorder1.add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 180, 296, 35));
 
         txtMatKhau.setBackground(new java.awt.Color(255, 255, 255));
         txtMatKhau.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtMatKhau.setForeground(new java.awt.Color(0, 0, 0));
         txtMatKhau.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtMatKhau.setEnabled(false);
-        panelBorder1.add(txtMatKhau, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 296, 35));
 
         jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Tài Khoản");
-        panelBorder1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, 123, -1));
 
         jLabel3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel3.setText("Mật Khẩu");
-        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 123, -1));
 
         jLabel4.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel4.setText("Cơ Sở");
-        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 123, -1));
 
         txtCoSo.setBackground(new java.awt.Color(255, 255, 255));
         txtCoSo.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtCoSo.setForeground(new java.awt.Color(0, 0, 0));
         txtCoSo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtCoSo.setEnabled(false);
-        panelBorder1.add(txtCoSo, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, 130, 35));
-        panelBorder1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 270, 746, 8));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(51, 51, 51));
         jLabel6.setText("Thông tin cá nhân");
-        panelBorder1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 284, 174, 26));
 
         jLabel7.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(51, 51, 51));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel7.setText("Họ Tên");
-        panelBorder1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 123, -1));
 
         txtHoTen.setBackground(new java.awt.Color(255, 255, 255));
         txtHoTen.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtHoTen.setForeground(new java.awt.Color(0, 0, 0));
         txtHoTen.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtHoTen.setEnabled(false);
-        panelBorder1.add(txtHoTen, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 296, 35));
 
         jLabel8.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(51, 51, 51));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel8.setText("Giới Tính");
-        panelBorder1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 370, 123, -1));
 
         jLabel9.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(51, 51, 51));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel9.setText("Ngày Sinh (dd/MM/yyyy)");
-        panelBorder1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 410, 210, -1));
 
         txtNgaySinh.setBackground(new java.awt.Color(255, 255, 255));
         txtNgaySinh.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtNgaySinh.setForeground(new java.awt.Color(0, 0, 0));
         txtNgaySinh.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNgaySinh.setEnabled(false);
-        panelBorder1.add(txtNgaySinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 400, 296, 35));
 
         jLabel10.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(51, 51, 51));
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel10.setText("Số Điện Thoại");
-        panelBorder1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 450, 123, -1));
 
         txtSoDienThoai.setBackground(new java.awt.Color(255, 255, 255));
         txtSoDienThoai.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtSoDienThoai.setForeground(new java.awt.Color(0, 0, 0));
         txtSoDienThoai.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtSoDienThoai.setEnabled(false);
-        panelBorder1.add(txtSoDienThoai, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 440, 296, 35));
 
         cbGioiTinh.setBackground(new java.awt.Color(255, 255, 255));
         cbGioiTinh.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         cbGioiTinh.setForeground(new java.awt.Color(0, 0, 0));
         cbGioiTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nam", "Nữ" }));
         cbGioiTinh.setEnabled(false);
-        panelBorder1.add(cbGioiTinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 133, 35));
 
         jLabel11.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel11.setText("Chuyên Môn");
-        panelBorder1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 490, 123, -1));
 
         txtChuyenMon.setBackground(new java.awt.Color(255, 255, 255));
         txtChuyenMon.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtChuyenMon.setForeground(new java.awt.Color(0, 0, 0));
         txtChuyenMon.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtChuyenMon.setEnabled(false);
-        panelBorder1.add(txtChuyenMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 490, 296, 35));
 
         jLabel12.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(51, 51, 51));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel12.setText("Địa Chỉ");
-        panelBorder1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 530, 123, -1));
 
         txtDiaChi.setBackground(new java.awt.Color(255, 255, 255));
         txtDiaChi.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
@@ -232,7 +209,6 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         txtDiaChi.setCaretColor(new java.awt.Color(0, 0, 0));
         txtDiaChi.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtDiaChi.setEnabled(false);
-        panelBorder1.add(txtDiaChi, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 530, 296, 35));
 
         btCapNhat.setText("Cập Nhật");
         btCapNhat.addActionListener(new java.awt.event.ActionListener() {
@@ -240,7 +216,6 @@ public class FormTaiKhoan extends javax.swing.JPanel {
                 btCapNhatActionPerformed(evt);
             }
         });
-        panelBorder1.add(btCapNhat, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 580, 140, 35));
 
         btHuy.setText("Hủy");
         btHuy.addActionListener(new java.awt.event.ActionListener() {
@@ -248,20 +223,177 @@ public class FormTaiKhoan extends javax.swing.JPanel {
                 btHuyActionPerformed(evt);
             }
         });
-        panelBorder1.add(btHuy, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, 130, 35));
 
         txtVaiTro.setBackground(new java.awt.Color(255, 255, 255));
         txtVaiTro.setFont(new java.awt.Font("JetBrains Mono Light", 0, 14)); // NOI18N
         txtVaiTro.setForeground(new java.awt.Color(0, 0, 0));
         txtVaiTro.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtVaiTro.setEnabled(false);
-        panelBorder1.add(txtVaiTro, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 220, 130, 35));
 
         jLabel13.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(51, 51, 51));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel13.setText("Email");
-        panelBorder1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 123, -1));
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtTaiKhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtMatKhau, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(txtVaiTro, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 746, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtHoTen, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(cbGioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtSoDienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtChuyenMon, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(200, 200, 200)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17)
+                .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(340, 340, 340)
+                .addComponent(btCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(btHuy, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addComponent(lbTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))
+                    .addComponent(txtTaiKhoan))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtMatKhau))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtEmail))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtCoSo)
+                    .addComponent(txtVaiTro))
+                .addGap(15, 15, 15)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtHoTen))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(cbGioiTinh))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtNgaySinh))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(5, 5, 5))
+                    .addComponent(txtSoDienThoai))
+                .addGap(15, 15, 15)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))
+                    .addComponent(txtChuyenMon))
+                .addGap(5, 5, 5)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(15, 15, 15))
+                    .addComponent(txtDiaChi))
+                .addGap(15, 15, 15)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btCapNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btHuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(5, 5, 5))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -275,7 +407,7 @@ public class FormTaiKhoan extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, 620, Short.MAX_VALUE)
+                .addComponent(panelBorder1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
