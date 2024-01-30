@@ -1,5 +1,6 @@
 package views.panel.canbo;
 
+import dao.impl.DatPhongDAO;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +48,7 @@ public class FormThongKe extends javax.swing.JPanel {
 
     private void setDataYeuCau() {
         List<YeuCauTheoCoSo> dsSoYeuCau = new ArrayList<>();
-        dsSoYeuCau.add(new YeuCauTheoCoSo("7/2023", 35, 25, 7));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("8/2023", 2, 13, 5));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("9/2023", 19, 17, 22));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("10/2023", 43, 5, 15));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("11/2023", 15, 10, 9));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("12/2023", 27, 3, 18));
-        dsSoYeuCau.add(new YeuCauTheoCoSo("1/2024", 10, 30, 16));
-
+        dsSoYeuCau = DatPhongDAO.getIns().findAllYeuCauTheoCoSo();
         for (YeuCauTheoCoSo yc : dsSoYeuCau) {
             double[] value;
 
