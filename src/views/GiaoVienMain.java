@@ -9,6 +9,7 @@ import views.models.EventMenuSelected;
 import views.panel.admin.AdminDashBroad;
 import views.panel.admin.FormTaiKhoan;
 import views.panel.giaovien.FormLichTrinh;
+import views.panel.giaovien.GiaoVienYeuCau;
 
 public class GiaoVienMain extends javax.swing.JFrame {
 
@@ -32,7 +33,7 @@ public class GiaoVienMain extends javax.swing.JFrame {
                         setMainPanel(new FormLichTrinh());
                         break;
                     case 2:
-                   
+                        setMainPanel(new GiaoVienYeuCau());
                         break;
                     case 3:
                  
@@ -62,7 +63,7 @@ public class GiaoVienMain extends javax.swing.JFrame {
                 }
             }
         });
-        setMainPanel(new AdminDashBroad());
+        setMainPanel(new FormLichTrinh());
     }
 
     private void setMainPanel(JComponent component) {
