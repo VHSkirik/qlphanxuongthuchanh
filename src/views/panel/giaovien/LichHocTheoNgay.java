@@ -19,7 +19,7 @@ public class LichHocTheoNgay extends JPanel {
         dsLichThucHanh = lichThucHanhService.getLichThucHanh(CurrentUser.getNguoiDung().getMaNguoiDung(), ngay);
         setBackground(new Color(255, 255, 255));
         GridLayout layout = new GridLayout(6, 1);
-        if (dsLichThucHanh.size() > 6){
+        if (dsLichThucHanh.size() > 6) {
             layout = new GridLayout(dsLichThucHanh.size(), 1);
         }
         this.setLayout(layout);
@@ -27,7 +27,7 @@ public class LichHocTheoNgay extends JPanel {
     }
 
     private void myInit() {
-        for (LichThucHanh2 lichThucHanh : dsLichThucHanh){
+        for (LichThucHanh2 lichThucHanh : dsLichThucHanh) {
             DataLichHoc dataLichHoc = new DataLichHoc();
             dataLichHoc.setMonHoc(lichThucHanh.getMon());
             dataLichHoc.setTietHoc("Tiết: " + lichThucHanh.getTietBatDau() + " - " + lichThucHanh.getTietKetTHuc());
