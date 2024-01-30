@@ -18,13 +18,13 @@ import views.UserFormInterface;
 import views.models.CurrentUser;
 
 public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
-    
+
     private List<ThietBi> dsThietBi, dsHienTai;
     private DefaultTableModel dtm;
     private ThietBiService thietBiService;
     private NguoiDung nguoiDung;
     private HashMap<Integer, String> hmPhongThucHanh;
-    
+
     public AdminThietBi() {
         this.nguoiDung = CurrentUser.getNguoiDung();
         hmPhongThucHanh = new HashMap<>();
@@ -33,15 +33,19 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         tbThietBi.setAutoCreateRowSorter(true);
         thietBiService = new ThietBiService();
         myInit();
+        if (!CurrentUser.getNguoiDung().getLoaiNguoiDung().equals("Admin")) {
+            cbDiaDiem.setEnabled(false);
+            cbDiaDiem.setSelectedItem(CurrentUser.getNguoiDung().getCoSo());
+        }
     }
-    
+
     private void myInit() {
         initImage();
         initTableStart();
         initComboBox();
         initEvent();
     }
-    
+
     private void initImage() {
         btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg", 45, 45));
         btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg", 45, 45));
@@ -49,19 +53,19 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         btBaoCao.setIcon(new FlatSVGIcon("./views/icon/svg/report.svg", 45, 45));
         lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/devices_black.svg", 40, 40));
     }
-    
+
     public void initTableStart() {
         dsThietBi = thietBiService.getAll();
         dsHienTai = dsThietBi;
         initDataThietBi(dsThietBi);
     }
-    
+
     @Override
-    public void initTable(){
+    public void initTable() {
         dsThietBi = thietBiService.getAll();
         cbPhongEvent();
     }
-    
+
     private void initDataThietBi(List<ThietBi> dsThietBiHienTai) {
         dtm.setRowCount(0);
         for (ThietBi thietBi : dsThietBiHienTai) {
@@ -77,7 +81,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             });
         }
     }
-    
+
     private void initComboBox() {
         cbDiaDiem.addItem("Lĩnh Nam");
         cbDiaDiem.addItem("Minh Khai");
@@ -86,11 +90,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             cbDiaDiem.setEnabled(false);
         }
     }
-    
+
     private void initEvent() {
-        
+
     }
-    
+
     private void initDataToaNha() {
         cbToaNha.removeAllItems();
         cbToaNha.addItem("Tất Cả");
@@ -102,7 +106,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             }
         }
     }
-    
+
     private void initDataPhong() {
         cbPhong.removeAllItems();
         cbPhong.addItem("Tất Cả");
@@ -115,7 +119,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             }
         }
     }
-    
+
     private int getIdPhong() {
         int id = -1;
         for (int key : hmPhongThucHanh.keySet()) {
@@ -126,9 +130,9 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         }
         return id;
     }
-    
-   private void cbPhongEvent(){
-       if (cbPhong.getSelectedItem() == null) {
+
+    private void cbPhongEvent() {
+        if (cbPhong.getSelectedItem() == null) {
             return;
         }
         if (cbPhong.getSelectedIndex() != 0) {
@@ -138,8 +142,8 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         } else {
             initDataThietBi(dsThietBi);
         }
-   }
-    
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -385,22 +389,26 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     }//GEN-LAST:event_cbPhongActionPerformed
 
     private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
-        int currentRow =tbThietBi.getSelectedRow();
-        if (currentRow != -1){
-            int MaThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
-            ThietBi thietBi = ThietBiDAO.getIns().findOne(MaThietBi);
-            new ThietBiDialog(this, new JFrame(), true, thietBi).setVisible(true);
+        int currentRow = tbThietBi.getSelectedRow();
+        if (currentRow != -1) {
+            if (cbPhong.getSelectedIndex() == 0 && !CurrentUser.getNguoiDung().getLoaiNguoiDung().equals("Admin")) {
+                JOptionPane.showMessageDialog(this, "Hãy Chọn Phòng Trước.");
+            } else {
+                int MaThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
+                ThietBi thietBi = ThietBiDAO.getIns().findOne(MaThietBi);
+                new ThietBiDialog(this, new JFrame(), true, thietBi).setVisible(true);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "Chưa chọn thiết bị cần cập nhật.");
         }
     }//GEN-LAST:event_btSuaActionPerformed
 
     private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
-        int currentRow =tbThietBi.getSelectedRow();
-        if (currentRow != -1){
+        int currentRow = tbThietBi.getSelectedRow();
+        if (currentRow != -1) {
             int MaThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
             OperationResult os = thietBiService.deleteThietBi(MaThietBi);
-            if (os.isSuccess()){
+            if (os.isSuccess()) {
                 JOptionPane.showMessageDialog(this, "Xóa Thành Công.");
             } else {
                 JOptionPane.showMessageDialog(this, "Xóa Thất Bại");
