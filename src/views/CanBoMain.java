@@ -5,8 +5,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 import models.NguoiDung;
 import views.models.CurrentUser;
-import views.panel.admin.AdminDashBroad;
-import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.AdminPhong;
 import views.models.EventMenuSelected;
 import views.panel.admin.AdminThietBi;
@@ -14,14 +12,14 @@ import views.panel.admin.FormTaiKhoan;
 import views.panel.canbo.FormThongKe;
 
 public class CanBoMain extends javax.swing.JFrame {
-    
+
     public CanBoMain(NguoiDung user) {
         CurrentUser.setNguoiDung(user);
         initComponents();
         myInit();
     }
-    
-    private void myInit(){
+
+    private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
         menu.initMoving(CanBoMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -36,22 +34,22 @@ public class CanBoMain extends javax.swing.JFrame {
                         setMainPanel(new AdminThietBi());
                         break;
                     case 3:
+
+                        break;
+                    case 5:
                         setMainPanel(new FormThongKe());
                         break;
-                    case 4:
-   
-                        break;
-                    case 6:
+                    case 8:
                         setMainPanel(new FormTaiKhoan());
                         break;
-                    case 7:
+                    case 9:
                         int checkLogout = JOptionPane.showConfirmDialog(CanBoMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             CanBoMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 8:
+                    case 12:
                         int checkExit = JOptionPane.showConfirmDialog(CanBoMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
@@ -61,7 +59,7 @@ public class CanBoMain extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void setMainPanel(JComponent component) {
         mainPanel.removeAll();
         mainPanel.add(component);
@@ -127,7 +125,6 @@ public class CanBoMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
