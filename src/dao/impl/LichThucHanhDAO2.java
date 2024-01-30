@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import models.DatPhong;
 
@@ -250,4 +252,34 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         return dsLichThucHanh;
     }
+    
+    public LichThucHanh2 findOneIfPast(int id) {
+    LichThucHanh2 lichThucHanh = null;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT * FROM lichthuchanh WHERE MaLichThucHanh = ? AND NgayThucHanh <= ?";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setInt(1, id);
+        stm.setDate(2, Date.valueOf(LocalDate.now())); // Ngày hiện tại
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            lichThucHanh = new LichThucHanh2(
+                    rs.getInt("MaLichThucHanh"),
+                    rs.getInt("MaNguoiDung"),
+                    rs.getInt("MaPhongThucHanh"),
+                    rs.getString("NgayThucHanh"),
+                    rs.getInt("TietBatDau"),
+                    rs.getInt("TietKetTHuc"),
+                    rs.getString("MonHoc")
+            );
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return lichThucHanh;
+}
 }

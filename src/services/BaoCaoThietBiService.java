@@ -5,26 +5,27 @@ import dao.impl.ThietBiDAO;
 import java.util.List;
 import models.BaoCaoThietBi;
 import models.OperationResult;
+import models.ResultReason;
 
 public class BaoCaoThietBiService {
 
-    public OperationResult createBaoCaoThietBi(Integer MaBaoCao, Integer MaThietBi, String NgayBaoCao, String NoiDungBaoCao) {
-        // Kiểm tra trống
-        if (NgayBaoCao.isBlank() || NoiDungBaoCao.isBlank()) {
-            return OperationResult.ADD_FAILURE;
-        } 
-        else if (ThietBiDAO.getIns().findOne(MaThietBi) != null) {
-                return OperationResult.ADD_FAILURE;
-            }
-        else if (BaoCaoThietBiDAO.getIns().findOne(MaBaoCao) != null) {
-                return OperationResult.ADD_FAILURE;
-            } else {
-                BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(MaBaoCao, MaThietBi, NgayBaoCao, NoiDungBaoCao);
-                int result = BaoCaoThietBiDAO.getIns().create(baoCaoThietBi);
-                return (result == -1) ? OperationResult.ADD_FAILURE : OperationResult.ADD_SUCCESS;
-            }
-        
+   public ResultReason createBaoCaoThietBi(Integer MaThietBi, String NgayBaoCao, String NoiDungBaoCao) {
+    // Kiểm tra trống
+    if (ThietBiDAO.getIns().findOne(MaThietBi) != null) {
+        return new ResultReason(OperationResult.ADD_FAILURE, "ThietBi found");
+    } else {
+        BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(null, MaThietBi, NgayBaoCao, NoiDungBaoCao);
+        int result = BaoCaoThietBiDAO.getIns().create(baoCaoThietBi);
+
+        if (result == -1) {
+            return new ResultReason(OperationResult.ADD_FAILURE, "Failed to create BaoCaoThietBi");
+        } else {
+            ThietBiDAO.getIns().updateTT("Hong", MaThietBi);
+            return new ResultReason(OperationResult.ADD_SUCCESS, "BaoCaoThietBi created successfully");
+        }
     }
+}
+
 
     public OperationResult updateBaoCaoThietBi(Integer MaBaoCao, Integer MaThietBi, String NgayBaoCao, String NoiDungBaoCao) {
         // Kiểm tra trống
