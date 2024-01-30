@@ -10,8 +10,8 @@ import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.AdminPhong;
 import views.models.EventMenuSelected;
 import views.panel.admin.AdminThietBi;
-import views.panel.admin.AdminYeuCau;
 import views.panel.admin.FormTaiKhoan;
+import views.panel.canbo.FormThongKe;
 
 public class CanBoMain extends javax.swing.JFrame {
     
@@ -30,28 +30,28 @@ public class CanBoMain extends javax.swing.JFrame {
                 System.out.println(index);
                 switch (index) {
                     case 1:
-                        setMainPanel(new AdminDashBroad());
-                        break;
-                    case 2:
                         setMainPanel(new AdminPhong());
                         break;
-                    case 3:
+                    case 2:
                         setMainPanel(new AdminThietBi());
                         break;
+                    case 3:
+                        setMainPanel(new FormThongKe());
+                        break;
                     case 4:
-                        setMainPanel(new AdminNguoiDung());
+   
                         break;
                     case 6:
                         setMainPanel(new FormTaiKhoan());
                         break;
-                    case 10:
+                    case 7:
                         int checkLogout = JOptionPane.showConfirmDialog(CanBoMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             CanBoMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 13:
+                    case 8:
                         int checkExit = JOptionPane.showConfirmDialog(CanBoMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
