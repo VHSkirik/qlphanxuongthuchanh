@@ -8,13 +8,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import models.DatPhong;
+import models.YeuCauTheoCoSo;
 
 public class DatPhongDAO implements DAOInterface<DatPhong> {
+
     private static final DatPhongDAO dpDAO = new DatPhongDAO();
 
     public DatPhongDAO() {
@@ -55,7 +58,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
         return datPhong;
     }
 
-     public int create(DatPhong datPhong) {
+    public int create(DatPhong datPhong) {
         int rs = -1;
 
         try {
@@ -91,30 +94,31 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return rs;
     }
-     
-   public int update(DatPhong datPhong, int id) {
-    int rs = -1;
 
-    try {Connection c = Jdbc.getConnection();
-        String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, NgayThucHanh = ?,TietBatDau = ?, TietKetThuc = ?,  MonHoc = ?, TrangThai = ?, NgayTao = ? WHERE MaYeuCau = ?";
-        PreparedStatement stm = c.prepareStatement(query);
-        stm.setInt(1, datPhong.getMaNguoiDung());
-        stm.setInt(2, datPhong.getMaPhongThucHanh());
-        stm.setString(3, datPhong.getNgayThucHanh());
-        stm.setInt(4, datPhong.getTietBatDau());
-        stm.setInt(5, datPhong.getTietKetThuc());
-        stm.setString(6, datPhong.getMonHoc());
-        stm.setString(7, datPhong.getTrangThai());
-        stm.setString(8, datPhong.getNgayTao());
-        stm.setInt(9, id);
-        rs = stm.executeUpdate();
-        Jdbc.closeConnection(c);
-    } catch (SQLException var7) {
-        var7.printStackTrace();
+    public int update(DatPhong datPhong, int id) {
+        int rs = -1;
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "UPDATE datphong SET MaNguoiDung = ?, MaPhongThucHanh = ?, NgayThucHanh = ?,TietBatDau = ?, TietKetThuc = ?,  MonHoc = ?, TrangThai = ?, NgayTao = ? WHERE MaYeuCau = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setInt(1, datPhong.getMaNguoiDung());
+            stm.setInt(2, datPhong.getMaPhongThucHanh());
+            stm.setString(3, datPhong.getNgayThucHanh());
+            stm.setInt(4, datPhong.getTietBatDau());
+            stm.setInt(5, datPhong.getTietKetThuc());
+            stm.setString(6, datPhong.getMonHoc());
+            stm.setString(7, datPhong.getTrangThai());
+            stm.setString(8, datPhong.getNgayTao());
+            stm.setInt(9, id);
+            rs = stm.executeUpdate();
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return rs;
     }
-
-    return rs;
-}
 
     public int delete(int id) {
         int rs = -1;
@@ -144,7 +148,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
             while (rs.next()) {
                 DatPhong datPhong = new DatPhong(
-                       rs.getInt("MaYeuCau"),
+                        rs.getInt("MaYeuCau"),
                         rs.getInt("MaNguoiDung"),
                         rs.getInt("MaPhongThucHanh"),
                         rs.getString("NgayThucHanh"),
@@ -164,6 +168,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return dsDatPhong;
     }
+
     //in ra số phòng có trạng thái mình cần tìm
     public int countDatPhongWithStatus(String status) {
         int count = 0;
@@ -186,8 +191,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return count;
     }
-    
-    
+
     //in ra danh sach ngay tao gan nhat limit = số bản ghi
     public List<DatPhong> getLatestDatPhong(int limit) {//in ra danh sach ngay tao gan nhat limit = số bản ghi
         List<DatPhong> latestDatPhongList = new ArrayList<>();

@@ -186,35 +186,35 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
     }
 
     public ThietBi findOneBySoMayAndPhong(int SoMay, int MaPhongThucHanh) {
-     ThietBi thietBi = null;
+        ThietBi thietBi = null;
 
-     try {
-         Connection c = Jdbc.getConnection();
-         String query = "SELECT * FROM thietbi WHERE SoMay = ? AND MaPhongThucHanh = ?";
-         PreparedStatement stm = c.prepareStatement(query);
-         stm.setInt(1, SoMay);
-         stm.setInt(2, MaPhongThucHanh);
-         ResultSet rs = stm.executeQuery();
-         if (rs.next()) {
-             thietBi = new ThietBi(
-                     rs.getInt("MaThietBi"),
-                     rs.getString("TenThietBi"),
-                     rs.getString("LoaiThietBi"),
-                     rs.getString("NgaySuDung"),
-                     rs.getString("MoTa"),
-                     rs.getString("TinhTrang"),
-                     rs.getInt("MaPhongThucHanh"),
-                     rs.getInt("SoMay")
-             );
-         }
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM thietbi WHERE SoMay = ? AND MaPhongThucHanh = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setInt(1, SoMay);
+            stm.setInt(2, MaPhongThucHanh);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                thietBi = new ThietBi(
+                        rs.getInt("MaThietBi"),
+                        rs.getString("TenThietBi"),
+                        rs.getString("LoaiThietBi"),
+                        rs.getString("NgaySuDung"),
+                        rs.getString("MoTa"),
+                        rs.getString("TinhTrang"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getInt("SoMay")
+                );
+            }
 
-         Jdbc.closeConnection(c);
-     } catch (SQLException var7) {
-         var7.printStackTrace();
-     }
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
 
-     return thietBi;
- }
+        return thietBi;
+    }
 
     public List<ThietBi> findAllByTenPhongThucHanh(String tenPhongThucHanh) {
         List<ThietBi> dsThietBi = new ArrayList<>();
@@ -247,28 +247,50 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return dsThietBi;
     }
-    
+
     public int countNonHong() {
-    int count = 0;
+        int count = 0;
 
-    try {
-        Connection c = Jdbc.getConnection();
-        String query = "SELECT COUNT(*) FROM thietbi WHERE TinhTrang != ?";
-        PreparedStatement stm = c.prepareStatement(query);
-        stm.setString(1, "Hong");
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT COUNT(*) FROM thietbi WHERE TinhTrang != ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "Hong");
 
-        ResultSet rs = stm.executeQuery();
-        if (rs.next()) {
-            count = rs.getInt(1);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
-        Jdbc.closeConnection(c);
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return count;
     }
 
-    return count;
-    }
+    public int countNonHongPhong(int phong) {
+        int count = 0;
 
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT COUNT(*) FROM thietbi WHERE MaPhongThucHanh = ? and TinhTrang != ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setInt(1, phong);
+            stm.setString(2, "Hong");
+
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return count;
+    }
 
 }

@@ -18,8 +18,8 @@ public class LichHocTheoNgay extends JPanel {
     public LichHocTheoNgay(String ngay) {
         dsLichThucHanh = lichThucHanhService.getLichThucHanh(CurrentUser.getNguoiDung().getMaNguoiDung(), ngay);
         setBackground(new Color(255, 255, 255));
-        GridLayout layout = new GridLayout(4, 1);
-        if (dsLichThucHanh.size() > 4){
+        GridLayout layout = new GridLayout(6, 1);
+        if (dsLichThucHanh.size() > 6){
             layout = new GridLayout(dsLichThucHanh.size(), 1);
         }
         this.setLayout(layout);
