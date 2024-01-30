@@ -49,7 +49,7 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="information1" pref="963" max="32767" attributes="0"/>
+                          <Component id="pnInfor" pref="963" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -65,7 +65,7 @@
               <Component id="menu" alignment="0" pref="701" max="32767" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="information1" min="-2" max="-2" attributes="0"/>
+                  <Component id="pnInfor" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="mainPanel" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
       <SubComponents>
         <Component class="views.panel.CanBoMenu" name="menu">
         </Component>
-        <Component class="views.panel.Information" name="information1">
+        <Component class="views.panel.Information" name="pnInfor">
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">

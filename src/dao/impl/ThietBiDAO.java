@@ -158,7 +158,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM thietbi WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
+            String query = "SELECT * FROM thietbi WHERE LOWER(" + fieldName + ") LIKE LOWER(?) ORDER BY SoMay";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setString(1, "%" + value + "%");
             ResultSet rs = stm.executeQuery();
