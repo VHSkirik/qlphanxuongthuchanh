@@ -2,11 +2,14 @@ package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.PhongThucHanhDAO;
+import dao.impl.ThietBiDAO;
 import java.util.HashMap;
 import java.util.List;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
+import models.OperationResult;
 import models.PhongThucHanh;
 import models.ThietBi;
 import services.PhongThucHanhService;
@@ -15,13 +18,13 @@ import views.UserFormInterface;
 import views.models.CurrentUser;
 
 public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
-
+    
     private List<ThietBi> dsThietBi, dsHienTai;
     private DefaultTableModel dtm;
     private ThietBiService thietBiService;
     private NguoiDung nguoiDung;
     private HashMap<Integer, String> hmPhongThucHanh;
-
+    
     public AdminThietBi() {
         this.nguoiDung = CurrentUser.getNguoiDung();
         hmPhongThucHanh = new HashMap<>();
@@ -31,14 +34,14 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         thietBiService = new ThietBiService();
         myInit();
     }
-
+    
     private void myInit() {
         initImage();
-        initTable();
+        initTableStart();
         initComboBox();
         initEvent();
     }
-
+    
     private void initImage() {
         btThem.setIcon(new FlatSVGIcon("./views/icon/svg/add.svg", 45, 45));
         btSua.setIcon(new FlatSVGIcon("./views/icon/svg/edit.svg", 45, 45));
@@ -46,14 +49,19 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         btBaoCao.setIcon(new FlatSVGIcon("./views/icon/svg/report.svg", 45, 45));
         lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/devices_black.svg", 40, 40));
     }
-
-    @Override
-    public void initTable() {
+    
+    public void initTableStart() {
         dsThietBi = thietBiService.getAll();
         dsHienTai = dsThietBi;
         initDataThietBi(dsThietBi);
     }
-
+    
+    @Override
+    public void initTable(){
+        dsThietBi = thietBiService.getAll();
+        cbPhongEvent();
+    }
+    
     private void initDataThietBi(List<ThietBi> dsThietBiHienTai) {
         dtm.setRowCount(0);
         for (ThietBi thietBi : dsThietBiHienTai) {
@@ -69,7 +77,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             });
         }
     }
-
+    
     private void initComboBox() {
         cbDiaDiem.addItem("Lĩnh Nam");
         cbDiaDiem.addItem("Minh Khai");
@@ -78,11 +86,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             cbDiaDiem.setEnabled(false);
         }
     }
-
+    
     private void initEvent() {
-
+        
     }
-
+    
     private void initDataToaNha() {
         cbToaNha.removeAllItems();
         cbToaNha.addItem("Tất Cả");
@@ -94,7 +102,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             }
         }
     }
-
+    
     private void initDataPhong() {
         cbPhong.removeAllItems();
         cbPhong.addItem("Tất Cả");
@@ -107,7 +115,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             }
         }
     }
-
+    
     private int getIdPhong() {
         int id = -1;
         for (int key : hmPhongThucHanh.keySet()) {
@@ -118,7 +126,20 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         }
         return id;
     }
-
+    
+   private void cbPhongEvent(){
+       if (cbPhong.getSelectedItem() == null) {
+            return;
+        }
+        if (cbPhong.getSelectedIndex() != 0) {
+            int id = getIdPhong();
+            dsHienTai = thietBiService.get("MaPhongThucHanh", id + "");
+            initDataThietBi(dsHienTai);
+        } else {
+            initDataThietBi(dsThietBi);
+        }
+   }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -171,11 +192,16 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
         btSua.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
         btSua.setForeground(new java.awt.Color(0, 0, 0));
-        btSua.setText("Sửa");
+        btSua.setText("Cập Nhật");
         btSua.setFocusable(false);
         btSua.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btSua.setIconTextGap(0);
         btSua.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSuaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btSua);
 
         btXoa.setFont(new java.awt.Font("Segoe UI", 1, 15)); // NOI18N
@@ -185,6 +211,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         btXoa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btXoa.setIconTextGap(0);
         btXoa.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btXoa);
         jToolBar1.add(jSeparator1);
 
@@ -238,25 +269,22 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
                 .addGroup(panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder2Layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelBorder2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -336,7 +364,8 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
     private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
         if (cbPhong.getSelectedIndex() != 0) {
-
+            int id = getIdPhong();
+            new ThietBiDialog(this, new JFrame(), true, id).setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Chọn Phòng Cần Thêm trước.");
         }
@@ -352,17 +381,34 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     }//GEN-LAST:event_cbToaNhaItemStateChanged
 
     private void cbPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbPhongActionPerformed
-        if (cbPhong.getSelectedItem() == null) {
-            return;
-        }
-        if (cbPhong.getSelectedIndex() != 0) {
-            int id = getIdPhong();
-            dsHienTai = thietBiService.get("MaPhongThucHanh", id + "");
-            initDataThietBi(dsHienTai);
-        } else {
-            initDataThietBi(dsThietBi);
-        }
+        cbPhongEvent();
     }//GEN-LAST:event_cbPhongActionPerformed
+
+    private void btSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSuaActionPerformed
+        int currentRow =tbThietBi.getSelectedRow();
+        if (currentRow != -1){
+            int MaThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
+            ThietBi thietBi = ThietBiDAO.getIns().findOne(MaThietBi);
+            new ThietBiDialog(this, new JFrame(), true, thietBi).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn thiết bị cần cập nhật.");
+        }
+    }//GEN-LAST:event_btSuaActionPerformed
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        int currentRow =tbThietBi.getSelectedRow();
+        if (currentRow != -1){
+            int MaThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
+            OperationResult os = thietBiService.deleteThietBi(MaThietBi);
+            if (os.isSuccess()){
+                JOptionPane.showMessageDialog(this, "Xóa Thành Công.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Xóa Thất Bại");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn thiết bị cần xóa.");
+        }
+    }//GEN-LAST:event_btXoaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

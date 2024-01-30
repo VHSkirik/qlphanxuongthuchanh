@@ -12,6 +12,7 @@ import java.util.List;
 import models.ThietBi;
 
 public class ThietBiDAO implements DAOInterface<ThietBi> {
+
     private static final ThietBiDAO tbDAO = new ThietBiDAO();
 
     public ThietBiDAO() {
@@ -57,7 +58,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
         try {
             Connection c = Jdbc.getConnection();
             String query = "INSERT INTO thietbi (TenThietBi, LoaiThietBi, NgaySuDung, MoTa, TinhTrang, MaPhongThucHanh, SoMay) VALUES (?, ?, ?, ?, ?, ?,?)";
-        PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stm = c.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             stm.setString(1, thietBi.getTenThietBi());
             stm.setString(2, thietBi.getLoaiThietBi());
             stm.setString(3, thietBi.getNgaySuDung());
@@ -66,12 +67,12 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
             stm.setInt(6, thietBi.getMaPhongThucHanh());
             stm.setInt(7, thietBi.getSoMay());
             rs = stm.executeUpdate();
-             if (rs != -1) {
-            ResultSet generatedKeys = stm.getGeneratedKeys();
-            if (generatedKeys.next()) {
-                thietBi.setMaThietBi(generatedKeys.getInt(1));
+            if (rs != -1) {
+                ResultSet generatedKeys = stm.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    thietBi.setMaThietBi(generatedKeys.getInt(1));
+                }
             }
-        }
             Jdbc.closeConnection(c);
         } catch (SQLException var6) {
             var6.printStackTrace();
@@ -151,15 +152,15 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return dsThietBi;
     }
-    
-    public List<ThietBi> findAllByField(String fieldName, String value)  {
+
+    public List<ThietBi> findAllByField(String fieldName, String value) {
         List<ThietBi> dsThietBi = new ArrayList();
 
         try {
             Connection c = Jdbc.getConnection();
             String query = "SELECT * FROM thietbi WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(1, "%"+value+"%");
+            stm.setString(1, "%" + value + "%");
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -183,7 +184,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return dsThietBi;
     }
-    
+
     public ThietBi findOneBySoMay(int SoMay) {
         ThietBi thietBi = null;
 
@@ -213,39 +214,37 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return thietBi;
     }
-    
 
-  public List<ThietBi> findAllByTenPhongThucHanh(String tenPhongThucHanh) {
-    List<ThietBi> dsThietBi = new ArrayList<>();
+    public List<ThietBi> findAllByTenPhongThucHanh(String tenPhongThucHanh) {
+        List<ThietBi> dsThietBi = new ArrayList<>();
 
-    try {
-        Connection c = Jdbc.getConnection();
-        String query = "SELECT * FROM thietbi WHERE MaPhongThucHanh IN (SELECT MaPhongThucHanh FROM phongthuchanh WHERE LOWER(TenPhong) LIKE LOWER(?))";
-        PreparedStatement stm = c.prepareStatement(query);
-        stm.setString(1, "%" + tenPhongThucHanh + "%");
-        ResultSet rs = stm.executeQuery();
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM thietbi WHERE MaPhongThucHanh IN (SELECT MaPhongThucHanh FROM phongthuchanh WHERE LOWER(TenPhong) LIKE LOWER(?))";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setString(1, "%" + tenPhongThucHanh + "%");
+            ResultSet rs = stm.executeQuery();
 
-        while (rs.next()) {
-            ThietBi thietBi = new ThietBi(
-                    rs.getInt("MaThietBi"),
-                    rs.getString("TenThietBi"),
-                    rs.getString("LoaiThietBi"),
-                    rs.getString("NgaySuDung"),
-                    rs.getString("MoTa"),
-                    rs.getString("TinhTrang"),
-                    rs.getInt("MaPhongThucHanh"),
-                    rs.getInt("SoMay")
-            );
-            dsThietBi.add(thietBi);
+            while (rs.next()) {
+                ThietBi thietBi = new ThietBi(
+                        rs.getInt("MaThietBi"),
+                        rs.getString("TenThietBi"),
+                        rs.getString("LoaiThietBi"),
+                        rs.getString("NgaySuDung"),
+                        rs.getString("MoTa"),
+                        rs.getString("TinhTrang"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getInt("SoMay")
+                );
+                dsThietBi.add(thietBi);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
         }
 
-        Jdbc.closeConnection(c);
-    } catch (SQLException var7) {
-        var7.printStackTrace();
+        return dsThietBi;
     }
-
-    return dsThietBi;
-}
-
 
 }

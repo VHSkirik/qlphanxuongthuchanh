@@ -84,7 +84,7 @@ public class CanBoMenu extends javax.swing.JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        sVGImage1.setSVGImage("./views/icon/svg/0.svg");
+        sVGImage1.setSVGImage("./views/icon/svg/uneti_2.svg");
     }
 
     @SuppressWarnings("unchecked")
