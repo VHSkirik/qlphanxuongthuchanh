@@ -1,6 +1,8 @@
 package views.panel.giaovien;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -8,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.DatPhong;
+import models.OperationResult;
 import services.DatPhongService;
 import views.models.CurrentUser;
 
@@ -48,6 +51,14 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     public JTextField getTxtMaPhong() {
         return this.lbMaPhong;
     }
+    
+    private void reset(){
+        lbMaPhong.setText("");
+        lbThoiGian.setText("____/__/__");
+        lbTietBatDau.setText("");
+        lbTietKetThuc.setText("");
+        lbMucDich.setText("");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -82,10 +93,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
         tbDatPhong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "ID", "Ngày", "Trạng Thái"
@@ -320,12 +328,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btReSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReSetActionPerformed
-
-        lbMaPhong.setText("");
-        lbThoiGian.setText("____/__/__");
-        lbTietBatDau.setText("");
-        lbTietKetThuc.setText("");
-        lbMucDich.setText("");
+        reset();
     }//GEN-LAST:event_btReSetActionPerformed
 
     private void btChonPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonPhongActionPerformed
@@ -340,15 +343,24 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
             int tietBatDau = Integer.parseInt(lbTietBatDau.getText());
             int tietKetThuc = Integer.parseInt(lbTietKetThuc.getText());
             String monHoc = lbMucDich.getText();
+            String ngayTao = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
+            System.out.println(ngayTao);
 
             if (thoiGian.isBlank() || monHoc.isBlank()) {
                 JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
                 return;
             }
-            
-            int rs = JOptionPane.showConfirmDialog(this, "Xác nhận yêu cầu?","Xác Nhận",JOptionPane.YES_NO_OPTION);
-            if (rs == JOptionPane.YES_OPTION){
-                
+
+            int rs = JOptionPane.showConfirmDialog(this, "Xác nhận yêu cầu?", "Xác Nhận", JOptionPane.YES_NO_OPTION);
+            if (rs == JOptionPane.YES_OPTION) {
+                OperationResult os = datPhongService.createDatPhong(null, maGiaoVien, maPhong, thoiGian, tietBatDau, tietKetThuc, monHoc, thoiGian, ngayTao);
+                if (os.isSuccess()) {
+                    JOptionPane.showMessageDialog(this, "Gửi Thành Công.");
+                    reset();
+                    initDataTable();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Gửi Thất Bại.");
+                }
             }
 
         } catch (Exception e) {

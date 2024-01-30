@@ -33,7 +33,7 @@ public class DataLichHoc extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 3));
 
         txtMonhoc.setColumns(20);
-        txtMonhoc.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtMonhoc.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         txtMonhoc.setForeground(new java.awt.Color(21, 61, 95));
         txtMonhoc.setRows(5);
         txtMonhoc.setText("Thực tập cuối khóa ngành CNTT");
@@ -62,10 +62,10 @@ public class DataLichHoc extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(txtMonhoc, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtMonhoc, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(txtTietHoc)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(0, 0, 0)
                 .addComponent(txtPhongHoc)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
