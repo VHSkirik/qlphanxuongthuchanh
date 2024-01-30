@@ -71,7 +71,7 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
             stm.setInt(4, datPhong.getTietBatDau());
             stm.setInt(5, datPhong.getTietKetThuc());
             stm.setString(6, datPhong.getMonHoc());
-            stm.setString(5, datPhong.getTrangThai());
+            stm.setString(7, datPhong.getTrangThai());
 
             // Lấy thời gian hiện tại
             LocalDateTime now = LocalDateTime.now();

@@ -23,7 +23,7 @@ public class DatPhongService {
         } else if (PhongThucHanhDAO.getIns().findOne(MaPhongThucHanh) != null) {
             return OperationResult.ADD_FAILURE;
         } else {
-            DatPhong datPhong = new DatPhong(MaYeuCau, MaNguoiDung, MaPhongThucHanh, NgayThucHanh, TietBatDau, TietKetThuc, MonHoc, TrangThai, NgayTao);
+            DatPhong datPhong = new DatPhong(null, MaNguoiDung, MaPhongThucHanh, NgayThucHanh, TietBatDau, TietKetThuc, MonHoc, TrangThai, NgayTao);
 
             int result = DatPhongDAO.getIns().create(datPhong);
             return (result == -1) ? OperationResult.ADD_FAILURE : OperationResult.ADD_SUCCESS;
