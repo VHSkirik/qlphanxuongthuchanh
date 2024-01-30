@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import models.NguoiDung;
 import views.models.CurrentUser;
 import views.models.EventMenuSelected;
+import views.panel.admin.AdminBaoCao;
 import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;
 import views.panel.admin.AdminThietBi;
@@ -56,6 +57,9 @@ public class AdminMain extends javax.swing.JFrame {
                         break;
                     case 5:
                         setMainPanel(new AdminYeuCau());
+                        break;
+                    case 6:
+                        setMainPanel(new AdminBaoCao());
                         break;
                     case 8:
                         setMainPanel(new FormThongKe());
