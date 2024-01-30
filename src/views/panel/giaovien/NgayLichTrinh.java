@@ -16,6 +16,10 @@ public class NgayLichTrinh extends javax.swing.JPanel {
     public void setNgay(String ngay){
         this.lbNgay.setText(ngay);
     }
+    
+    public String getNgay(){
+        return lbNgay.getText();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
