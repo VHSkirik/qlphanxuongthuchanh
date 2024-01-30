@@ -4,6 +4,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import models.DatPhong;
@@ -22,7 +23,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     }
 
     private void myInit() {
-        lbMaGiaoVien.setText(CurrentUser.getNguoiDung().getMaNguoiDung()+"");
+        lbMaGiaoVien.setText(CurrentUser.getNguoiDung().getMaNguoiDung() + "");
         initImage();
         initDataTable();
     }
@@ -43,10 +44,10 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
             });
         }
     }
-    
-    public JTextField getTxtMaPhong(){
+
+    public JTextField getTxtMaPhong() {
         return this.lbMaPhong;
-    } 
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -145,7 +146,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel6.setText("Mục Đích");
+        jLabel6.setText("Môn Học");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel7.setText("Chi Tiết Yêu Cầu");
@@ -177,6 +178,11 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
         btGui.setText("GỬI");
         btGui.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btGui.setIconTextGap(0);
+        btGui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btGuiActionPerformed(evt);
+            }
+        });
 
         btReSet.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btReSet.setText("RESET");
@@ -314,8 +320,7 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btReSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReSetActionPerformed
-        lbMaYeuCau.setText("");
-        lbMaGiaoVien.setText("");
+
         lbMaPhong.setText("");
         lbThoiGian.setText("____/__/__");
         lbTietBatDau.setText("");
@@ -326,6 +331,31 @@ public class GiaoVienYeuCau extends javax.swing.JPanel {
     private void btChonPhongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btChonPhongActionPerformed
         new ChonPhongDiaLog(this, new JFrame(), true).setVisible(true);
     }//GEN-LAST:event_btChonPhongActionPerformed
+
+    private void btGuiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGuiActionPerformed
+        try {
+            int maPhong = Integer.parseInt(lbMaPhong.getText());
+            int maGiaoVien = Integer.parseInt(lbMaGiaoVien.getText());
+            String thoiGian = lbThoiGian.getText();
+            int tietBatDau = Integer.parseInt(lbTietBatDau.getText());
+            int tietKetThuc = Integer.parseInt(lbTietKetThuc.getText());
+            String monHoc = lbMucDich.getText();
+
+            if (thoiGian.isBlank() || monHoc.isBlank()) {
+                JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin.");
+                return;
+            }
+            
+            int rs = JOptionPane.showConfirmDialog(this, "Xác nhận yêu cầu?","Xác Nhận",JOptionPane.YES_NO_OPTION);
+            if (rs == JOptionPane.YES_OPTION){
+                
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Dữ liệu không hợp lệ.");
+        }
+    }//GEN-LAST:event_btGuiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
