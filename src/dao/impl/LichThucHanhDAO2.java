@@ -226,7 +226,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh WHERE MaNguoiDung = ? and NgayThucHanh = ?";
+            String query = "SELECT * FROM lichthuchanh WHERE MaNguoiDung = ? and NgayThucHanh = ? ORDER BY TietBatDau";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, MaNguoiDung );
             stm.setString(2, NgayThucHanh);
