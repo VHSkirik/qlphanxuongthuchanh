@@ -28,7 +28,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh2 WHERE MaLichThucHanh = ?";
+            String query = "SELECT * FROM lichthuchanh WHERE MaLichThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
@@ -40,7 +40,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getString("NgayThucHanh"),
                         rs.getInt("TietBatDau"),
                         rs.getInt("TietKetTHuc"),
-                        rs.getString("Mon")
+                        rs.getString("MonHoc")
                 );
             }
 
@@ -85,7 +85,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE lichthuchanh2 SET MaNguoiDung = ?, MaPhongThucHanh = ?,NgayThucHanh = ?, TietBatDau = ?, TietKetTHuc = ?, Mon = ? WHERE MaLichThucHanh = ?";
+            String query = "UPDATE lichthuchanh SET MaNguoiDung = ?, MaPhongThucHanh = ?,NgayThucHanh = ?, TietBatDau = ?, TietKetTHuc = ?, MonHoc = ? WHERE MaLichThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, lichThucHanh.getMaNguoiDung());
             stm.setInt(2, lichThucHanh.getMaPhongThucHanh());
@@ -108,7 +108,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "DELETE FROM lichthuchanh2 WHERE MaLichThucHanh = ?";
+            String query = "DELETE FROM lichthuchanh WHERE MaLichThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, id);
             rs = stm.executeUpdate();
@@ -125,7 +125,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh2";
+            String query = "SELECT * FROM lichthuchanh";
             PreparedStatement stm = c.prepareStatement(query);
             ResultSet rs = stm.executeQuery();
 
@@ -137,7 +137,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getString("NgayThucHanh"),
                         rs.getInt("TietBatDau"),
                         rs.getInt("TietKetThuc"),
-                        rs.getString("Mon")
+                        rs.getString("MonHoc")
                 );
                 dsLichThucHanh.add(lichThucHanh);
             }
@@ -155,7 +155,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh2 WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
+            String query = "SELECT * FROM lichthuchanh WHERE LOWER(" + fieldName + ") LIKE LOWER(?)";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setString(1, "%" + value + "%");
             ResultSet rs = stm.executeQuery();
@@ -168,7 +168,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getString("NgayThucHanh"),
                         rs.getInt("TietBatDau"),
                         rs.getInt("TietKetThuc"),
-                        rs.getString("Mon")
+                        rs.getString("MonHoc")
                 );
                 dsLichThucHanh.add(lichThucHanh);
             }
@@ -224,7 +224,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM lichthuchanh2 WHERE MaNguoiDung = ? and NgayThucHanh = ?";
+            String query = "SELECT * FROM lichthuchanh WHERE MaNguoiDung = ? and NgayThucHanh = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, MaNguoiDung );
             stm.setString(2, NgayThucHanh);
@@ -238,7 +238,7 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
                         rs.getString("NgayThucHanh"),
                         rs.getInt("TietBatDau"),
                         rs.getInt("TietKetThuc"),
-                        rs.getString("Mon")
+                        rs.getString("MonHoc")
                 );
                 dsLichThucHanh.add(lichThucHanh);
             }

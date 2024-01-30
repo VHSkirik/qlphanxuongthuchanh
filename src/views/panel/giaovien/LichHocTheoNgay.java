@@ -1,26 +1,39 @@
 package views.panel.giaovien;
 
+import dao.impl.PhongThucHanhDAO;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.util.List;
 import javax.swing.JPanel;
-import models.LichThucHanh;
+import models.LichThucHanh2;
+import models.PhongThucHanh;
+import services.LichThucHanhService;
+import views.models.CurrentUser;
 
 public class LichHocTheoNgay extends JPanel {
 
-    private List<LichThucHanh> lichThucHanhs;
-    
-    public LichHocTheoNgay() {
-        setBackground(new Color(255,255,255));
+    private List<LichThucHanh2> dsLichThucHanh;
+    private final LichThucHanhService lichThucHanhService = new LichThucHanhService();
+
+    public LichHocTheoNgay(String ngay) {
+        dsLichThucHanh = lichThucHanhService.getLichThucHanh(CurrentUser.getNguoiDung().getMaNguoiDung(), ngay);
+        setBackground(new Color(255, 255, 255));
         GridLayout layout = new GridLayout(4, 1);
+        if (dsLichThucHanh.size() > 4){
+            layout = new GridLayout(dsLichThucHanh.size(), 1);
+        }
         this.setLayout(layout);
         myInit();
     }
 
     private void myInit() {
-        DataLichHoc dt1 = new DataLichHoc();
-        DataLichHoc dt2 = new DataLichHoc();
-        this.add(dt1, 0, 0);
-        this.add(dt2, 1, 0);
+        for (LichThucHanh2 lichThucHanh : dsLichThucHanh){
+            DataLichHoc dataLichHoc = new DataLichHoc();
+            dataLichHoc.setMonHoc(lichThucHanh.getMon());
+            dataLichHoc.setTietHoc("Tiết: " + lichThucHanh.getTietBatDau() + " - " + lichThucHanh.getTietKetTHuc());
+            String tenPhongThucHanh = new PhongThucHanhDAO().findOne(lichThucHanh.getMaPhongThucHanh()).getTenPhong();
+            dataLichHoc.setPhongHoc("Phòng: " + tenPhongThucHanh);
+            this.add(dataLichHoc);
+        }
     }
 }

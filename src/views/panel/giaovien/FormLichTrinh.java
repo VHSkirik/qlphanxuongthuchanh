@@ -27,9 +27,13 @@ public class FormLichTrinh extends javax.swing.JPanel {
     }
     
     private void initLich(){
-        for (int i = 0 ; i < 7 ; i++){
-            pnLichHoc.add(new LichHocTheoNgay());
-        }
+            pnLichHoc.add(new LichHocTheoNgay(pnThu2.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnThu3.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnThu4.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnThu5.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnThu6.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnThu7.getNgay()));
+            pnLichHoc.add(new LichHocTheoNgay(pnChuNhat.getNgay()));
     }
 
     @SuppressWarnings("unchecked")
