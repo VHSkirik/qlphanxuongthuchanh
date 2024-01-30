@@ -1,24 +1,50 @@
-
 package views.panel.admin;
 
-public class AdminBaoCao extends javax.swing.JPanel {
+import com.formdev.flatlaf.extras.FlatSVGIcon;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import models.BaoCaoThietBi;
+import services.BaoCaoThietBiService;
 
+public class AdminBaoCao extends javax.swing.JPanel {
+    
+    List<BaoCaoThietBi> dsBaoCaoThietBi;
+    private BaoCaoThietBiService baoCaoThietBiService;
+    private DefaultTableModel dtm;
+    
     public AdminBaoCao() {
         initComponents();
+        baoCaoThietBiService = new BaoCaoThietBiService();
+        dtm = (DefaultTableModel) tbBaoCao.getModel();
+        myInit();
     }
-
+    
+    private void myInit() {
+        lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/error_black.svg", 35, 35));
+        initData();
+    }
+    
+    private void initData(){
+        dsBaoCaoThietBi = baoCaoThietBiService.getAll();
+        initTable();
+    }
+    
+    private void initTable(){
+        
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         panelBorder1 = new views.panel.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        lbYeuCau = new javax.swing.JLabel();
+        tbBaoCao = new javax.swing.JTable();
+        lbTitle = new javax.swing.JLabel();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbBaoCao.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -34,11 +60,11 @@ public class AdminBaoCao extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbBaoCao);
 
-        lbYeuCau.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        lbYeuCau.setForeground(new java.awt.Color(127, 127, 127));
-        lbYeuCau.setText("Danh Sách Báo Cáo");
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(127, 127, 127));
+        lbTitle.setText("Danh Sách Báo Cáo Lỗi");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -49,7 +75,7 @@ public class AdminBaoCao extends javax.swing.JPanel {
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(lbYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -57,7 +83,7 @@ public class AdminBaoCao extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                 .addContainerGap(191, Short.MAX_VALUE)
-                .addComponent(lbYeuCau, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -84,8 +110,8 @@ public class AdminBaoCao extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lbYeuCau;
+    private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorder panelBorder1;
+    private javax.swing.JTable tbBaoCao;
     // End of variables declaration//GEN-END:variables
 }
