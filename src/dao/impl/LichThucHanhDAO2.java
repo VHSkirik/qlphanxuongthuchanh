@@ -219,4 +219,35 @@ public class LichThucHanhDAO2 implements DAOInterface<LichThucHanh2> {
         return overlappingLichThucHanhList;
     }
 
+    public List<LichThucHanh2> getLichThucHanh(int MaNguoiDung, String NgayThucHanh){
+         List<LichThucHanh2> dsLichThucHanh = new ArrayList<>();
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM lichthuchanh2 WHERE MaNguoiDung = ? and NgayThucHanh = ?";
+            PreparedStatement stm = c.prepareStatement(query);
+            stm.setInt(1, MaNguoiDung );
+            stm.setString(2, NgayThucHanh);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                LichThucHanh2 lichThucHanh = new LichThucHanh2(
+                        rs.getInt("MaLichThucHanh"),
+                        rs.getInt("MaNguoiDung"),
+                        rs.getInt("MaPhongThucHanh"),
+                        rs.getString("NgayThucHanh"),
+                        rs.getInt("TietBatDau"),
+                        rs.getInt("TietKetThuc"),
+                        rs.getString("Mon")
+                );
+                dsLichThucHanh.add(lichThucHanh);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+
+        return dsLichThucHanh;
+    }
 }
