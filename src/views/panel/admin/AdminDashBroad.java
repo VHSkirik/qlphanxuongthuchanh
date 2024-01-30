@@ -27,7 +27,7 @@ public class AdminDashBroad extends javax.swing.JPanel {
     private void myInit() {
         int soNguoiDung = thongKeService.getSoNguoiDung();
         int soThietBi = thongKeService.getSoThietBi();
-        int soDiem = (int) thongKeService.getDiemTrungBinh();
+        double soDiem = (double) thongKeService.getDiemTrungBinh();
         lbYeuCau.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
         Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_User.svg", 120, 120), "NGƯỜI DÙNG", soNguoiDung+"", "Trên tất cả các cơ sở");
         Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Device.svg", 100, 100), "THIẾT BỊ", soThietBi+"", "Đang được sử dụng");
