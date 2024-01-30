@@ -164,4 +164,34 @@ public class PhanHoiDAO implements DAOInterface<PhanHoi> {
 
         return dsPhanHoi;
     }
+    
+      public double calculateAverageRating() {
+        double averageRating = 0.0;
+        int totalRatings = 0;
+
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT DiemDanhGia FROM phanhoi";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                int rating = rs.getInt("DiemDanhGia");
+                averageRating += rating;
+                totalRatings++;
+            }
+
+            // Tránh chia cho 0
+            if (totalRatings > 0) {
+                averageRating /= totalRatings;
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return averageRating;
+    }
+
 }

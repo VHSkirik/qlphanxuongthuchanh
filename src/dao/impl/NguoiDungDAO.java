@@ -185,4 +185,28 @@ public class NguoiDungDAO implements DAOInterface<NguoiDung> {
         }
         return danhSachNguoiDung;
     }
+    
+   public int countNonAdminUsers() {
+    int count = 0;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT COUNT(*) FROM nguoidung WHERE LoaiNguoiDung != ?";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "Admin");
+
+        ResultSet rs = stm.executeQuery();
+        if (rs.next()) {
+            count = rs.getInt(1);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return count;
+    }
+
+
 }

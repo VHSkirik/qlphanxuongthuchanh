@@ -17,7 +17,7 @@ public class ThietBiService {
         } else if (PhongThucHanhDAO.getIns().findOne(MaPhongThucHanh) == null) {
             return new ResultReason(OperationResult.ADD_FAILURE, "Phòng thực hành không tồn tại");
         } else {
-            if (ThietBiDAO.getIns().findOneBySoMay(SoMay) != null) {
+            if (ThietBiDAO.getIns().findOneBySoMayAndPhong(SoMay, MaPhongThucHanh) != null) {
                 return new ResultReason(OperationResult.ADD_FAILURE, "Số máy thiết bị đã tồn tại");
             } else {
                 ThietBi thietBi = new ThietBi(null, TenThietBi, LoaiThietBi, NgaySuDung, MoTa, TinhTrang, MaPhongThucHanh, SoMay);
@@ -33,13 +33,12 @@ public class ThietBiService {
         // Kiểm tra trống
         if (TenThietBi.isBlank() || LoaiThietBi.isBlank() || NgaySuDung.isBlank() || MoTa.isBlank() || TinhTrang.isBlank()) {
             return OperationResult.EDIT_FAILURE;
-        } else if (PhongThucHanhDAO.getIns().findOne(MaPhongThucHanh) != null) {
+        } else if (PhongThucHanhDAO.getIns().findOne(MaPhongThucHanh) == null) {
             return OperationResult.EDIT_FAILURE;
         } else {
             if (ThietBiDAO.getIns().findOne(MaThietBi) == null) {
                 return OperationResult.EDIT_FAILURE;
-            } else if (ThietBiDAO.getIns().findOneBySoMay(SoMay) != null) {
-                return OperationResult.EDIT_FAILURE;
+            
             } else {
                 ThietBi thietBi = new ThietBi(MaThietBi, TenThietBi, LoaiThietBi, NgaySuDung, MoTa, TinhTrang, MaPhongThucHanh, SoMay);
                 int result = ThietBiDAO.getIns().update(thietBi, MaThietBi);
