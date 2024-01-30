@@ -20,7 +20,6 @@ public class AdminMenu extends javax.swing.JPanel {
     private int y;
     private EventMenuSelected event;
 
-
     public AdminMenu() {
         initComponents();
         setOpaque(false);
@@ -36,6 +35,7 @@ public class AdminMenu extends javax.swing.JPanel {
         listMenu.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("multi_user", "Người Dùng", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("gv3", "Yêu Cầu", Model_Menu.MenuType.MENU));
+        listMenu.addItem(new Model_Menu("error", "Báo Cáo Lỗi", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("feedback", "Phản Hồi", Model_Menu.MenuType.MENU));
 
         listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
@@ -49,8 +49,8 @@ public class AdminMenu extends javax.swing.JPanel {
         listMenu.addItem(new Model_Menu("exit", "Thoát", Model_Menu.MenuType.MENU));
 
     }
-    
-    public ListMenu<String> getListMenu(){
+
+    public ListMenu<String> getListMenu() {
         return this.listMenu;
     }
 
@@ -73,9 +73,8 @@ public class AdminMenu extends javax.swing.JPanel {
         });
 
     }
-    
-        
-    public void addEventMenuSelected(EventMenuSelected event){
+
+    public void addEventMenuSelected(EventMenuSelected event) {
         this.event = event;
         listMenu.addEventMenuSelected(event);
     }

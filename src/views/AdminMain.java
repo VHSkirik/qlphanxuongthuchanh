@@ -56,17 +56,17 @@ public class AdminMain extends javax.swing.JFrame {
                     case 5:
                         setMainPanel(new AdminYeuCau());
                         break;
-                    case 9:
+                    case 10:
                         setMainPanel(new FormTaiKhoan());
                         break;
-                    case 10:
+                    case 11:
                         int checkLogout = JOptionPane.showConfirmDialog(AdminMain.this, "Đăng xuất tài khoản hiện tại?", "Đăng xuất", JOptionPane.YES_NO_OPTION);
                         if (checkLogout == JOptionPane.YES_OPTION) {
                             AdminMain.this.dispose();
                             new LoginForm().setVisible(true);
                         }
                         break;
-                    case 13:
+                    case 14:
                         int checkExit = JOptionPane.showConfirmDialog(AdminMain.this, "Thoát ứng dụng?", "Thoát", JOptionPane.YES_NO_OPTION);
                         if (checkExit == JOptionPane.YES_OPTION) {
                             System.exit(0);
