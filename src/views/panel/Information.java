@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.Timer;
 import models.NguoiDung;
 import models.ThongTinNguoiDung;
+import services.ThongKeService;
 import services.ThongTinNguoiDungService;
 
 public class Information extends PanelBorderHalf {
@@ -13,14 +14,25 @@ public class Information extends PanelBorderHalf {
     private NguoiDung nguoiDung;
     private ThongTinNguoiDung thongTinNguoiDung;
     private Timer timer;
+    private int check = 3;
+    private ThongKeService thongKeService;
 
     public Information() {
         initComponents();
+        thongKeService = new ThongKeService();
         lbUserIcon.setIcon(new FlatSVGIcon("./views/icon/svg/admin_2.svg", 63, 63));
         timer = new Timer(1000, (e) -> {
             LocalTime currentTime = LocalTime.now();
             String time = String.format("%02d:%02d:%02d", currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
             txtTime.setText(time);
+            if (check >= 3) {
+                int rs = thongKeService.getSoYeuCauDangCho();
+                String soLuong = (rs == 0) ? "" : rs + "";
+                btThongBao.setText(soLuong);
+                check = 0;
+            } else {
+                check++;
+            }
         });
         timer.start();
     }

@@ -1,5 +1,6 @@
 package services;
 
+import dao.impl.DatPhongDAO;
 import dao.impl.NguoiDungDAO;
 import dao.impl.PhanHoiDAO;
 import dao.impl.ThietBiDAO;
@@ -20,6 +21,10 @@ public class ThongKeService {
     public double getDiemTrungBinh(){
         // trả về tổng số điểm trung bình của đánh giá
         return PhanHoiDAO.getIns().calculateAverageRating();
+    }
+    
+    public int getSoYeuCauDangCho(){
+        return DatPhongDAO.getIns().getSoYeuCauDangCho();
     }
     
 }

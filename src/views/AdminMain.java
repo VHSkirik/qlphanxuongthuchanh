@@ -11,6 +11,7 @@ import javax.swing.UIManager;
 import models.NguoiDung;
 import views.models.CurrentUser;
 import views.models.EventMenuSelected;
+import views.panel.admin.AdminPhanHoi;
 import views.panel.admin.AdminBaoCao;
 import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;
@@ -32,11 +33,11 @@ public class AdminMain extends javax.swing.JFrame {
     private void myInit() {
         setBackground(new Color(0, 0, 0, 0));
         JButton button = pnUserTitle.getButtonThongBao();
-        button.addMouseListener(new MouseAdapter(){
+        button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 setMainPanel(new AdminYeuCau());
-            }          
+            }
         });
         menu.initMoving(AdminMain.this);
         menu.addEventMenuSelected(new EventMenuSelected() {
@@ -60,6 +61,9 @@ public class AdminMain extends javax.swing.JFrame {
                         break;
                     case 6:
                         setMainPanel(new AdminBaoCao());
+                        break;
+                    case 7:
+                        setMainPanel(new AdminPhanHoi());
                         break;
                     case 8:
                         setMainPanel(new FormThongKe());

@@ -259,32 +259,51 @@ public class DatPhongDAO implements DAOInterface<DatPhong> {
 
         return dsDatPhong;
     }
-    
+
     public List<YeuCauTheoCoSo> findAllYeuCauTheoCoSo() {
-    List<YeuCauTheoCoSo> dsYeuCauTheoCoSo = new ArrayList<>();
+        List<YeuCauTheoCoSo> dsYeuCauTheoCoSo = new ArrayList<>();
 
-    try {
-        Connection c = Jdbc.getConnection();
-        String query = "SELECT * FROM YeuCauTheoCoSo";
-        PreparedStatement stm = c.prepareStatement(query);
-        ResultSet rs = stm.executeQuery();
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT * FROM YeuCauTheoCoSo";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
 
-        while (rs.next()) {
-            YeuCauTheoCoSo yeuCauTheoCoSo = new YeuCauTheoCoSo(
-                    rs.getString("Thang"),
-                    rs.getInt("LinhNam"),
-                    rs.getInt("MyXa"),
-                    rs.getInt("MinhKhai")
-            );
-            dsYeuCauTheoCoSo.add(yeuCauTheoCoSo);
+            while (rs.next()) {
+                YeuCauTheoCoSo yeuCauTheoCoSo = new YeuCauTheoCoSo(
+                        rs.getString("Thang"),
+                        rs.getInt("LinhNam"),
+                        rs.getInt("MyXa"),
+                        rs.getInt("MinhKhai")
+                );
+                dsYeuCauTheoCoSo.add(yeuCauTheoCoSo);
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
         }
 
-        Jdbc.closeConnection(c);
-    } catch (SQLException var7) {
-        var7.printStackTrace();
+        return dsYeuCauTheoCoSo;
     }
 
-    return dsYeuCauTheoCoSo;
-}
+    public int getSoYeuCauDangCho() {
+        int soLuong = 0;
+        try {
+            Connection c = Jdbc.getConnection();
+            String query = "SELECT COUNT(*) as 'SoLuong' FROM datphong WHERE datphong.TrangThai = 'DangCho'";
+            PreparedStatement stm = c.prepareStatement(query);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                soLuong = rs.getInt("SoLuong");
+            }
+
+            Jdbc.closeConnection(c);
+        } catch (SQLException var7) {
+            var7.printStackTrace();
+        }
+        return soLuong;
+    }
 
 }
