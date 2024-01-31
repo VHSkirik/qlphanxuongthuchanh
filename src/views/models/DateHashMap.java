@@ -47,13 +47,4 @@ public class DateHashMap {
                 return "";
         }
     }
-
-    public static void main(String[] args) {
-        HashMap<String, String> weekDays = getCurrentWeekDays();
-
-        for (String thu : weekDays.keySet()) {
-            String ngay = weekDays.get(thu);
-            System.out.println("Thứ: " + thu + ", Ngay: " + ngay);
-        }
-    }
 }
