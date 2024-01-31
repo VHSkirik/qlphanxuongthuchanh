@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 import models.NguoiDung;
 import views.models.CurrentUser;
 import views.models.EventMenuSelected;
-import views.panel.AdminPhanHoi;
+import views.panel.admin.AdminPhanHoi;
 import views.panel.admin.AdminBaoCao;
 import views.panel.admin.AdminDashBroad;
 import views.panel.admin.AdminPhong;

@@ -1,4 +1,4 @@
-package views.panel;
+package views.panel.admin;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.LichThucHanhDAO2;
