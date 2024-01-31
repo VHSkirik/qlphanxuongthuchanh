@@ -6,7 +6,9 @@ import dao.impl.ThietBiDAO;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
 import models.OperationResult;
@@ -24,11 +26,13 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     private ThietBiService thietBiService;
     private NguoiDung nguoiDung;
     private HashMap<Integer, String> hmPhongThucHanh;
+    private JPopupMenu popupMenu;
 
     public AdminThietBi() {
+        initComponents();
+        popupMenu = new JPopupMenu();
         this.nguoiDung = CurrentUser.getNguoiDung();
         hmPhongThucHanh = new HashMap<>();
-        initComponents();
         dtm = (DefaultTableModel) tbThietBi.getModel();
         tbThietBi.setAutoCreateRowSorter(true);
         thietBiService = new ThietBiService();
@@ -41,6 +45,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
     private void myInit() {
         initImage();
+        initPopup();
         initTableStart();
         initComboBox();
         initEvent();
@@ -142,6 +147,14 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         } else {
             initDataThietBi(dsThietBi);
         }
+    }
+    
+    private void initPopup(){
+        JMenuItem themItem = new JMenuItem("Thêm");
+        JMenuItem suaItem = new JMenuItem("Sửa");
+        JMenuItem xoaItem = new JMenuItem("Xóa");
+        JMenuItem baoCaoItem = new JMenuItem("Báo Cáo");
+        
     }
 
     @SuppressWarnings("unchecked")
