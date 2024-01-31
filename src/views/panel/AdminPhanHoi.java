@@ -1,7 +1,7 @@
 package views.panel;
 
 import com.formdev.flatlaf.extras.FlatSVGIcon;
-import dao.impl.LichThucHanhDAO;
+import dao.impl.LichThucHanhDAO2;
 import dao.impl.PhongThucHanhDAO;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -10,7 +10,6 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
-import models.LichThucHanh;
 import models.NguoiDung;
 import models.PhanHoi;
 import models.PhongThucHanh;
@@ -48,7 +47,7 @@ public class AdminPhanHoi extends javax.swing.JPanel {
             List<PhanHoi> dsPhanHoiMoi = new ArrayList<>();
             for (PhanHoi phanHoi : dsPhanHoi){
                 int maLich = phanHoi.getMaLichThucHanh();
-                int maPhong = LichThucHanhDAO.getIns().findOne(maLich).getMaPhongThucHanh();
+                int maPhong = LichThucHanhDAO2.getIns().findOne(maLich).getMaPhongThucHanh();
                 PhongThucHanh phongThucHanh = PhongThucHanhDAO.getIns().findOne(maPhong);
                 if (phongThucHanh.getDiaDiem().equals(coSo)){
                     dsPhanHoiMoi.add(phanHoi);
