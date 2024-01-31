@@ -61,6 +61,7 @@ public class CanBoMain extends javax.swing.JFrame {
                 }
             }
         });
+        setMainPanel(new AdminPhong());
     }
 
     private void setMainPanel(JComponent component) {

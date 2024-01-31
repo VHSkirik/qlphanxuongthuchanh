@@ -37,7 +37,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     @Override
     public void paintAll(Graphics g) {
-        svgUser.setSVGImage("./views/icon/svg/icons8_user.svg");
+        svgUser.setSVGImage("icons8_user.svg");
         svgLogin.setSVGImage("./views/icon/svg/login-image.svg");
         svgShow.setSVGImage("./views/icon/svg/icons8_eye.svg");
         svgHide.setSVGImage("./views/icon/svg/icons8_hide.svg");
@@ -153,7 +153,6 @@ public class LoginForm extends javax.swing.JFrame {
         txtUsername.setBackground(new java.awt.Color(25, 118, 211));
         txtUsername.setFont(new java.awt.Font("JetBrains Mono Light", 0, 18)); // NOI18N
         txtUsername.setForeground(new java.awt.Color(255, 255, 255));
-        txtUsername.setText("admin");
         txtUsername.setBorder(null);
         txtUsername.setCaretColor(new java.awt.Color(255, 255, 255));
         txtUsername.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -162,7 +161,6 @@ public class LoginForm extends javax.swing.JFrame {
         txtPassword.setBackground(new java.awt.Color(25, 118, 211));
         txtPassword.setFont(new java.awt.Font("JetBrains Mono Light", 0, 18)); // NOI18N
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setText("admin");
         txtPassword.setBorder(null);
         txtPassword.setCaretColor(new java.awt.Color(255, 255, 255));
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
