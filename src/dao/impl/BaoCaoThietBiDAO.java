@@ -26,13 +26,13 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "SELECT * FROM baocaothietbi WHERE MaBaoCao = ?";
+            String query = "SELECT * FROM baocaothietbi WHERE MaBaoCaoThietBi = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 baoCaoThietBi = new BaoCaoThietBi(
-                        rs.getInt("MaBaoCao"),
+                        rs.getInt("MaBaoCaoThietBi"),
                         rs.getInt("MaThietBi"),
                         rs.getString("NgayBaoCao"),
                         rs.getString("NoiDungBaoCao")
@@ -78,7 +78,7 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "UPDATE baocaothietbi SET MaThietBi = ?, NgayBaoCao = ?, NoiDungBaoCao = ? WHERE MaBaoCao = ?";
+            String query = "UPDATE baocaothietbi SET MaThietBi = ?, NgayBaoCao = ?, NoiDungBaoCao = ? WHERE MaBaoCaoThietBi = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, baoCaoThietBi.getMaThietBi());
             stm.setString(2, baoCaoThietBi.getNgayBaoCao());
@@ -98,7 +98,7 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
         try {
             Connection c = Jdbc.getConnection();
-            String query = "DELETE FROM baocaothietbi WHERE MaBaoCao = ?";
+            String query = "DELETE FROM baocaothietbi WHERE MaBaoCaoThietBi = ?";
             PreparedStatement stm = c.prepareStatement(query);
             stm.setInt(1, id);
             rs = stm.executeUpdate();
@@ -121,7 +121,7 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
             while(rs.next()) {
                 BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(
-                        rs.getInt("MaBaoCao"),
+                        rs.getInt("MaBaoCaoThietBi"),
                         rs.getInt("MaThietBi"),
                         rs.getString("NgayBaoCao"),
                         rs.getString("NoiDungBaoCao")
@@ -149,7 +149,7 @@ public class BaoCaoThietBiDAO implements DAOInterface<BaoCaoThietBi> {
 
         while (rs.next()) {
             BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(
-                    rs.getInt("MaBaoCao"),
+                    rs.getInt("MaBaoCaoThietBi"),
                     rs.getInt("MaThietBi"),
                     rs.getString("NgayBaoCao"),
                     rs.getString("NoiDungBaoCao")
