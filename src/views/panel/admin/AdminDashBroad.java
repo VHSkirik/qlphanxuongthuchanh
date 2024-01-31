@@ -4,6 +4,7 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import dao.impl.DatPhongDAO;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.text.DecimalFormat;
 import java.util.List;
 import models.DatPhong;
 import services.PhongThucHanhService;
@@ -27,11 +28,12 @@ public class AdminDashBroad extends javax.swing.JPanel {
     private void myInit() {
         int soNguoiDung = thongKeService.getSoNguoiDung();
         int soThietBi = thongKeService.getSoThietBi();
-        double soDiem = (double) thongKeService.getDiemTrungBinh();
+        String soDiem = new DecimalFormat("0.0").format(thongKeService.getDiemTrungBinh());
+        
         lbYeuCau.setIcon(new FlatSVGIcon("./views/icon/svg/request_black.svg",40,40));
         Model_Card data1 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_User.svg", 120, 120), "NGƯỜI DÙNG", soNguoiDung+"", "Trên tất cả các cơ sở");
         Model_Card data2 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Device.svg", 100, 100), "THIẾT BỊ", soThietBi+"", "Đang được sử dụng");
-        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Star.svg", 120, 120), "ĐIỂM", soDiem+"", "Đánh giá từ giáo viên");
+        Model_Card data3 = new Model_Card(new FlatSVGIcon("./views/icon/svg/Card_Star.svg", 120, 120), "ĐIỂM", soDiem, "Đánh giá từ giáo viên");
         card1.SetData(data1);
         card2.SetData(data2);
         card3.SetData(data3);
@@ -79,8 +81,6 @@ public class AdminDashBroad extends javax.swing.JPanel {
         lbYeuCau = new javax.swing.JLabel();
         spTable = new javax.swing.JScrollPane();
         table = new views.table.Table();
-
-        setBackground(new java.awt.Color(242, 242, 242));
 
         panelConstainCard.setLayout(new java.awt.GridLayout(1, 0, 10, 0));
 

@@ -112,8 +112,8 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
             Connection c = Jdbc.getConnection();
             String query = "UPDATE thietbi SET TinhTrang = ? WHERE MaThietBi = ?";
             PreparedStatement stm = c.prepareStatement(query);
-            stm.setString(5, tinhTrang);
-            stm.setInt(8, id);
+            stm.setString(1, tinhTrang);
+            stm.setInt(2, id);
             rs = stm.executeUpdate();
             Jdbc.closeConnection(c);
         } catch (SQLException var7) {

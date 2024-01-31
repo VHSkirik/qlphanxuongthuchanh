@@ -11,8 +11,8 @@ public class BaoCaoThietBiService {
 
    public ResultReason createBaoCaoThietBi(Integer MaThietBi, String NgayBaoCao, String NoiDungBaoCao) {
     // Kiểm tra trống
-    if (ThietBiDAO.getIns().findOne(MaThietBi) != null) {
-        return new ResultReason(OperationResult.ADD_FAILURE, "ThietBi found");
+    if (ThietBiDAO.getIns().findOne(MaThietBi) == null) {
+        return new ResultReason(OperationResult.ADD_FAILURE, "ThietBi not found");
     } else {
         BaoCaoThietBi baoCaoThietBi = new BaoCaoThietBi(null, MaThietBi, NgayBaoCao, NoiDungBaoCao);
         int result = BaoCaoThietBiDAO.getIns().create(baoCaoThietBi);

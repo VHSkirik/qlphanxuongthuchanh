@@ -6,7 +6,9 @@ import dao.impl.ThietBiDAO;
 import java.util.HashMap;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.table.DefaultTableModel;
 import models.NguoiDung;
 import models.OperationResult;
@@ -16,6 +18,7 @@ import services.PhongThucHanhService;
 import services.ThietBiService;
 import views.UserFormInterface;
 import views.models.CurrentUser;
+import views.panel.canbo.BaoCaoDialog;
 
 public class AdminThietBi extends javax.swing.JPanel implements UserFormInterface {
 
@@ -24,11 +27,13 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
     private ThietBiService thietBiService;
     private NguoiDung nguoiDung;
     private HashMap<Integer, String> hmPhongThucHanh;
+    private JPopupMenu popupMenu;
 
     public AdminThietBi() {
+        initComponents();
+        popupMenu = new JPopupMenu();
         this.nguoiDung = CurrentUser.getNguoiDung();
         hmPhongThucHanh = new HashMap<>();
-        initComponents();
         dtm = (DefaultTableModel) tbThietBi.getModel();
         tbThietBi.setAutoCreateRowSorter(true);
         thietBiService = new ThietBiService();
@@ -41,6 +46,7 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
 
     private void myInit() {
         initImage();
+        initPopup();
         initTableStart();
         initComboBox();
         initEvent();
@@ -144,6 +150,14 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         }
     }
 
+    private void initPopup() {
+        JMenuItem themItem = new JMenuItem("Thêm");
+        JMenuItem suaItem = new JMenuItem("Sửa");
+        JMenuItem xoaItem = new JMenuItem("Xóa");
+        JMenuItem baoCaoItem = new JMenuItem("Báo Cáo");
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -230,6 +244,11 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
         btBaoCao.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btBaoCao.setIconTextGap(0);
         btBaoCao.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btBaoCao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBaoCaoActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btBaoCao);
 
         jToolBar2.setRollover(true);
@@ -417,6 +436,25 @@ public class AdminThietBi extends javax.swing.JPanel implements UserFormInterfac
             JOptionPane.showMessageDialog(this, "Chưa chọn thiết bị cần xóa.");
         }
     }//GEN-LAST:event_btXoaActionPerformed
+
+    private void btBaoCaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBaoCaoActionPerformed
+        int currentRow = tbThietBi.getSelectedRow();
+        if (currentRow != -1) {
+            if (cbPhong.getSelectedIndex() == 0 && !CurrentUser.getNguoiDung().getLoaiNguoiDung().equals("Admin")) {
+                JOptionPane.showMessageDialog(this, "Hãy Chọn Phòng Trước.");
+            } else {
+                int maThietBi = Integer.parseInt(tbThietBi.getValueAt(currentRow, 0).toString());
+                ThietBi thietBi = ThietBiDAO.getIns().findOne(maThietBi);
+                if (thietBi.getTinhTrang().equals("Hong")) {
+                    JOptionPane.showMessageDialog(this, "Thiết bị này đã được báo cáo.");
+                } else {
+                    new BaoCaoDialog(this, new JFrame(), true, maThietBi).setVisible(true);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa chọn thiết bị cần Báo Cáo.");
+        }
+    }//GEN-LAST:event_btBaoCaoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
