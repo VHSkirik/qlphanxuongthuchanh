@@ -35,10 +35,17 @@ public class ThongKeBang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMain = new javax.swing.JTable();
         cbCoSo = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        cbCoSo2 = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbCoSo3 = new javax.swing.JComboBox<>();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jScrollPane1.setBorder(null);
+
+        tbMain.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tbMain.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -49,9 +56,34 @@ public class ThongKeBang extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tbMain);
 
-        jLabel1.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel1.setText("Cơ Sở");
+        cbCoSo.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+
+        cbCoSo2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbCoSo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Phòng", "Thiết Bị" }));
+        cbCoSo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCoSo2ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Cơ Sở");
+
+        jLabel3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Đối tượng");
+
+        jLabel4.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("Tình Trạng");
+
+        cbCoSo3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbCoSo3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCoSo3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -60,22 +92,36 @@ public class ThongKeBang extends javax.swing.JPanel {
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(cbCoSo, 0, 157, Short.MAX_VALUE)
-                        .addGap(676, 676, 676))
+                        .addGap(13, 13, 13)
+                        .addComponent(cbCoSo2, 0, 157, Short.MAX_VALUE)
+                        .addGap(13, 13, 13)
+                        .addComponent(cbCoSo3, 0, 157, Short.MAX_VALUE)
+                        .addGap(336, 336, 336))
                     .addComponent(jScrollPane1))
-                .addGap(20, 20, 20))
+                .addGap(25, 25, 25))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addGap(6, 6, 6)
-                .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbCoSo3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(68, 68, 68)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
 
@@ -91,10 +137,22 @@ public class ThongKeBang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbCoSo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCoSo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCoSo2ActionPerformed
+
+    private void cbCoSo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCoSo3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCoSo3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbCoSo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox<String> cbCoSo2;
+    private javax.swing.JComboBox<String> cbCoSo3;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JTable tbMain;
