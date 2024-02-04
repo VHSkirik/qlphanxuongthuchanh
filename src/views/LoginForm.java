@@ -37,7 +37,7 @@ public class LoginForm extends javax.swing.JFrame {
 
     @Override
     public void paintAll(Graphics g) {
-        svgUser.setSVGImage("icons8_user.svg");
+        svgUser.setSVGImage("./views/icon/svg/icons8_user.svg");
         svgLogin.setSVGImage("./views/icon/svg/login-image.svg");
         svgShow.setSVGImage("./views/icon/svg/icons8_eye.svg");
         svgHide.setSVGImage("./views/icon/svg/icons8_hide.svg");
