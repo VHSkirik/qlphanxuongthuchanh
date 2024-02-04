@@ -32,7 +32,6 @@ public class CanBoMenu extends javax.swing.JPanel {
         listMenu.addItem(new Model_Menu("2", "Phòng", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("3", "Thiết Bị", Model_Menu.MenuType.MENU));
         listMenu.addItem(new Model_Menu("feedback", "Phản Hồi", Model_Menu.MenuType.MENU));
-        listMenu.addItem(new Model_Menu("5", "Thống Kê", Model_Menu.MenuType.MENU));
 
         listMenu.addItem(new Model_Menu("", "", Model_Menu.MenuType.EMPTY));
         listMenu.addItem(new Model_Menu("", "Cá Nhân", Model_Menu.MenuType.TITLE));

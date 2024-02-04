@@ -9,41 +9,24 @@ import models.YeuCauTheoCoSo;
 import raven.chart.ModelChart;
 import views.models.CurrentUser;
 
-public class FormThongKe extends javax.swing.JPanel {
+public class ThongKeBieuDo extends javax.swing.JPanel {
 
     private int userIndex;
 
-    public FormThongKe() {
+    public ThongKeBieuDo() {
         initComponents();
         setTitle();
         setDataYeuCau();
     }
 
     private void setTitle() {
-        chart.setTitle("Chart Data");
+        chart.setTitle("Số Lượng");
+        userIndex = 0;
+        chart.addLegend("Lĩnh Nam", Color.decode("#7b4397"), Color.decode("#dc2430"));
+        chart.addLegend("Mỹ Xá", Color.decode("#e65c00"), Color.decode("#F9D423"));
+        chart.addLegend("Minh Khai", Color.decode("#0099F7"), Color.decode("#F11712"));
+        chart.addLegend("Tất Cả", Color.decode("#0099F7"), Color.decode("#F9D423"));
 
-        NguoiDung nguoiDung = CurrentUser.getNguoiDung();
-        switch (nguoiDung.getCoSo()) {
-            case "Lĩnh Nam":
-                userIndex = 1;
-                chart.addLegend("Lĩnh Nam", Color.decode("#7b4397"), Color.decode("#dc2430"));
-                break;
-            case "Mỹ Xá":
-                userIndex = 2;
-                chart.addLegend("Mỹ Xá", Color.decode("#e65c00"), Color.decode("#F9D423"));
-                break;
-            case "Minh Khai":
-                userIndex = 3;
-                chart.addLegend("Minh Khai", Color.decode("#0099F7"), Color.decode("#F11712"));
-                break;
-            default:
-                userIndex = 0;
-                chart.addLegend("Lĩnh Nam", Color.decode("#7b4397"), Color.decode("#dc2430"));
-                chart.addLegend("Mỹ Xá", Color.decode("#e65c00"), Color.decode("#F9D423"));
-                chart.addLegend("Minh Khai", Color.decode("#0099F7"), Color.decode("#F11712"));
-                chart.addLegend("Tất Cả", Color.decode("#0099F7"), Color.decode("#F9D423"));
-                break;
-        }
     }
 
     private void setDataYeuCau() {
@@ -51,26 +34,11 @@ public class FormThongKe extends javax.swing.JPanel {
         dsSoYeuCau = DatPhongDAO.getIns().findAllYeuCauTheoCoSo();
         for (YeuCauTheoCoSo yc : dsSoYeuCau) {
             double[] value;
-
-            switch (userIndex) {
-                case 1:
-                    value = new double[]{yc.LinhNam()};
-                    break;
-                case 2:
-                    value = new double[]{yc.MinhKhai()};
-                    break;
-                case 3:
-                    value = new double[]{yc.MyXa()};
-                    break;
-                default:
-                    value = new double[]{
-                        yc.LinhNam(),
-                        yc.MinhKhai(),
-                        yc.MyXa(),
-                        yc.LinhNam() + yc.MinhKhai() + yc.MyXa()
-                    };
-                    break;
-            }
+            value = new double[]{
+                yc.LinhNam(),
+                yc.MinhKhai(),
+                yc.MyXa(),
+                yc.LinhNam() + yc.MinhKhai() + yc.MyXa()};
 
             chart.addData(new ModelChart(yc.Thang(), value));
         }
