@@ -1,6 +1,6 @@
 package views.panel.canbo;
 
-import java.util.ArrayList;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -15,16 +15,36 @@ public class ThongKeBang extends javax.swing.JPanel {
     }
 
     private void myInit() {
+        lbTitle.setIcon(new FlatSVGIcon("./views/icon/svg/Chart.svg", 45, 45));
         initComboBox();
-        
-        
+        initTableModel();
+        initDataTable();
     }
-    
-    private void initComboBox(){
-        List<String> dsCoSo = Arrays.asList(new String[]{"Lĩnh Nam", "Minh Khai", "Mỹ Xá"});
-        for (String coSo : dsCoSo){
+
+    private void initComboBox() {
+        List<String> dsCoSo = Arrays.asList(new String[]{" ", "Lĩnh Nam", "Minh Khai", "Mỹ Xá"});
+        for (String coSo : dsCoSo) {
             cbCoSo.addItem(coSo);
         }
+    }
+
+    private void initTableModel() {
+        myTableModel = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"", "Đang Sử Dụng", "Hỏng", "Tổng"}
+        ) {
+            boolean[] canEdit = new boolean[]{false, false, false, false};
+
+            public boolean isCellEditable(int row, int column) {
+                return canEdit[column];
+            }
+        };
+        
+        tbMain.setModel(myTableModel);
+    }
+    
+    private void initDataTable(){
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -38,8 +58,7 @@ public class ThongKeBang extends javax.swing.JPanel {
         cbCoSo2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cbCoSo3 = new javax.swing.JComboBox<>();
+        lbTitle = new javax.swing.JLabel();
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -74,16 +93,9 @@ public class ThongKeBang extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Đối tượng");
 
-        jLabel4.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("Tình Trạng");
-
-        cbCoSo3.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        cbCoSo3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCoSo3ActionPerformed(evt);
-            }
-        });
+        lbTitle.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lbTitle.setForeground(new java.awt.Color(127, 127, 127));
+        lbTitle.setText("Thống Kê Chung");
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -93,34 +105,36 @@ public class ThongKeBang extends javax.swing.JPanel {
                 .addGap(20, 20, 20)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(cbCoSo, 0, 157, Short.MAX_VALUE)
-                        .addGap(13, 13, 13)
-                        .addComponent(cbCoSo2, 0, 157, Short.MAX_VALUE)
-                        .addGap(13, 13, 13)
-                        .addComponent(cbCoSo3, 0, 157, Short.MAX_VALUE)
-                        .addGap(336, 336, 336))
-                    .addComponent(jScrollPane1))
-                .addGap(25, 25, 25))
+                        .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelBorder1Layout.createSequentialGroup()
+                                .addComponent(cbCoSo, 0, 157, Short.MAX_VALUE)
+                                .addGap(13, 13, 13)
+                                .addComponent(cbCoSo2, 0, 157, Short.MAX_VALUE)
+                                .addGap(506, 506, 506))
+                            .addComponent(jScrollPane1))
+                        .addGap(25, 25, 25))))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(24, 24, 24)
+                .addComponent(lbTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel3))
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCoSo3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(68, 68, 68)
+                    .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
         );
@@ -141,19 +155,14 @@ public class ThongKeBang extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbCoSo2ActionPerformed
 
-    private void cbCoSo3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCoSo3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCoSo3ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbCoSo;
     private javax.swing.JComboBox<String> cbCoSo2;
-    private javax.swing.JComboBox<String> cbCoSo3;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbTitle;
     private views.panel.PanelBorder panelBorder1;
     private javax.swing.JTable tbMain;
     // End of variables declaration//GEN-END:variables
