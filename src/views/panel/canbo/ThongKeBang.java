@@ -25,6 +25,7 @@ public class ThongKeBang extends javax.swing.JPanel {
             tbMain.getColumnModel().getColumn(1).setPreferredWidth(100);
             tbMain.getColumnModel().getColumn(2).setPreferredWidth(100);
             tbMain.getColumnModel().getColumn(3).setPreferredWidth(100);
+            tbMain.getColumnModel().getColumn(4).setPreferredWidth(100);
         }
     }
 
@@ -122,11 +123,11 @@ public class ThongKeBang extends javax.swing.JPanel {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(panelBorder1Layout.createSequentialGroup()
-                                .addComponent(cbCoSo, 0, 157, Short.MAX_VALUE)
+                                .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(13, 13, 13)
-                                .addComponent(cbCoSo2, 0, 157, Short.MAX_VALUE)
-                                .addGap(506, 506, 506))
-                            .addComponent(jScrollPane1))
+                                .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE))
                         .addGap(25, 25, 25))))
         );
         panelBorder1Layout.setVerticalGroup(
