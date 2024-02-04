@@ -17,6 +17,7 @@ import views.panel.admin.AdminThietBi;
 import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.FormTaiKhoan;
+import views.panel.canbo.FormThongKe;
 import views.panel.canbo.ThongKeBieuDo;
 
 public class AdminMain extends javax.swing.JFrame {
@@ -66,7 +67,7 @@ public class AdminMain extends javax.swing.JFrame {
                         setMainPanel(new AdminPhanHoi());
                         break;
                     case 8:
-                        setMainPanel(new ThongKeBieuDo());
+                        setMainPanel(new FormThongKe());
                         break;
                     case 11:
                         setMainPanel(new FormTaiKhoan());
