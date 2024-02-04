@@ -96,7 +96,6 @@ public class Information extends PanelBorderHalf {
         lbHoTen.setText("Họ Tên");
 
         btThongBao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/icon/notification.png"))); // NOI18N
-        btThongBao.setText("5");
 
         jLabel2.setBackground(new java.awt.Color(102, 102, 102));
         jLabel2.setOpaque(true);

@@ -1,13 +1,11 @@
 package views;
 
-import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
 import models.NguoiDung;
 import views.models.CurrentUser;
 import views.models.EventMenuSelected;
@@ -20,6 +18,7 @@ import views.panel.admin.AdminYeuCau;
 import views.panel.admin.AdminNguoiDung;
 import views.panel.admin.FormTaiKhoan;
 import views.panel.canbo.FormThongKe;
+import views.panel.canbo.ThongKeBieuDo;
 
 public class AdminMain extends javax.swing.JFrame {
 
@@ -36,7 +35,9 @@ public class AdminMain extends javax.swing.JFrame {
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                setMainPanel(new AdminYeuCau());
+                if (!pnUserTitle.getButtonThongBao().getText().isBlank()) {
+                    setMainPanel(new AdminYeuCau());
+                }
             }
         });
         menu.initMoving(AdminMain.this);
@@ -155,7 +156,6 @@ public class AdminMain extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
