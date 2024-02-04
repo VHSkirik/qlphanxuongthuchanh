@@ -27,4 +27,9 @@ public class ThongKeService {
         return DatPhongDAO.getIns().getSoYeuCauDangCho();
     }
     
+    public String[] getDanhSachCoSo(){
+        //trả về danh sách tên các cơ sở
+        return null;
+    }
+    
 }
