@@ -12,6 +12,7 @@ public class ThongKeBang extends javax.swing.JPanel {
     public ThongKeBang() {
         initComponents();
         myInit();
+        
     }
 
     private void myInit() {
@@ -19,6 +20,12 @@ public class ThongKeBang extends javax.swing.JPanel {
         initComboBox();
         initTableModel();
         initDataTable();
+        if (tbMain.getColumnModel().getColumnCount() > 0) {
+            tbMain.getColumnModel().getColumn(0).setPreferredWidth(100);
+            tbMain.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tbMain.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tbMain.getColumnModel().getColumn(3).setPreferredWidth(100);
+        }
     }
 
     private void initComboBox() {
@@ -31,9 +38,9 @@ public class ThongKeBang extends javax.swing.JPanel {
     private void initTableModel() {
         myTableModel = new DefaultTableModel(
                 new Object[][]{},
-                new String[]{"", "Đang Sử Dụng", "Hỏng", "Tổng"}
+                new String[]{"", "Mới", "Cũ", "Hỏng", "Tổng"}
         ) {
-            boolean[] canEdit = new boolean[]{false, false, false, false};
+            boolean[] canEdit = new boolean[]{false, false, false, false, false};
 
             public boolean isCellEditable(int row, int column) {
                 return canEdit[column];
