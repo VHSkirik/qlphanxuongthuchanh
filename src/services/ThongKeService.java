@@ -38,7 +38,7 @@ public class ThongKeService {
     //Thiet Bi
     public List<String> getLoaiThietBiTheoCoSo(String coSo) {
         //trả về danh sách tên các loại thiết bị theo cơ sở coSo
-        return ThietBiDAO.getIns().findTenThietBiByTenCoSo(coSo);
+        return ThietBiDAO.getIns().findLoaiThietBiByTenCoSo(coSo);
     }
 
     public int getTongThietBiTheoCoSo(String CoSo) {

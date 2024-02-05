@@ -384,7 +384,7 @@ public int countTotalPhongByCoSo(String coSo) {
         Connection c = Jdbc.getConnection();
         String query = "SELECT COUNT(*) AS TongSoPhong " +
                        "FROM phongthuchanh " +
-                       "WHERE LOWER(CoSo) LIKE LOWER(?)";
+                       "WHERE LOWER(DiaDiem) LIKE LOWER(?)";
         PreparedStatement stm = c.prepareStatement(query);
         stm.setString(1, "%" + coSo + "%");
         ResultSet rs = stm.executeQuery();

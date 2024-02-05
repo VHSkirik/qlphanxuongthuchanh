@@ -313,12 +313,12 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
         return count;
     }
     
-    public List<String> findTenThietBiByTenCoSo(String tenCoSo) {
-    List<String> dsTenThietBi = new ArrayList<>();
+    public List<String> findLoaiThietBiByTenCoSo(String tenCoSo) {
+    List<String> dsLoaiThietBi = new ArrayList<>();
 
     try {
         Connection c = Jdbc.getConnection();
-        String query = "SELECT DISTINCT tb.TenThietBi " +
+        String query = "SELECT DISTINCT tb.LoaiThietBi " +
                        "FROM thietbi tb " +
                        "JOIN phongthuchanh pt ON tb.MaPhongThucHanh = pt.MaPhongThucHanh " +
                        "WHERE LOWER(pt.DiaDiem) LIKE LOWER(?)";
@@ -327,8 +327,8 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
         ResultSet rs = stm.executeQuery();
 
         while (rs.next()) {
-            String tenThietBi = rs.getString("TenThietBi");
-            dsTenThietBi.add(tenThietBi);
+            String loaiThietBi = rs.getString("LoaiThietBi");
+            dsLoaiThietBi.add(loaiThietBi);
         }
 
         Jdbc.closeConnection(c);
@@ -336,7 +336,7 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
         var7.printStackTrace();
     }
 
-    return dsTenThietBi;
+    return dsLoaiThietBi;
 }
     public int findTongSoThietBiByCoSo(String tenCoSo) {
     int tongSoThietBi = 0;
