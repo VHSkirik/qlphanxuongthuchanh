@@ -351,5 +351,102 @@ public class PhongThucHanhDAO implements DAOInterface<PhongThucHanh> {
 
         return phongMap;
     }
+     
+     public List<String> findLoaiPhongByDiaDiem(String diaDiem) {
+    List<String> dsLoaiPhong = new ArrayList<>();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT DISTINCT pt.LoaiPhong " +
+                       "FROM phongthuchanh pt " +
+                       "WHERE LOWER(pt.DiaDiem) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + diaDiem + "%");
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            String loaiPhong = rs.getString("LoaiPhong");
+            dsLoaiPhong.add(loaiPhong);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return dsLoaiPhong;
+}
+
+public int countTotalPhongByCoSo(String coSo) {
+    int tongSoPhong = 0;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT COUNT(*) AS TongSoPhong " +
+                       "FROM phongthuchanh " +
+                       "WHERE LOWER(CoSo) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + coSo + "%");
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            tongSoPhong = rs.getInt("TongSoPhong");
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return tongSoPhong;
+}
+
+public List<String> getAllCoSoNames() {
+    List<String> danhSachCoSo = new ArrayList<>();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT DISTINCT CoSo FROM phongthuchanh";
+        PreparedStatement stm = c.prepareStatement(query);
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            danhSachCoSo.add(rs.getString("CoSo"));
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return danhSachCoSo;
+}
+
+public int getSoLuongPhongTheoYeuCau(String diaDiem, String loaiPhong, String tinhTrang) {
+    int soLuong = 0;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT COUNT(*) AS SoLuong FROM phongthuchanh "
+                     + "WHERE LOWER(DiaDiem) LIKE LOWER(?) "
+                     + "AND LOWER(LoaiPhong) LIKE LOWER(?) "
+                     + "AND LOWER(TinhTrang) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + diaDiem + "%");
+        stm.setString(2, "%" + loaiPhong + "%");
+        stm.setString(3, "%" + tinhTrang + "%");
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            soLuong = rs.getInt("SoLuong");
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return soLuong;
+}
 
 }
