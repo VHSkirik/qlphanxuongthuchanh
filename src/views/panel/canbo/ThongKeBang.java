@@ -4,15 +4,19 @@ import com.formdev.flatlaf.extras.FlatSVGIcon;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import services.ThongKeService;
 
 public class ThongKeBang extends javax.swing.JPanel {
 
-    private DefaultTableModel myTableModel;
+    private DefaultTableModel dtmThietBi;
+    private DefaultTableModel dtmPhong;
+    private ThongKeService thongKeService;
 
     public ThongKeBang() {
         initComponents();
+        thongKeService = new ThongKeService();
         myInit();
-        
+
     }
 
     private void myInit() {
@@ -30,14 +34,15 @@ public class ThongKeBang extends javax.swing.JPanel {
     }
 
     private void initComboBox() {
-        List<String> dsCoSo = Arrays.asList(new String[]{" ", "Lĩnh Nam", "Minh Khai", "Mỹ Xá"});
+        List<String> dsCoSo = thongKeService.getDanhSachCoSo();
         for (String coSo : dsCoSo) {
             cbCoSo.addItem(coSo);
         }
     }
 
     private void initTableModel() {
-        myTableModel = new DefaultTableModel(
+        //
+        dtmThietBi = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{"", "Mới", "Cũ", "Hỏng", "Tổng"}
         ) {
@@ -47,12 +52,22 @@ public class ThongKeBang extends javax.swing.JPanel {
                 return canEdit[column];
             }
         };
-        
-        tbMain.setModel(myTableModel);
+
+        //
+        dtmPhong = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{"", "Sẵn Sàng", "Đang Được Sử Dụng", "Bảo Trì", "Tổng"}
+        ) {
+            boolean[] canEdit = new boolean[]{false, false, false, false, false};
+
+            public boolean isCellEditable(int row, int column) {
+                return canEdit[column];
+            }
+        };
     }
-    
-    private void initDataTable(){
-        
+
+    private void initDataTable() {
+
     }
 
     @SuppressWarnings("unchecked")
@@ -63,7 +78,7 @@ public class ThongKeBang extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbMain = new javax.swing.JTable();
         cbCoSo = new javax.swing.JComboBox<>();
-        cbCoSo2 = new javax.swing.JComboBox<>();
+        cbDoiTuong = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         lbTitle = new javax.swing.JLabel();
@@ -84,12 +99,17 @@ public class ThongKeBang extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tbMain);
 
         cbCoSo.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-
-        cbCoSo2.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
-        cbCoSo2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Phòng", "Thiết Bị" }));
-        cbCoSo2.addActionListener(new java.awt.event.ActionListener() {
+        cbCoSo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCoSo2ActionPerformed(evt);
+                cbCoSoActionPerformed(evt);
+            }
+        });
+
+        cbDoiTuong.setFont(new java.awt.Font("JetBrains Mono", 0, 14)); // NOI18N
+        cbDoiTuong.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Phòng", "Thiết Bị" }));
+        cbDoiTuong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDoiTuongActionPerformed(evt);
             }
         });
 
@@ -125,8 +145,7 @@ public class ThongKeBang extends javax.swing.JPanel {
                             .addGroup(panelBorder1Layout.createSequentialGroup()
                                 .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(13, 13, 13)
-                                .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(cbDoiTuong, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 833, Short.MAX_VALUE))
                         .addGap(25, 25, 25))))
         );
@@ -141,7 +160,7 @@ public class ThongKeBang extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cbCoSo, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbCoSo2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbDoiTuong, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addGap(23, 23, 23))
@@ -159,14 +178,61 @@ public class ThongKeBang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbCoSo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCoSo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbCoSo2ActionPerformed
+    private void cbDoiTuongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDoiTuongActionPerformed
+        if (cbDoiTuong.getSelectedIndex() != 0 && cbCoSo.getSelectedItem() != null) {
+            if (cbDoiTuong.getSelectedIndex() == 1) {
+
+                String coSo = cbCoSo.getSelectedItem().toString();
+                List<String> dsLoaiPhong = thongKeService.getLoaiPhongTheoCoSo(coSo);
+                dtmPhong.setRowCount(0);
+                for (String loai : dsLoaiPhong) {
+                    int sanSang = thongKeService.getSoPhongTheoLoaiTinhTrang(coSo, loai, "SanSang");
+                    int dangSuDung = thongKeService.getSoPhongTheoLoaiTinhTrang(coSo, loai, "DaDuocSuDung");
+                    int baoTri = thongKeService.getSoThietBiTheoLoaiTinhTrang(coSo, loai, "DangSuaChua");
+                    int tong = sanSang + dangSuDung + baoTri;
+                    dtmPhong.addRow(new Object[]{
+                        loai,
+                        sanSang,
+                        dangSuDung,
+                        baoTri,
+                        tong
+                    });
+                }
+                dtmPhong.addRow(new Object[]{"", "", "", "", thongKeService.getTongPhongTheoCoSo(coSo)});
+                tbMain.setModel(dtmPhong);
+
+            } else {
+
+                String coSo = cbCoSo.getSelectedItem().toString();
+                List<String> dsLoaiThietBi = thongKeService.getLoaiThietBiTheoCoSo(coSo);
+                dtmThietBi.setRowCount(0);
+                for (String loai : dsLoaiThietBi) {
+                    int moi = thongKeService.getSoThietBiTheoLoaiTinhTrang(coSo, loai, "Moi");
+                    int cu = thongKeService.getSoThietBiTheoLoaiTinhTrang(coSo, loai, "Cu");
+                    int hong = thongKeService.getSoThietBiTheoLoaiTinhTrang(coSo, loai, "Hon");
+                    int tong = moi + cu + hong;
+                    dtmThietBi.addRow(new Object[]{
+                        loai,
+                        moi,
+                        cu,
+                        hong,
+                        tong
+                    });
+                }
+                dtmThietBi.addRow(new Object[]{"", "", "", "", thongKeService.getTongThietBiTheoCoSo(coSo)});
+                tbMain.setModel(dtmThietBi);
+            }
+        }
+    }//GEN-LAST:event_cbDoiTuongActionPerformed
+
+    private void cbCoSoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCoSoActionPerformed
+        cbDoiTuong.setSelectedIndex(0);
+    }//GEN-LAST:event_cbCoSoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbCoSo;
-    private javax.swing.JComboBox<String> cbCoSo2;
+    private javax.swing.JComboBox<String> cbDoiTuong;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
