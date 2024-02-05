@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import models.ThietBi;
 
 public class ThietBiDAO implements DAOInterface<ThietBi> {
@@ -310,5 +312,84 @@ public class ThietBiDAO implements DAOInterface<ThietBi> {
 
         return count;
     }
+    
+    public List<String> findTenThietBiByTenCoSo(String tenCoSo) {
+    List<String> dsTenThietBi = new ArrayList<>();
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT DISTINCT tb.TenThietBi " +
+                       "FROM thietbi tb " +
+                       "JOIN phongthuchanh pt ON tb.MaPhongThucHanh = pt.MaPhongThucHanh " +
+                       "WHERE LOWER(pt.DiaDiem) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + tenCoSo + "%");
+        ResultSet rs = stm.executeQuery();
+
+        while (rs.next()) {
+            String tenThietBi = rs.getString("TenThietBi");
+            dsTenThietBi.add(tenThietBi);
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return dsTenThietBi;
+}
+    public int findTongSoThietBiByCoSo(String tenCoSo) {
+    int tongSoThietBi = 0;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT COUNT(tb.MaThietBi) AS TongSoThietBi " +
+                       "FROM phongthuchanh pt " +
+                       "JOIN thietbi tb ON pt.MaPhongThucHanh = tb.MaPhongThucHanh " +
+                       "WHERE LOWER(pt.DiaDiem) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + tenCoSo + "%");
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            tongSoThietBi = rs.getInt("TongSoThietBi");
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return tongSoThietBi;
+}
+
+    public int getSoLuongThietBiTheoYeuCau(String diaDiem, String loaiThietBi, String tinhTrang) {
+    int soLuong = 0;
+
+    try {
+        Connection c = Jdbc.getConnection();
+        String query = "SELECT COUNT(*) AS SoLuong FROM thietbi "
+                     + "INNER JOIN phongthuchanh ON thietbi.MaPhongThucHanh = phongthuchanh.MaPhongThucHanh "
+                     + "WHERE LOWER(phongthuchanh.DiaDiem) LIKE LOWER(?) "
+                     + "AND LOWER(thietbi.LoaiThietBi) LIKE LOWER(?) "
+                     + "AND LOWER(thietbi.TinhTrang) LIKE LOWER(?)";
+        PreparedStatement stm = c.prepareStatement(query);
+        stm.setString(1, "%" + diaDiem + "%");
+        stm.setString(2, "%" + loaiThietBi + "%");
+        stm.setString(3, "%" + tinhTrang + "%");
+        ResultSet rs = stm.executeQuery();
+
+        if (rs.next()) {
+            soLuong = rs.getInt("SoLuong");
+        }
+
+        Jdbc.closeConnection(c);
+    } catch (SQLException var7) {
+        var7.printStackTrace();
+    }
+
+    return soLuong;
+}
+
 
 }
